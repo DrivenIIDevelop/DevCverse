@@ -50,8 +50,10 @@ db_dependency = Annotated[Session, Depends(get_db)]
 async def create_user(db: db_dependency, create_user_request: CreateUserRequest):
     create_user_model = Users(
         username=create_user_request.username, 
-        # hashed_password=bcrypt_context.hash(create_user_request.password)
-        hashed_password=hash_password(create_user_request.password)
+        hashed_password=hash_password(create_user_request.password),
+        role=create_user_request.role,
+        age=create_user_request.age,
+        skin_type=create_user_request.skin_type
     )
 
     db.add(create_user_model)
