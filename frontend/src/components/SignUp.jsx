@@ -4,11 +4,11 @@ import axios from "axios";
 axios.defaults.baseURL = 'http://localhost:8000';
 
 const Signup = () => {
-  const [username, setUserEmail] = useState("");
+  const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const { signup } = useUserContext();
-  console.log("signup", signup);
+//   console.log("signup", signup);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,7 +25,7 @@ const Signup = () => {
       setError(error.message);
     }
 
-    setUserEmail("");
+    setUserName("");
     setPassword("");
   };
 
@@ -38,7 +38,7 @@ const Signup = () => {
         type="email"
         value={username}
         placeholder="User email"
-        onChange={(e) => setUserEmail(e.target.value)}
+        onChange={(e) => setUserName(e.target.value)}
         required
       />
       <input
