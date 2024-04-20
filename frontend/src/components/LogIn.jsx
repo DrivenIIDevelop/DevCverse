@@ -1,16 +1,14 @@
 import { useState } from "react";
-import axios from "axios";
-axios.defaults.baseURL = "http://localhost:8000";
 
 import { useUserContext } from "../context/UserContext";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
   const { login } = useUserContext();
-  // console.log("login from context: ", login);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,6 +20,9 @@ const Login = () => {
     }
 
     await login(username, password);
+
+    setUserName("");
+    setPassword("");
    
   };
 
@@ -31,7 +32,7 @@ const Login = () => {
         type="email"
         value={username}
         placeholder="User email"
-        onChange={(e) => setUsername(e.target.value)}
+        onChange={(e) => setUserName(e.target.value)}
         required
       />
       <input

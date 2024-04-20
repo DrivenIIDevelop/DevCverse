@@ -1,43 +1,30 @@
 import { useState } from "react";
 import  {useUserContext}  from "../context/UserContext";
-import axios from "axios";
-axios.defaults.baseURL = 'http://localhost:8000';
 
-const Signup = () => {
+const SignUp = () => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const  { userSignUp }  = useUserContext();
-  // console.log("userSignup from context", userSignUp);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
 
-    // console.log("in signup component", username, password);
-    await userSignUp(username, password);
+    if (!username || !password) {
+      setError("Please enter both username and password");
+      return; // Prevent sending request if data is missing
+    }
 
-    // try {
-    //   const res = await userSignUp(username, password);
-    //   console.log("Signup successful:", res);
-    // } catch (error) {
-    //   console.error("Signup failed:", error);
-    //   setError(error.message || "An unexpected error occurred.");
-    // }
+    await userSignUp(username, password);
 
     setUserName("");
     setPassword("");
   };
 
-  // useEffect(() => {
-  //   userSignUp(username, password);
-  // }, [])
-
-
 
   return (
     <form onSubmit={handleSubmit}>
-      {/* Username and password input fields */}
       <input
         type="email"
         value={username}
@@ -58,4 +45,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default SignUp;

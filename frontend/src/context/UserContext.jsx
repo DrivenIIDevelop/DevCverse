@@ -13,7 +13,7 @@ export const UserContext = createContext({
 export const UserContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   
-  console.log("user in UserContextProvider: ", user);
+  // console.log("user in UserContextProvider: ", user);
   const [error, setError] = useState(null);
   
   const login = async (username, password) => {
@@ -27,10 +27,10 @@ export const UserContextProvider = ({ children }) => {
       )}&password=${encodeURIComponent(password)}`,
     })
   
-    console.log('Raw response in login function context: ', response);
+    // console.log('Raw response in login function context: ', response);
     
       const { access_token } = await response.json();
-      console.log("access_token: ", access_token);
+      // console.log("access_token: ", access_token);
       const userResponse = await fetch('http://localhost:8000/user', { 
         method: 'GET',                                                      
         headers: {                                                         
@@ -49,7 +49,6 @@ export const UserContextProvider = ({ children }) => {
 
   const userSignUp = async (username, password) => {
     try {
-      // Replace with your actual backend call (FastAPI) for signup
       await axios.post('/auth/', {
         username,
         password,
@@ -57,15 +56,12 @@ export const UserContextProvider = ({ children }) => {
     } catch (error) {
       console.error('Signup error:', error);
       setError(error.message);
-      // Handle signup errors (display error message, etc.)
     }
+
     login(username, password); // Auto-login after signup
   };
   console.log('user in UserContextProvider: ', user);
-
-
-
-// console.log("Providing context", { user, error, login, userSignUp, updateUser });
+  // console.log("Providing context", { user, error, login, userSignUp, updateUser });
 
 
   return (
