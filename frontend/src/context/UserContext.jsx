@@ -1,81 +1,78 @@
-import { createContext, useState, useContext, useEffect } from 'react';
+import { createContext, useState, useContext } from 'react';
 import axios from 'axios';
 axios.defaults.baseURL = 'http://localhost:8000';
 
 export const UserContext = createContext({
   user: null,
   login: () => {},
-  signup: () => {},
-  fetchCurrentUser: () => {},
+  userSignUp: () => {},
+  setUser: () => {},
+  error: null
 });
 
 export const UserContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [error, setError] = useState(null);
-
-  const fetchCurrentUser = async () => {
-    try {
-      // Replace with your actual backend call (FastAPI) to fetch current user
-      const response = await axios.get('/api/auth/user'); // Assuming an endpoint for fetching current user
-      const userData = response.data;
   
-      if (userData) {
-        setUser(userData);
-      } else {
-        setUser(null); // Set user to null if not found
-      }
-    } catch (error) {
-      console.error('Error fetching current user:', error);
-      setError(error.message);
-      // Handle errors appropriately (e.g., display error message)
-    }
-  };
-
+  console.log("user in UserContextProvider: ", user);
+  const [error, setError] = useState(null);
+  
   const login = async (username, password) => {
-    try {
-      // Replace with your actual backend call (FastAPI) for login
-      const response = await axios.post('/api/auth/login', {
-        username,
-        password,
-      });
-
-      const userData = response.data; // Replace with actual data structure from backend
-
-      setUser(userData);
-    } catch (error) {
-      console.error('Login error:', error);
-      setError(error.message);
-      // Handle login errors (display error message, etc.)
-    }
+    const response = await fetch("http://localhost:8000/auth/token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: `username=${encodeURIComponent(
+        username
+      )}&password=${encodeURIComponent(password)}`,
+    })
+  
+    console.log('Raw response in login function context: ', response);
+    
+      const { access_token } = await response.json();
+      console.log("access_token: ", access_token);
+      const userResponse = await fetch('http://localhost:8000/user', { 
+        method: 'GET',                                                      
+        headers: {                                                         
+            'Authorization': `Bearer ${access_token}`,                     
+            'Content-Type': 'application/json'                             
+        }   
+    });
+  
+    if (!userResponse.ok) {
+        throw new Error(`Failed to get user! status: ${userResponse.status}`);
+    }   
+    const userData = await userResponse.json(); 
+    console.log("userData in login component: ", userData);
+    setUser(userData);
   };
 
-  const signup = async (username, password) => {
+  const userSignUp = async (username, password) => {
     try {
       // Replace with your actual backend call (FastAPI) for signup
-      const response = await axios.post('/api/auth/signup', {
+      await axios.post('/auth/', {
         username,
         password,
       });
-
-      const userData = response.data; // Replace with actual data structure from backend
-
-      setUser(userData);
     } catch (error) {
       console.error('Signup error:', error);
       setError(error.message);
       // Handle signup errors (display error message, etc.)
     }
+    login(username, password); // Auto-login after signup
   };
+  console.log('user in UserContextProvider: ', user);
 
-  useEffect(() => {
-    fetchCurrentUser();
-  }, []); 
+
+
+// console.log("Providing context", { user, error, login, userSignUp, updateUser });
 
 
   return (
-    <UserContext.Provider value={{ user, error, fetchCurrentUser, login, signup }}>
+    <UserContext.Provider value={{ user, error, login, userSignUp }}>
       {children}
     </UserContext.Provider>
+    
   );
 };
 

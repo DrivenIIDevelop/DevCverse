@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useUserContext } from "../context/UserContext";
+import  {useUserContext}  from "../context/UserContext";
 import axios from "axios";
 axios.defaults.baseURL = 'http://localhost:8000';
 
@@ -7,29 +7,33 @@ const Signup = () => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const { signup } = useUserContext();
-//   console.log("signup", signup);
+  const  { userSignUp }  = useUserContext();
+  // console.log("userSignup from context", userSignUp);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
 
-    try {
-      const response = await axios.post("/auth/", {
-        username,
-        password,
-      });
+    // console.log("in signup component", username, password);
+    await userSignUp(username, password);
 
-      signup(response.data); // Update user context
-    } catch (error) {
-      setError(error.message);
-    }
+    // try {
+    //   const res = await userSignUp(username, password);
+    //   console.log("Signup successful:", res);
+    // } catch (error) {
+    //   console.error("Signup failed:", error);
+    //   setError(error.message || "An unexpected error occurred.");
+    // }
 
     setUserName("");
     setPassword("");
   };
 
-  // ... JSX for signup form and error display
+  // useEffect(() => {
+  //   userSignUp(username, password);
+  // }, [])
+
+
 
   return (
     <form onSubmit={handleSubmit}>

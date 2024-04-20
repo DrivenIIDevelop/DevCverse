@@ -35,7 +35,7 @@ user_dependency = Annotated[dict, Depends(get_current_user)]
 # in SWAGGER UI, if we try to use any of the API, there will be a 'Authentication Fail' if we don't authorize the account
 # Visual: there's a lock next to the API, which means, user has to be authenticated to be able to use the API
 
-@app.get('/', status_code=status.HTTP_200_OK)
+@app.get('/user', status_code=status.HTTP_200_OK)
 async def user(user: user_dependency, db: db_dependency):
     if user is None:
         raise HTTPException(status_code=404, detail="Authentication Failed")

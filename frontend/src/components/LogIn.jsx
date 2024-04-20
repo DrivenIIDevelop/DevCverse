@@ -1,63 +1,32 @@
 import { useState } from "react";
-import { useUserContext } from "../context/UserContext";
 import axios from "axios";
 axios.defaults.baseURL = "http://localhost:8000";
+
+import { useUserContext } from "../context/UserContext";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const { login } = useUserContext();
 
-  //   console.log("username type: ", typeof(username), username);
-  //   console.log("password type: ", typeof(password), password);
+  const { login } = useUserContext();
+  // console.log("login from context: ", login);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
 
-    console.log("username type: ", typeof username, username);
-    console.log("password type: ", typeof password, password);
     if (!username || !password) {
       setError("Please enter both username and password");
       return; // Prevent sending request if data is missing
     }
-    fetch("http://localhost:8000/auth/token", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: `username=${encodeURIComponent(
-        username
-      )}&password=${encodeURIComponent(password)}`,
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-    // try {
-    //   // Use the login function from UserContext
-    //     // await login(username, password);
-    //   const response =
-    //   await axios
-    //     .post("/auth/token/", {
-    //       username: username,
-    //       password: password,
-    //     })
-    //     .then((response) => {
-    //       console.log("response", response);
-    //     });
 
-    //   login(response.data); // Update user context
-    // } catch (error) {
-    //   setError(error.message || "Login failed"); // Handle errors
-    // }
+    await login(username, password);
+   
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      {/* Username and password input fields */}
       <input
         type="email"
         value={username}
@@ -72,7 +41,7 @@ const Login = () => {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
-      <button type="submit" onClick={handleSubmit}>
+      <button type="submit">
         Login
       </button>
       {error && <p>{error}</p>}
