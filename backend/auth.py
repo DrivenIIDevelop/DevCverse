@@ -58,11 +58,6 @@ async def create_user(db: db_dependency, create_user_request: CreateUserRequest)
     db.commit()
 
 @router.post("/token", response_model=Token)
-# async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm, Depends(OAuth2PasswordRequestForm)], 
-#                                  db: db_dependency):
-#     user = authenticate_user(form_data.username, form_data.password, db)
-#     if not user:
-#         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Incorrect username or password")
 async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm, Depends(OAuth2PasswordRequestForm)], 
                                  db: db_dependency):
     user = authenticate_user(form_data.username, form_data.password, db)
@@ -81,10 +76,13 @@ async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm,
 
 def authenticate_user(username: str, password: str, db: Session):
     user = db.query(Users).filter(Users.username == username).first()
+    print('username in the authenticate_user: ', username)   
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
     if not verify_password(password, user.hashed_password):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Incorrect password")
+    
+    print('user: ', user)
     return user
 
 def create_access_token(username: str, user_id: int, expires_delta: timedelta):
