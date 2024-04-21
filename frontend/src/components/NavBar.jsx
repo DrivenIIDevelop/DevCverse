@@ -8,6 +8,7 @@ import brand_a  from "../assets/logo/brand-a.svg";
 import brand_i from "../assets/logo/brand-i.svg";
 import searchIcon from  "../assets/search.svg";
 import cartIcon from "../assets/cart.svg";
+import InferiorNav from "./InferiorNav";
 
 
 export default function NavBar() {
@@ -16,8 +17,9 @@ export default function NavBar() {
 
 
   return (
-    <nav className="max-w-[1440px] mx-auto mt-6">
-      <div className="flex justify-between">
+    <nav className="max-w-[1440px] mx-auto mt-6 px-7">
+
+      <div className="flex justify-between w-full">
 
         <select name="language" id="" className="px-3 py-2 font-epilogue font-sm font-normal text-[#666] items-center rounded-[8px] border border-[#666]">
           <option value="english">English</option>
@@ -45,6 +47,7 @@ export default function NavBar() {
           }
         </div>
       </div>
+      <InferiorNav />
     </nav>
   )
 }
