@@ -1,12 +1,9 @@
-import Login from "../components/LogIn";
-import SignUp from "../components/SignUp";
-
+import HeroCard from "../components/HeroCard";
 
 export default function Home() {
   return (
-    <div className="bg-slate-400">
-      {/* <SignUp />
-      <Login /> */}
+    <div className="max-w-[1440px] mx-auto px-16">
+      <HeroCard />
     </div>
   )
 }
