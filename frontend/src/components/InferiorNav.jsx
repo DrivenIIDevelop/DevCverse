@@ -4,28 +4,28 @@ export default function InferiorNav() {
   }
 
   return (
-    <nav className="max-w-[1440px] flex justify-center">
+    <nav className="max-w-[1440px] flex justify-center font-serif">
       <div className="flex gap-[60px]">
         <span
-          className="px-4 py-6 hover:bg-gradient-to-r from from-[#994D80] to-[#E55CB8] hover:text-transparent hover:bg-clip-text"
+          className="px-4 py-6 hover:bg-gradient-to-r from from-[#994D80] to-[#E55CB8] hover:text-transparent hover:bg-clip-text cursor-default"
           onClick={handleClick}
         >
           SHOP
         </span>
         <span
-          className="px-4 py-6 hover:bg-gradient-to-r from from-[#994D80] to-[#E55CB8] hover:text-transparent hover:bg-clip-text"
+          className="px-4 py-6 hover:bg-gradient-to-r from from-[#994D80] to-[#E55CB8] hover:text-transparent hover:bg-clip-text cursor-default"
           onClick={handleClick}
         >
           BEST SELLERS
         </span>
         <span
-          className="px-4 py-6 hover:bg-gradient-to-r from from-[#994D80] to-[#E55CB8] hover:text-transparent hover:bg-clip-text"
+          className="px-4 py-6 hover:bg-gradient-to-r from from-[#994D80] to-[#E55CB8] hover:text-transparent hover:bg-clip-text cursor-default"
           onClick={handleClick}
         >
           BRANDS
         </span>
         <span
-          className="px-4 py-6 hover:bg-gradient-to-r from from-[#994D80] to-[#E55CB8] hover:text-transparent hover:bg-clip-text"
+          className="px-4 py-6 hover:bg-gradient-to-r from from-[#994D80] to-[#E55CB8] hover:text-transparent hover:bg-clip-text cursor-default"
           onClick={handleClick}
         >
           BLOG

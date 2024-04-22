@@ -17,7 +17,7 @@ export default function NavBar() {
 
 
   return (
-    <nav className="max-w-[1440px] mx-auto mt-6 px-7">
+    <nav className="max-w-[1440px] mx-auto mt-6 px-16">
 
       <div className="flex justify-between w-full">
 
