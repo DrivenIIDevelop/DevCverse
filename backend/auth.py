@@ -8,12 +8,13 @@ from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from starlette import status
 from database import SessionLocal
-from models import Users
+from models import Users, SkinType, AgeRange
 from jose import JWTError, jwt
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 import os 
 from password_utils import hash_password, verify_password
 from pydantic import EmailStr
+
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = os.getenv("ALGORITHM")
@@ -34,8 +35,8 @@ class CreateUserRequest(BaseModel):
     # role: str
     first_name: str
     last_name: str
-    # age: int
-    # skin_type: str
+    age: AgeRange
+    skin_type: SkinType
 
 class Token(BaseModel):
     access_token: str
@@ -57,9 +58,9 @@ async def create_user(db: db_dependency, create_user_request: CreateUserRequest)
         hashed_password=hash_password(create_user_request.password),
         # role=create_user_request.role,
         first_name=create_user_request.first_name,
-        last_name=create_user_request.last_name
-        # age=create_user_request.age,
-        # skin_type=create_user_request.skin_type
+        last_name=create_user_request.last_name,
+        age=create_user_request.age,
+        skin_type=create_user_request.skin_type
     )
 
     db.add(create_user_model)
@@ -104,6 +105,7 @@ def create_access_token(username: str, user_id: int, expires_delta: timedelta):
 async def get_current_user(token: Annotated[str, Depends(oauth2_bearer)]):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        print("payload: ", payload)
         username: str = payload.get('sub')
         user_id: int = payload.get('id')
 
