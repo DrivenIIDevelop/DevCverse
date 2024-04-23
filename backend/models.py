@@ -23,4 +23,4 @@ class Products(Base):
     description = Column(String, nullable=False)
     skin_type = Column(String, nullable=False)
     brand=Column(String, nullable=False)
-    # do image later
+    image_url = Column(String, nullable=False)
