@@ -1,0 +1,57 @@
+import star from "../assets/star.svg";
+import cartIcon from "../assets/cart.svg";
+import likeIcon from "../assets/like.svg";
+
+export default function ProductCard({ product }) {
+  return (
+    <li className="p-2">
+      <div>
+        <img
+          src={product.image}
+          alt={product.name}
+          className="object-fit w-[310px] h-[300px] rounded-lg"
+        />
+      </div>
+
+      <div className="p-2">
+        <div className="flex justify-between">
+          <p className="font-sans text-xl text-[#262626]">{product.brand} </p>
+          <div className="flex gap-x-0.5 ">
+            <img src={star} alt="star" className="w-4 h-4" />
+            <p className="font-sans text-xs">{product.review}</p>
+            <p className="font-sans text-xs">({product.reviewCount})</p>
+          </div>
+        </div>
+        <p className="font-sans text-sm truncate">{product.name}</p>
+        <div className="flex justify-between mt-2">
+          <p className="font-sans text-base">${product.price}</p>
+          <div className="flex gap-1">
+            {product.badge && product.badge.length > 0
+              ? product.badge.map((badge, index) => (
+                  <span
+                    key={index}
+                    className={`font-sans text-xs ${
+                      badge === "Clean"
+                        ? "bg-[#D9EFFF] text-[#2090C9] border border-[#2090C9]"
+                        : "bg-[#FEF7FB] text-[#B26B94] border border-[#B26B94]"
+                    } px-2 py-1 rounded`}
+                  >
+                    {badge}
+                  </span>
+                ))
+              : null}
+          </div>
+        </div>
+        <div className="flex justify-between">
+          <button className="w-[70%] flex justify-center font-sans text-base border border-[#262626] gap-2 px-8 py-3 rounded-lg mt-2.5 ">
+            <img src={cartIcon} alt="cart" className="w-6 h-6" />
+            Add to cart
+          </button>
+          <button className="w-[20%] flex justify-center items-center border border-[#262626] rounded-lg mt-2.5">
+            <img src={likeIcon} alt="like button" className="w-6 h-6"/>
+          </button>
+        </div>
+      </div>
+    </li>
+  );
+}
