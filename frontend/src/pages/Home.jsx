@@ -1,7 +1,8 @@
-import AdFrame from "../components/AdFrame";
+import AdFrame from "../components/PromoSection";
 import HeroCard from "../components/HeroCard";
 import ProductList from "../components/ProductList";
 import ProductNavBar from "../components/ProductNavBar";
+import Labels from "../components/Labels";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <ProductNavBar />
       <ProductList />
       <AdFrame />
+      <Labels />
     </div>
   )
 }
