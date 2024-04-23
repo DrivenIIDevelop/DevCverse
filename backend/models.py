@@ -1,5 +1,5 @@
 from database import Base
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Float
 
 class Users(Base):
     __tablename__ = "users"
@@ -19,7 +19,7 @@ class Products(Base):
 
     id = Column(Integer, primary_key=True, nullable=False)
     name = Column(String, nullable=False)
-    price = Column(Integer, nullable=False)
+    price = Column(Float, nullable=False)
     description = Column(String, nullable=False)
     skin_type = Column(String, nullable=False)
     brand=Column(String, nullable=False)

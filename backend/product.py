@@ -1,8 +1,8 @@
 from dotenv import load_dotenv
 load_dotenv()
 
-from fastapi import UploadFile, File, APIRouter, Depends, HTTPException
-from typing import Annotated
+from fastapi import UploadFile, File, APIRouter, Depends, HTTPException, Form
+from typing import Annotated, Optional
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from database import SessionLocal
@@ -25,17 +25,17 @@ s3 = boto3.client('s3',
                     aws_secret_access_key= SECRET_ACCESS_KEY,
                     )
 
-class CreateProductRequest(BaseModel):
-    name: str
-    price: int
-    description: str
-    skin_type: str
-    brand: str
+# class CreateProductRequest(BaseModel):
+#     name: str
+#     price: int
+#     description: str
+#     skin_type: str
+#     brand: str
 
 class ProductResponse(BaseModel):
     id: int
     name: str
-    price: int
+    price: float
     description: str
     skin_type: str
     brand: str
@@ -53,38 +53,38 @@ def get_db():
 
 db_dependency = Annotated[Session, Depends(get_db)]
 
-# @router.post("/upload")
-# async def create_product(file: UploadFile = File(...)):
-#     if file:
-#         print(file.filename)
-#         s3.upload_fileobj(file.file, S3_BUCKET, file.filename)
-#         return "file uploaded successfully"
-#     else:
-#         return "Error uploading file"
-
-@router.post("/upload", response_model=CreateProductRequest, status_code=201)
+@router.post('/create-products', response_model=ProductResponse, status_code=201)
 async def create_product(
-    product: CreateProductRequest,
+    name: Annotated[str, Form()],
+    price: Annotated[float, Form()],
+    description: Annotated[str, Form()],
+    skin_type: Annotated[str, Form()],
+    brand: Annotated[str, Form()],
     db: Session = Depends(get_db),
     file: UploadFile = File(...)
 ):
-    if file and all(value is not None for value in product.model_dump().values()):
-        print(file.filename)
+    if file:
         s3.upload_fileobj(file.file, S3_BUCKET, file.filename)
         image_url = f"https://s3.<region>.amazonaws.com/{S3_BUCKET}/{file.filename}"
-        
-        # Create new product
-        db_product = Products(**product.model_dump(), image_url=image_url)
+        product_data = {
+            "name": name,
+            "price": price,
+            "description": description,
+            "skin_type": skin_type,
+            "brand": brand,
+            "image_url": image_url
+        }
+        db_product = Products(**product_data)
         db.add(db_product)
         db.commit()
         db.refresh(db_product)
-        
+
         return db_product
     else:
         raise HTTPException(status_code=400, detail="Error uploading file")
-    
 
 @router.get("/")
 async def get_products(db: db_dependency):
+    """Fetch all products"""
     products = db.query(Products).all()
     return products
