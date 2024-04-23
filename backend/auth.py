@@ -32,6 +32,11 @@ oauth2_bearer = OAuth2PasswordBearer(tokenUrl="/auth/token")
 class CreateUserRequest(BaseModel):
     username: EmailStr
     password: str
+    # role: str
+    first_name: str
+    last_name: str
+    # age: int
+    # skin_type: str
 
 class Token(BaseModel):
     access_token: str
@@ -51,9 +56,11 @@ async def create_user(db: db_dependency, create_user_request: CreateUserRequest)
     create_user_model = Users(
         username=create_user_request.username, 
         hashed_password=hash_password(create_user_request.password),
-        role=create_user_request.role,
-        age=create_user_request.age,
-        skin_type=create_user_request.skin_type
+        # role=create_user_request.role,
+        first_name=create_user_request.first_name,
+        last_name=create_user_request.last_name
+        # age=create_user_request.age,
+        # skin_type=create_user_request.skin_type
     )
 
     db.add(create_user_model)

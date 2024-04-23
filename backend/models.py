@@ -5,11 +5,13 @@ class Users(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, index=True)
+    first_name = Column(String, nullable=False)
+    last_name = Column(String, nullable=False)
     username = Column(String, unique=True)
     hashed_password = Column(String)
     role = Column(String, default="admin")
-    age = Column(Integer, nullable=False)
-    skin_type= Column(String, nullable=False)
+    # age = Column(Integer, nullable=False)
+    # skin_type= Column(String, nullable=False)
 
 
 class Products(Base):
