@@ -1,5 +1,5 @@
 from database import Base
-from sqlalchemy import Column, Integer, String, Float, Enum, ForeignKey
+from sqlalchemy import Column, Integer, String, Float, Enum, ForeignKey, Boolean
 from sqlalchemy.orm import relationship
 import enum
 
@@ -31,6 +31,8 @@ class Users(Base):
     role = Column(String, default="admin")
     age = Column(Enum(AgeRange), nullable=False)
     skin_type = Column(Enum(SkinType), nullable=False)
+    survey_completed = Column(Boolean, default=False)
+    cart = relationship("Cart", uselist=False, back_populates="user")
 
 
 class Products(Base):
@@ -50,7 +52,7 @@ class Cart(Base):
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey('users.id'))
 
-    user = relationship("User", back_populates="cart")
+    user = relationship("Users", back_populates="cart")
     items = relationship("CartItem", back_populates="cart")
 
 class CartItem(Base):
@@ -61,4 +63,5 @@ class CartItem(Base):
     product_id = Column(Integer, ForeignKey('products.id'))
 
     cart = relationship("Cart", back_populates="items")
-    product = relationship("Product")
+    product = relationship("Products")
+
