@@ -1,13 +1,14 @@
-from fastapi import FastAPI, status, Depends, HTTPException 
+from fastapi import FastAPI, status, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import models
 from database import engine, SessionLocal
 from typing import Annotated, Optional
 from sqlalchemy.orm import Session
-import auth
+import auth, product
 from auth import get_current_user
 
 app = FastAPI()
+
 
 origins = ["*"]
 
@@ -20,6 +21,7 @@ app.add_middleware(
 )
 
 app.include_router(auth.router)
+app.include_router(product.router)
 
 models.Base.metadata.create_all(bind=engine)
 
