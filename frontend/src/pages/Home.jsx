@@ -1,3 +1,4 @@
+import AdFrame from "../components/AdFrame";
 import HeroCard from "../components/HeroCard";
 import ProductList from "../components/ProductList";
 import ProductNavBar from "../components/ProductNavBar";
@@ -8,6 +9,7 @@ export default function Home() {
       <HeroCard />
       <ProductNavBar />
       <ProductList />
+      <AdFrame />
     </div>
   )
 }
