@@ -43,9 +43,9 @@ export default function ProductCard({ product }) {
           </div>
         </div>
         <div className="flex justify-between">
-          <button className="w-[70%] flex justify-center font-sans text-base border border-[#262626] gap-2 px-8 py-3 rounded-lg mt-2.5 ">
+          <button className="w-[70%] flex justify-center items-center font-sans lg:text-sm border border-[#262626] gap-2 px-8 py-3 rounded-lg mt-2.5 ">
             <img src={cartIcon} alt="cart" className="w-6 h-6" />
-            Add to cart
+            <span className="hidden xl:inline">Add to cart</span>
           </button>
           <button className="w-[20%] flex justify-center items-center border border-[#262626] rounded-lg mt-2.5">
             <img src={likeIcon} alt="like button" className="w-6 h-6"/>
