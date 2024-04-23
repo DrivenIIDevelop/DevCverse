@@ -3,6 +3,7 @@ import HeroCard from "../components/HeroCard";
 import ProductList from "../components/ProductList";
 import ProductNavBar from "../components/ProductNavBar";
 import Labels from "../components/Labels";
+import Recommendations from "../components/Recommendations";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <ProductList />
       <AdFrame />
       <Labels />
+      <Recommendations />
     </div>
   )
 }
