@@ -1,25 +1,14 @@
-from fastapi import FastAPI, status, Depends, HTTPException, UploadFile, File
+from fastapi import FastAPI, status, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import models
 from database import engine, SessionLocal
 from typing import Annotated, Optional
 from sqlalchemy.orm import Session
-import auth
+import auth, product
 from auth import get_current_user
-
-# for products model
-import boto3
 
 app = FastAPI()
 
-# will need to set to renai-prod later
-# S3_BUCKET = 'renai-dev'
-# for products model
-# s3 = boto3.client('s3', 
-#                     aws_access_key_id = 'your_access_key_id',
-#                     aws_secret_access_key='your_secret_access_key',
-#                     region_name='your_region_name'
-                    # )
 
 origins = ["*"]
 
@@ -32,6 +21,7 @@ app.add_middleware(
 )
 
 app.include_router(auth.router)
+app.include_router(product.router)
 
 models.Base.metadata.create_all(bind=engine)
 

@@ -10,7 +10,6 @@ from starlette import status
 from database import SessionLocal
 from models import Users
 from jose import JWTError, jwt
-# from passlib.context import CryptContext
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 import os 
 from password_utils import hash_password, verify_password
