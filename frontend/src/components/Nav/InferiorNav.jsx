@@ -16,7 +16,7 @@ export default function InferiorNav() {
             category === 1
               ? "bg-gradient-to-r from from-[#994D80] to-[#E55CB8] text-transparent bg-clip-text"
               : "text-[#1A1A1A"
-          } cursor-default`}
+          } cursor-pointer`}
           onClick={() => handleClick(1)}
         >
           SHOP
@@ -26,7 +26,7 @@ export default function InferiorNav() {
             category === 2
               ? "bg-gradient-to-r from from-[#994D80] to-[#E55CB8] text-transparent bg-clip-text"
               : "text-[#1A1A1A"
-          } cursor-default`}
+          } cursor-pointer`}
           onClick={() => handleClick(2)}
         >
           BEST SELLERS
@@ -36,7 +36,7 @@ export default function InferiorNav() {
             category === 3
               ? "bg-gradient-to-r from from-[#994D80] to-[#E55CB8] text-transparent bg-clip-text"
               : "text-[#1A1A1A"
-          } cursor-default`}
+          } cursor-pointer`}
           onClick={() => handleClick(3)}
         >
           BRANDS
@@ -46,7 +46,7 @@ export default function InferiorNav() {
             category === 4
               ? "bg-gradient-to-r from from-[#994D80] to-[#E55CB8] text-transparent bg-clip-text"
               : "text-[#1A1A1A"
-          } cursor-default`}
+          } cursor-pointer`}
           onClick={() => handleClick(4)}
         >
           BLOG

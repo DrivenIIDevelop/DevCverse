@@ -5,10 +5,13 @@ const paulasImg =
 const maskImg =
   "https://s3-alpha-sig.figma.com/img/963c/bc19/cc150b8d53ca2e7e3b180b11c0b85c66?Expires=1714953600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=EijcVMNL08GzSawVWnIHoj-Wlw2EQR7YCboREKLdFMvUyDhtDsy7Tx3xuXiIsN1sCx57RX8zZ7hT2iurhU4EXWMLgoWQ3KOSJL75v-J17bz~xlEHsjwBj2B2hPiyy6o4giXBi9KK3tfXywhPX5TooUCROOmparrIadIHEztz~sOsSYLFhxV0VhxuuigDw8JJqMFQVq-WynHna8p~1Z6RykeNZoEmXyaZrRQMEFN7DVb-J8mYPk16aZTdo3tTEMKKvCCD772zXi9iyDBgt~fpAGdtYmFNFRE3ndguF-ehi-oJdFyXAnQcvfCypxMPdyhs3rSF9yYaRDLQq3q63RrcLA__";
 
+export default function Recommendations() {
+  function handleClick() {
+    window.alert("Feature coming soon!🚀");
+  }
 
-  export default function Recommendations() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 my-14 gap-3">
+    <div className="grid grid-cols-1 md:grid-cols-3 my-14 gap-3 mx-14">
       <div className="">
         <img
           src={tonerImg}
@@ -21,7 +24,10 @@ const maskImg =
         <p className="font-sans text-xs md:text-sm text-[#262626] flex justify-center py-4">
           View top-rated toners based on skin-type, reviews, & more.
         </p>
-        <button className="w-full font-serif font-light text-[#262626] text-sm flex justify-center border border-[#262626] rounded-lg px-8 py-3">
+        <button
+          className="w-full font-serif font-light text-[#262626] text-sm flex justify-center border border-[#262626] rounded-lg px-8 py-3"
+          onClick={handleClick}
+        >
           View Toners
         </button>
       </div>
@@ -38,7 +44,10 @@ const maskImg =
         <p className="font-sans text-xs md:text-sm text-[#262626] flex justify-center py-4">
           Check out Paula&apos;s Choice bundles for your skincare journey.
         </p>
-        <button className="w-full font-serif font-light text-[#262626] text-sm flex justify-center border border-[#262626] rounded-lg px-8 py-3">
+        <button
+          className="w-full font-serif font-light text-[#262626] text-sm flex justify-center border border-[#262626] rounded-lg px-8 py-3"
+          onClick={handleClick}
+        >
           View Paul’s Choice
         </button>
       </div>
@@ -55,9 +64,12 @@ const maskImg =
         <p className="font-sans text-xs md:text-sm text-[#262626] flex justify-center py-4">
           Revitalize skin with face masks in your routine.
         </p>
-        <p className="w-full font-serif font-light text-[#262626] text-sm flex justify-center border border-[#262626] rounded-lg px-8 py-3">
+        <button
+          className="w-full font-serif font-light text-[#262626] text-sm flex justify-center border border-[#262626] rounded-lg px-8 py-3"
+          onClick={handleClick}
+        >
           View Face Masks
-        </p>
+        </button>
       </div>
     </div>
   );

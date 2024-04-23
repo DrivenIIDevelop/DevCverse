@@ -12,6 +12,9 @@ export default {
         'sans': ['Epilogue', 'sans-serif'],
         'serif': ['Fraunces', 'serif'],
       },
+      boxShadow: {
+        'even': '10px 10px rgba(235, 235, 235, 0.8)', // Custom shadow definition
+      }
     },
   },
   plugins: [],

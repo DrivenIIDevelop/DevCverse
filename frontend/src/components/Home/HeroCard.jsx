@@ -7,7 +7,7 @@ const heroCardImgUrl =
 
 export default function HeroCard() {
   return (
-    <div className="flex justify-between bg-gradient-to-r from from-[#FDF3FA] to-[#F7F7F7] overflow-hidden relative">
+    <div className="flex justify-between bg-gradient-to-r from from-[#FDF3FA] to-[#F7F7F7] overflow-hidden relative mx-16">
       <img src={star3} alt="star3" className="absolute top-[10%] right-[38%] w-[86px] h-[91px] z-10" />
  
       <div className="w-[45%] pl-[65px] flex flex-col justify-center gap-1 lg:gap-3 relative">

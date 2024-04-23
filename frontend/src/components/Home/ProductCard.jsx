@@ -3,13 +3,18 @@ import cartIcon from "../../assets/cart.svg";
 import likeIcon from "../../assets/like.svg";
 
 export default function ProductCard({ product }) {
+
+  function handleClick() {
+    window.alert("Feature coming soon!🚀");
+  } 
+
   return (
     <li className="p-2">
-      <div>
+      <div className="">
         <img
           src={product.image}
           alt={product.name}
-          className="object-fit w-[310px] h-[300px] rounded-lg"
+          className="w-full h-[330px] object-cover rounded-lg"
         />
       </div>
 
@@ -43,12 +48,12 @@ export default function ProductCard({ product }) {
           </div>
         </div>
         <div className="flex justify-between">
-          <button className="w-[70%] flex justify-center items-center font-sans lg:text-sm border border-[#262626] gap-2 px-8 py-3 rounded-lg mt-2.5 ">
+          <button className="w-[70%] flex justify-center items-center font-sans lg:text-sm border border-[#262626] gap-2 px-8 py-3 rounded-lg mt-2.5 " onClick={handleClick}>
             <img src={cartIcon} alt="cart" className="w-6 h-6" />
             <span className="hidden xl:inline">Add to cart</span>
           </button>
-          <button className="w-[20%] flex justify-center items-center border border-[#262626] rounded-lg mt-2.5">
-            <img src={likeIcon} alt="like button" className="w-6 h-6"/>
+          <button className="w-[20%] flex justify-center items-center border border-[#262626] rounded-lg mt-2.5" onClick={handleClick}>
+            <img src={likeIcon} alt="like button" className="w-6 h-6" />
           </button>
         </div>
       </div>

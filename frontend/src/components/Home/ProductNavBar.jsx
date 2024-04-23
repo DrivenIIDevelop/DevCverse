@@ -9,7 +9,7 @@ export default function ProductNavBar() {
   }
 
   return (
-    <nav className="flex justify-between mt-14 items-center">
+    <nav className="flex justify-between mt-14 items-center mx-14">
       <div className="flex gap-x-8">
         <span
           className={`px-2 py-4 font-serif text-base ${

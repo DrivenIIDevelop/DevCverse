@@ -24,7 +24,7 @@ for (let i = 0; i < 8; i++) {
 
 export default function ProductList() {
   return (
-    <ul className="sm:grid sm:grid-cols-2 md:grid md:grid-cols-3 lg:grid lg:grid-cols-4 mx-auto">
+    <ul className="sm:grid sm:grid-cols-2 md:grid md:grid-cols-3 lg:grid lg:grid-cols-4 mx-16">
         {productArr.map((product) => (
             <ProductCard key={product.id} product={product} />
         ))}
