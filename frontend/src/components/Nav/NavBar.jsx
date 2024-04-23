@@ -1,13 +1,13 @@
-import { useUserContext } from "../context/UserContext";
+import { useUserContext } from "../../context/UserContext";
 
-import logo from "../assets/logo/logo.svg";
-import brand_r from "../assets/logo/brand-r.svg";
-import brand_e from "../assets/logo/brand-e.svg";
-import brand_n from "../assets/logo/brand-n.svg";
-import brand_a  from "../assets/logo/brand-a.svg";
-import brand_i from "../assets/logo/brand-i.svg";
-import searchIcon from  "../assets/search.svg";
-import cartIcon from "../assets/cart.svg";
+import logo from "../../assets/logo/logo.svg";
+import brand_r from "../../assets/logo/brand-r.svg";
+import brand_e from "../../assets/logo/brand-e.svg";
+import brand_n from "../../assets/logo/brand-n.svg";
+import brand_a  from "../../assets/logo/brand-a.svg";
+import brand_i from "../../assets/logo/brand-i.svg";
+import searchIcon from  "../../assets/search.svg";
+import cartIcon from "../../assets/cart.svg";
 import InferiorNav from "./InferiorNav";
 
 

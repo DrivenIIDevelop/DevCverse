@@ -1,6 +1,6 @@
-import truck from "../assets/labels/truck.png";
-import arrow from "../assets/labels/arrow.png";
-import authentic from "../assets/labels/authentic.png";
+import truck from "../../assets/labels/truck.png";
+import arrow from "../../assets/labels/arrow.png";
+import authentic from "../../assets/labels/authentic.png";
 
 export default function Labels() {
   return (

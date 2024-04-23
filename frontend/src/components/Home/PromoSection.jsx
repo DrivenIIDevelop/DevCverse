@@ -1,7 +1,7 @@
 
 const imageUrl ='https://s3-alpha-sig.figma.com/img/bd93/8586/6db8780d7622c38f45672d8c843bb63f?Expires=1714953600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=S6k~IHoKYGCHtNC-VgojkspP78EurYUYXZ1ajyMsHk~oYsrN4QPjsZM0AyhXmMecAJQw6EEsMNZn9Adb2gowz2DGMGWD9lhPK9Ka5u-2q19NcPj~MP~LZ~8gBiX5bt~~iOcUWvPqgSW9ES9uMwZqgxJRY7Gs2WZfd44g8vz6cZfJKBRfS4KNKGRL8qtaIqrb60fWwJ0NEACICnudyUBGgaSCYNjKWoU2eoCbAONAqo-~qhgljk3cjrW-U7amMjkTCqvHEzau~5CaVfpn8RTB0VQR7JwfXbQOegJTris8v8-iGxpSB6Y-vLHaIycIWBBMAmE~7VYyYRc2AZPbYdkTgQ__'
 
-export default function AdFrame() {
+export default function PromoSection() {
   return (
     <div className="flex mt-14 ">
       <img src={imageUrl} alt="ad image" className="w-[50%] object-cover" />

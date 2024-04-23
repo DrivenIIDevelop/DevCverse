@@ -1,9 +1,9 @@
-import AdFrame from "../components/PromoSection";
-import HeroCard from "../components/HeroCard";
-import ProductList from "../components/ProductList";
-import ProductNavBar from "../components/ProductNavBar";
-import Labels from "../components/Labels";
-import Recommendations from "../components/Recommendations";
+import PromoSection from "../components/Home/PromoSection";
+import HeroCard from "../components/Home/HeroCard";
+import ProductList from "../components/Home/ProductList";
+import ProductNavBar from "../components/Home/ProductNavBar";
+import Labels from "../components/Home/Labels";
+import Recommendations from "../components/Home/Recommendations";
 
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
       <HeroCard />
       <ProductNavBar />
       <ProductList />
-      <AdFrame />
+      <PromoSection />
       <Labels />
       <Recommendations />
     </div>

@@ -36,7 +36,7 @@ const maskImg =
           Paula’s Choice Bundles
         </p>
         <p className="font-sans text-xs md:text-sm text-[#262626] flex justify-center py-4">
-          Check out Paula's Choice bundles for your skincare journey.
+          Check out Paula&apos;s Choice bundles for your skincare journey.
         </p>
         <button className="w-full font-serif font-light text-[#262626] text-sm flex justify-center border border-[#262626] rounded-lg px-8 py-3">
           View Paul’s Choice

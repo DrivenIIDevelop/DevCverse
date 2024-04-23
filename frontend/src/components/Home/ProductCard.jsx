@@ -1,6 +1,6 @@
-import star from "../assets/star.svg";
-import cartIcon from "../assets/cart.svg";
-import likeIcon from "../assets/like.svg";
+import star from "../../assets/star.svg";
+import cartIcon from "../../assets/cart.svg";
+import likeIcon from "../../assets/like.svg";
 
 export default function ProductCard({ product }) {
   return (
