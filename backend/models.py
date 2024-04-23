@@ -1,6 +1,7 @@
-import enum
 from database import Base
-from sqlalchemy import Column, Integer, String, Float, Enum
+from sqlalchemy import Column, Integer, String, Float, Enum, ForeignKey
+from sqlalchemy.orm import relationship
+import enum
 
 class SkinType(enum.Enum):
     OILY= "oily"
@@ -42,3 +43,22 @@ class Products(Base):
     skin_type = Column(String, nullable=False)
     brand=Column(String, nullable=False)
     image_url = Column(String, nullable=False)
+
+class Cart(Base):
+    __tablename__ = "carts"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey('users.id'))
+
+    user = relationship("User", back_populates="cart")
+    items = relationship("CartItem", back_populates="cart")
+
+class CartItem(Base):
+    __tablename__ = "cart_items"
+
+    id = Column(Integer, primary_key=True, index=True)
+    cart_id = Column(Integer, ForeignKey('carts.id'))
+    product_id = Column(Integer, ForeignKey('products.id'))
+
+    cart = relationship("Cart", back_populates="items")
+    product = relationship("Product")
