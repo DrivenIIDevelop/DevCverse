@@ -22,7 +22,6 @@ const SignUp = () => {
     setPassword("");
   };
 
-
   return (
     <form onSubmit={handleSubmit}>
       <input
