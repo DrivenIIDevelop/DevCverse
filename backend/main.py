@@ -4,7 +4,7 @@ import models
 from database import engine, SessionLocal
 from typing import Annotated, Optional
 from sqlalchemy.orm import Session
-import auth, product
+import auth, product, cart
 from auth import get_current_user
 
 app = FastAPI()
@@ -22,6 +22,7 @@ app.add_middleware(
 
 app.include_router(auth.router)
 app.include_router(product.router)
+app.include_router(cart.router)
 
 models.Base.metadata.create_all(bind=engine)
 
