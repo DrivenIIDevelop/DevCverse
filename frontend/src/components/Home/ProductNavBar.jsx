@@ -4,7 +4,7 @@ export default function ProductNavBar() {
   const [category, setCategory] = useState(1);
 
   async function setCategoryNum(n) {
-    await setCategory(n); 
+    await setCategory(n);
     window.alert("Feature coming soon!🚀");
   }
 
@@ -14,9 +14,9 @@ export default function ProductNavBar() {
         <span
           className={`px-2 py-4 font-serif text-base ${
             category === 1
-              ? "bg-gradient-to-r from from-[#994D80] to-[#E55CB8] text-transparent bg-clip-text cursor-default"
+              ? "bg-gradient-to-r from from-[#994D80] to-[#E55CB8] text-transparent bg-clip-text "
               : "text-[#1A1A1A]"
-          } `}
+          } cursor-pointer`}
           onClick={() => setCategoryNum(1)}
         >
           NEW ARRIVALS
@@ -24,9 +24,9 @@ export default function ProductNavBar() {
         <span
           className={`px-2 py-4 font-serif text-base ${
             category === 2
-              ? "bg-gradient-to-r from from-[#994D80] to-[#E55CB8] text-transparent bg-clip-text cursor-default"
+              ? "bg-gradient-to-r from from-[#994D80] to-[#E55CB8] text-transparent bg-clip-text "
               : "text-[#1A1A1A]"
-          } `}
+          } cursor-pointer`}
           onClick={() => setCategoryNum(2)}
         >
           BEST SELLERS
@@ -34,9 +34,9 @@ export default function ProductNavBar() {
         <span
           className={`px-2 py-4 font-serif text-base ${
             category === 3
-              ? "bg-gradient-to-r from from-[#994D80] to-[#E55CB8] text-transparent bg-clip-text cursor-default"
+              ? "bg-gradient-to-r from from-[#994D80] to-[#E55CB8] text-transparent bg-clip-text "
               : "text-[#1A1A1A]"
-          } `}
+          } cursor-pointer`}
           onClick={() => setCategoryNum(3)}
         >
           OFFERS
@@ -49,6 +49,7 @@ export default function ProductNavBar() {
           name="sort"
           id=""
           className="px-3 py-2 font-sans text-sm font-normal text-[#666] items-center rounded-[8px] border border-[#666]"
+          onClick={() => window.alert("Feature coming soon!🚀")}
         >
           <option value="best_value">Best Value</option>
           <option value="brand">Brand</option>

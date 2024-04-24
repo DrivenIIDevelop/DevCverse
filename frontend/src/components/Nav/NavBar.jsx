@@ -21,6 +21,9 @@ export default function NavBar() {
     setShowPopUp(!showPopUp);
   }
 
+  function handleClick() {
+    window.alert("Feature coming soon!🚀");
+  }
   return (
     <nav className="max-w-[1440px] mx-auto mt-6 px-16">
       <div className="flex justify-between w-full relative">
@@ -28,6 +31,7 @@ export default function NavBar() {
           name="language"
           id=""
           className="px-3 py-2 font-epilogue font-sm font-normal text-[#666] items-center rounded-[8px] border border-[#666]"
+          onClick={handleClick}
         >
           <option value="english">English</option>
           <option value="Spanish">Spanish</option>
@@ -60,9 +64,9 @@ export default function NavBar() {
           )}
         </div>
         {showPopUp && 
-        <div className="font-sans text-base px-5 py-6 rounded-lg absolute top-[60px] right-0 z-20 bg-[#F2DBEB]  text-[#FFF] shadow-even flex flex-col gap-3" onMouseLeave={() => handlePopUp()}>
-          <p className="hover:text-[#732E5C]">Sing In</p>
-          <p className="hover:text-[#732E5C]">Create Account</p>
+        <div className="font-sans text-base px-6 py-6 rounded-lg absolute top-[60px] right-0 z-20 bg-[#F2DBEB]  text-[#FFF] shadow-even flex flex-col gap-3" onMouseLeave={() => handlePopUp()}>
+          <p className="hover:text-[#732E5C] hover:font-medium transition duration-300 ease-in-out">Sing In</p>
+          <p className="hover:text-[#732E5C] hover:font-medium transition duration-300 ease-in-out">Create Account</p>
         </div>}
       </div>
       <InferiorNav />
