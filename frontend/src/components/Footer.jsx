@@ -77,7 +77,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="py-4">
-          <p className="pl-2 flex gap-2 items-center text-xs text-[#333]"><CiGlobe className="text-base"/> English (United States)</p>
+          <p className="pl-2 flex gap-2 items-center text-xs text-[#333]"><CiGlobe className="text-xl font-extrabold"/> English (United States)</p>
         </div>
       </div>
     </footer>

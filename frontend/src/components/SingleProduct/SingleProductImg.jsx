@@ -19,7 +19,7 @@ export default function SingleProductImg() {
   return (
     <>
 
-      <div className="flex gap-28 px-14">
+      <div className="flex gap-28 pl-14">
         <div
           className="flex flex-col gap-3 w-[500px]"
           style={{ height: "750px" }}

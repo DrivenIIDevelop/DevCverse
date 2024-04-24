@@ -23,23 +23,26 @@ const product = {
 
 export default function SingleProduct() {
   return (
-    <div className="">
-      <p className="font-sans text-[#000] text-sm mt-1 mb-14 px-14">
-        <span className="font-sans text-sm text-[#9F9BA6]">Best Sellers</span>{" "}
-        &gt; [{product.brand}]{product.name}{" "}
-      </p>
+    <div className="max-w-[1440px] mx-auto flex justify-center">
 
-      <div className="flex">
-        <SingleProductImg />
-        <SingleProductCard />
+      <div className="flex flex-col">
+        <p className="font-sans text-[#000] text-sm mt-1 mb-14 pl-14">
+          <span className="font-sans text-sm text-[#9F9BA6]">Best Sellers</span>{" "}
+          &gt; [{product.brand}]{product.name}{" "}
+        </p>
+
+        <div className="flex gap-14">
+          <SingleProductImg />
+          <SingleProductCard />
+        </div>
+
+        <img
+          src={reviewSectionImg}
+          alt="product review section"
+          className="mt-20 mb-32 mx-14"
+        />
+        <Footer />
       </div>
-
-      <img
-        src={reviewSectionImg}
-        alt="product review section"
-        className="mt-20 mb-32 mx-14"
-      />
-      <Footer />
     </div>
   );
 }
