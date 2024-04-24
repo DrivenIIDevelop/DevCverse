@@ -60,11 +60,15 @@ def get_db():
 
 db_dependency = Annotated[Session, Depends(get_db)]
 
-@router.get("/")
-async def get_products(db: db_dependency):
-    """Fetch all products"""
-    products = db.query(Products).all()
-    return products
+
+
+@router.get("/{product_id}")
+async def get_product(product_id: int, db: Session = Depends(get_db)):
+    db_product = db.query(Products).filter(Products.id == product_id).first()
+    if not db_product:
+        raise HTTPException(status_code=404, detail="Product not found")
+    return db_product
+
 
 @router.post('/create-products', response_model=ProductResponse, status_code=201)
 async def create_product(
@@ -139,3 +143,9 @@ async def delete_product(product_id: int, db: Session = Depends(get_db)):
     db.delete(db_product)
     db.commit()
     return {"message": "Product successfully deleted"}
+
+@router.get("/")
+async def get_products(db: db_dependency):
+    """Fetch all products"""
+    products = db.query(Products).all()
+    return products
