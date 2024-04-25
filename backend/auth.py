@@ -87,13 +87,10 @@ async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm,
 
 def authenticate_user(username: str, password: str, db: Session):
     user = db.query(Users).filter(Users.username == username).first()
-    print('username in the authenticate_user: ', username)   
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
     if not verify_password(password, user.hashed_password):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Incorrect password")
-    
-    print('user: ', user)
     return user
 
 def create_access_token(username: str, user_id: int, expires_delta: timedelta):
@@ -107,28 +104,27 @@ def create_access_token(username: str, user_id: int, expires_delta: timedelta):
 async def get_current_user(token: Annotated[str, Depends(oauth2_bearer)], db: db_dependency):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        print("payload: ", payload)
-        username: str = payload.get('sub')
+        # username: str = payload.get('sub')
         user_id: int = payload.get('id')
 
-        # user = db.query(Users).filter(Users.id == user.id).first()
-
-        if username is None or user_id is None:
-            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+        # if username is None or user_id is None:
+        #     raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
         
+        user = db.query(Users).filter(Users.id == user_id).first()
+        
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
 
-        # return {
-        #     'id': user_id,
-        #     'username': username,
-        #     'first_name': user.first_name,
-        #     'last_name': user.last_name,
-        #     'skin_type': user.skin_type,
-        #     'role': user.role,
-        #     'is_survey_complete': user.is_survey_complete,
-        #     'cart': user.cart
-        #     }
-
-        return {username, user_id}
+        return {
+            'id': user_id,
+            'username': user.username,
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'skin_type': user.skin_type,
+            'role': user.role,
+            'is_survey_complete': user.is_survey_complete,
+            'cart': user.cart
+            }
     
     except JWTError:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Could not validate user.')
