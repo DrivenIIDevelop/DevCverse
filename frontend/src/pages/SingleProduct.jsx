@@ -2,6 +2,9 @@ import SingleProductImg from "../components/SingleProduct/SingleProductImg";
 import SingleProductCard from "../components/SingleProduct/SingleProductCard";
 import reviewSectionImg from "../assets/Review Section.svg";
 import Footer from "../components/Footer";
+
+
+
 import {
   img1,
   img2,

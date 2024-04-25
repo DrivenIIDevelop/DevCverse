@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { img1, img2, img3, img4, img5, img6, img7 } from "./singleProductImage";
 import { FaStar } from "react-icons/fa";
 import badges from "../../assets/Badges.png";
@@ -7,6 +7,8 @@ import cartIcon from "../../assets/cart.svg";
 import like from "../../assets/like.svg";
 import { FaMinus } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
+import checked from '../../assets/Radio_checked.png';
+import notChecked from '../../assets/Radio_checked.png';
 
 const product = {
   name: "Glass Skin Water-Gel Moisturizer",
@@ -20,6 +22,9 @@ const product = {
 export default function SingleProductCard() {
   const [productQuantity, setProductQuantity] = useState(1);
   const [category, setCategory] = useState("Details");
+  const [productPrice, setProductPrice] = useState(product.price.toFixed(2));
+
+  console.log("productPrice", productPrice);
 
   function increaseQuantity() {
     setProductQuantity(productQuantity + 1);
@@ -35,11 +40,15 @@ export default function SingleProductCard() {
     setCategory(category);
   }
 
+  function handlePriceChange(price) {
+    setProductPrice(price.toFixed(2));
+  }
+
   return (
     <div className="flex flex-col pr-14">
-      <span className="font-sans text-sm text-[#BF4C9A] flex gap-1 mb-2">
-        <FaStar />
-        Suitable for your skin type
+      <span className="font-sans text-sm text-[#BF4C9A] flex gap-1 mb-2 items-center">
+        <FaStar className="text-lg flex justify-center" />
+        <p className="flex justify-center">Suitable for your skin type</p>
       </span>
       <h1 className="font-serif text-[40px] text=[#2C2C2C] font-light mb-2">
         {product.name}
@@ -47,10 +56,41 @@ export default function SingleProductCard() {
       <p className="font-sans text-2xl font-normal text-[#9F9BA6] mb-2">
         {product.brand}
       </p>
-      <p className="font-sans text-2xl text-[#260F1F] mb-2">${product.price.toFixed(2)}</p>
-      <p className="font-sans text-xl text-[#260F1F] mb-2">Size: 1.69 oz/ 50ml</p>
-      <img src={badges} alt="product badges" className="mb-2"/>
-      <img src={purchaseOption} alt="" className="mb-2"/>
+      <p className="font-sans text-2xl text-[#260F1F] mb-2">
+        ${product.price.toFixed(2)}
+      </p>
+      <p className="font-sans text-xl text-[#260F1F] mb-2">
+        Size: 1.69 oz/ 50ml
+      </p>
+      <img src={badges} alt="product badges" className="mb-2" />
+      {/* <img src={purchaseOption} alt="" className="mb-2" /> */}
+      <div className="mb-2">
+        <div className="flex gap-2 items-center">
+          <input
+            name="price"
+            type="radio"
+            value={product.price}
+            onClick={() => handlePriceChange(product.price)}
+            defaultChecked
+            className="hidden"
+          />
+
+        <img src={productPrice === product.price ? {checked} : {notChecked}} alt="one time purchase" />
+          {/* <p className="text-sm">One-time purchase</p> */}
+          <p>${product.price.toFixed(2)}</p>
+        </div>
+        <div className="flex gap-2 items-center" style={{}}>
+          <input
+            name="price"
+            type="radio"
+            value={product.price * 0.9}
+            onClick={() => handlePriceChange(product.price * 0.9)}
+          />
+          <img src={productPrice === product.price * 0.9 ? {checked} : {notChecked}} alt="Subscribe & save 10%" />
+          <p className="text-sm">Subscribe & Save 10%</p>
+          <p>${(product.price * 0.9).toFixed(2)}</p>
+        </div>
+      </div>
       <div className="flex justify-between gap-3 mb-2">
         <span className="flex gap-5 border border-black rounded-lg py-2 justify-center items-center text-center w-[20%]">
           <FaMinus onClick={decreaseQuantity} />{" "}
@@ -65,13 +105,42 @@ export default function SingleProductCard() {
         </button>
       </div>
       <p className="font-sans text-sm text-[#333] mb-3">
-        Pay with AfterPay Interest-free payments. <span className="underline">Learn more</span>
+        Pay with AfterPay Interest-free payments.{" "}
+        <span className="underline">Learn more</span>
       </p>
       <div className="flex gap-5 font-sans text-base text-[#666] mb-0.5">
-        <p className={`${category === 'Details' ? 'text-[#BF4C9A]' : 'text-[#666]'}`} onClick={() => handleCategoryChange("Details")}>Details</p>
-        <p className={`${category === 'Ingredients' ? 'text-[#BF4C9A]' : 'text-[#666]'}`} onClick={() => handleCategoryChange("Ingredients")}>Ingredients</p>
-        <p className={`${category === 'How to use' ? 'text-[#BF4C9A]' : 'text-[#666]'}`} onClick={() => handleCategoryChange("How to use")}>How to use</p>
-        <p className={`${category === 'Share' ? 'text-[#BF4C9A]' : 'text-[#666]'}`} onClick={() => handleCategoryChange("Share")}>Share</p>
+        <p
+          className={`${
+            category === "Details" ? "text-[#BF4C9A]" : "text-[#666]"
+          }`}
+          onClick={() => handleCategoryChange("Details")}
+        >
+          Details
+        </p>
+        <p
+          className={`${
+            category === "Ingredients" ? "text-[#BF4C9A]" : "text-[#666]"
+          }`}
+          onClick={() => handleCategoryChange("Ingredients")}
+        >
+          Ingredients
+        </p>
+        <p
+          className={`${
+            category === "How to use" ? "text-[#BF4C9A]" : "text-[#666]"
+          }`}
+          onClick={() => handleCategoryChange("How to use")}
+        >
+          How to use
+        </p>
+        <p
+          className={`${
+            category === "Share" ? "text-[#BF4C9A]" : "text-[#666]"
+          }`}
+          onClick={() => handleCategoryChange("Share")}
+        >
+          Share
+        </p>
       </div>
       <p className="font-sans text-base text-[#333]">
         Instantly hydrates, balances and strengthens your skin with the power of

@@ -6,6 +6,7 @@ import './App.css';
 import PromoBanner from './components/PromoBanner';
 import SingleProduct from './pages/SingleProduct';
 import CreateProduct from './components/Products/CreateProduct';
+import Cart from './pages/Cart';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
         <Route exact={true} path='/' element={<Home />} />
         <Route exact={true} path='/products/create' element={<CreateProduct />} />
         <Route exact={true} path='/products/:id' element={<SingleProduct />} />
+        <Route exact={true} path='/cart' element={<Cart />} />
       </Routes>
     </>
   )
