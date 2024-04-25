@@ -16,7 +16,7 @@ export const UserContextProvider = ({ children }) => {
   // console.log("user in UserContextProvider: ", user);
   const [error, setError] = useState(null);
 
-  const login = async (username, password) => {
+  const login = async (username, password, ) => {
     const response = await fetch("http://localhost:8000/auth/token", {
       method: "POST",
       headers: {
@@ -47,18 +47,25 @@ export const UserContextProvider = ({ children }) => {
     setUser(userData);
   };
 
-  const userSignUp = async (username, password) => {
+  const userSignUp = async (userData) => {
     try {
-      await axios.post("/auth/", {
-        username,
-        password,
+      const response = await fetch("http://localhost:8000/auth", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
       });
+
+      if(response.ok) {
+        console.log("User signed up successfully!");
+      }
     } catch (error) {
       console.error("Signup error:", error);
       setError(error.message);
     }
 
-    login(username, password); // Auto-login after signup
+    login(userData.username, userData.password); // Auto-login after signup
   };
   // console.log("user in UserContextProvider: ", user);
   // console.log("Providing context", { user, error, login, userSignUp, updateUser });

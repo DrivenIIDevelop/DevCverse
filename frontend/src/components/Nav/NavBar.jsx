@@ -64,9 +64,9 @@ export default function NavBar() {
           )}
         </div>
         {showPopUp && 
-        <div className="font-sans text-base px-6 py-6 rounded-lg absolute top-[60px] right-0 z-20 bg-[#F2DBEB]  text-[#FFF] shadow-even flex flex-col gap-3" onMouseLeave={() => handlePopUp()}>
-          <p className="hover:text-[#732E5C] hover:font-medium transition duration-300 ease-in-out">Sing In</p>
-          <p className="hover:text-[#732E5C] hover:font-medium transition duration-300 ease-in-out">Create Account</p>
+        <div className="font-sans text-base px-6 py-6 rounded-lg absolute top-[60px] right-0 z-20 bg-[#F2DBEB]  text-[#732E5C] shadow-even flex flex-col gap-3" onMouseLeave={() => handlePopUp()}>
+          <p className="hover:underline hover:font-medium transition duration-300 ease-in-out">Sing In</p>
+          <p className="hover:underline hover:font-medium transition duration-300 ease-in-out">Create Account</p>
         </div>}
       </div>
       <InferiorNav />

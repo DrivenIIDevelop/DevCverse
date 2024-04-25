@@ -51,7 +51,7 @@ export default function CreateProduct() {
 
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col">
+    <form onSubmit={handleSubmit} className="flex flex-col items-center">
       <input type="text" value={productName} placeholder="Product Name" onChange={(e) => setProductName(e.target.value)} required/>
       <input type="number" value={productPrice} placeholder="Product Price" onChange={(e) => setProductPrice(e.target.value)} required/>
       <input type="text" value={productDescription} placeholder="Product Description" onChange={(e) => setProductDescription(e.target.value)} required/>

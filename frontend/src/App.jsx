@@ -7,6 +7,8 @@ import PromoBanner from './components/PromoBanner';
 import SingleProduct from './pages/SingleProduct';
 import CreateProduct from './components/Products/CreateProduct';
 import Cart from './pages/Cart';
+import SignUp from './components/SignUp';
+import Login from './components/LogIn';
 
 function App() {
 
@@ -19,6 +21,8 @@ function App() {
         <Route exact={true} path='/products/create' element={<CreateProduct />} />
         <Route exact={true} path='/products/:id' element={<SingleProduct />} />
         <Route exact={true} path='/cart' element={<Cart />} />
+        <Route exact={true} path='/signup' element={<SignUp />} />
+        <Route exact={true} path='/login' element={<Login />} />
       </Routes>
     </>
   )
