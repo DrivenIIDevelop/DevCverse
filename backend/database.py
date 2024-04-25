@@ -10,5 +10,4 @@ engine = create_engine(
 #  the connect_args={"check_same_thread": False} argument is EXCLUSIVE ONLY for SQLite.
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
 Base = declarative_base()
