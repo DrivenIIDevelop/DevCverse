@@ -31,7 +31,7 @@ class Users(Base):
     role = Column(String, default="admin")
     age = Column(Enum(AgeRange), nullable=False)
     skin_type = Column(Enum(SkinType), nullable=False)
-    survey_completed = Column(Boolean, default=False)
+    is_survey_complete = Column(Boolean, default=False)
     cart = relationship("Cart", uselist=False, back_populates="user")
 
 

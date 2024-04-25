@@ -37,6 +37,7 @@ class CreateUserRequest(BaseModel):
     last_name: str
     age: AgeRange
     skin_type: SkinType
+    # is_survey_complete: bool = False
 
 class Token(BaseModel):
     access_token: str
@@ -60,7 +61,8 @@ async def create_user(db: db_dependency, create_user_request: CreateUserRequest)
         first_name=create_user_request.first_name,
         last_name=create_user_request.last_name,
         age=create_user_request.age,
-        skin_type=create_user_request.skin_type
+        skin_type=create_user_request.skin_type,
+        # is_survey_complete=create_user_request.is_survey_complete
     )
 
     db.add(create_user_model)
@@ -102,16 +104,31 @@ def create_access_token(username: str, user_id: int, expires_delta: timedelta):
     return encoded_jwt
 
 
-async def get_current_user(token: Annotated[str, Depends(oauth2_bearer)]):
+async def get_current_user(token: Annotated[str, Depends(oauth2_bearer)], db: db_dependency):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         print("payload: ", payload)
         username: str = payload.get('sub')
         user_id: int = payload.get('id')
 
+        # user = db.query(Users).filter(Users.id == user.id).first()
+
         if username is None or user_id is None:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
-        return {'username': username, 'id': user_id}
+        
+
+        # return {
+        #     'id': user_id,
+        #     'username': username,
+        #     'first_name': user.first_name,
+        #     'last_name': user.last_name,
+        #     'skin_type': user.skin_type,
+        #     'role': user.role,
+        #     'is_survey_complete': user.is_survey_complete,
+        #     'cart': user.cart
+        #     }
+
+        return {username, user_id}
     
     except JWTError:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Could not validate user.')
