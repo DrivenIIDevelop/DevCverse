@@ -25,7 +25,7 @@ const SignUp = () => {
     };
     
 
-    userSignUp( userData );
+    await userSignUp( userData );
     // if (signUpSuccess) {
     //   setUserName("");
     //   setPassword("");
