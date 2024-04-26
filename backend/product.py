@@ -104,17 +104,24 @@ async def create_product(
 @router.put("/update/{product_id}")
 async def update_product(
     product_id: int, 
-    name: Optional[Annotated[str, Form()]] = None,
-    price: Optional[Annotated[float, Form()]] = None,
-    description: Optional[Annotated[str, Form()]] = None,
-    skin_type: Optional[Annotated[str, Form()]] = None,
-    brand: Optional[Annotated[str, Form()]] = None,
+    name: Annotated[str, Form()],
+    price: Annotated[float, Form()],
+    description: Annotated[str, Form()],
+    skin_type: Annotated[str, Form()],
+    brand: Annotated[str, Form()],
     # file: Optional[UploadFile] = File(...), 
     db: Session = Depends(get_db),
 ):
+    print("in the update product route~~~")
     
-    print("product price: ", price)
+    print("product price: ", price) 
+    print("product name: ", name) 
+    print("product description: ", description) 
+    print("product skin_type: ", skin_type) 
+    print("product brand: ", brand) 
+
     db_product = db.query(Products).filter(Products.id == product_id).first()
+    
 
     if not db_product:
         raise HTTPException(status_code=404, detail="Product not found")

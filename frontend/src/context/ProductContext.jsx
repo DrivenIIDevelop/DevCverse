@@ -1,4 +1,6 @@
 import { createContext, useState, useContext } from "react";
+import axios from "axios";
+axios.defaults.baseURL = "http://localhost:8000";
 
 
 export const ProductContext = createContext({
@@ -77,14 +79,22 @@ export const ProductContextProvider = ({ children }) => {
   const updateProduct = async (id, formData) => { 
     // const id = Number(formData.get('product_id'));
     // console.log("id in updateProduct route: ", id);
+
     console.log("in the update product route")
     try {
-      const response = await fetch(`http://localhost:8000/products/update/${id}`, {
-        method: 'PUT',
-        body: formData,
+      // const response = await fetch(`http://localhost:8000/products/update/${id}`, {
+      //   method: 'PUT',
+      //   headers: {
+      //     'Content-Type': 'multipart/form-data',
+      //   },
+      //   body: formData,
+      // });
+      const response = await axios.put(`http://localhost:8000/products/update/${id}`, formData, 
+      {headers: {
+        'Content-Type': 'multipart/form-data'}
       });
-      
-      const data = await response.json();
+      // const data = await response.json();
+      const data = response.data;
       console.log("data in updateProduct: ", data);
       getAllProducts();
     } catch (error) {
