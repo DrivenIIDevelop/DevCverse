@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useUserContext } from "../../context/UserContext";
 
 export default function ProductNavBar() {
   const [category, setCategory] = useState(1);
+  const { user } = useUserContext();
 
   async function setCategoryNum(n) {
     await setCategory(n);
@@ -31,13 +33,28 @@ export default function ProductNavBar() {
         >
           BEST SELLERS
         </span>
+
+        {
+          user ? (
+            <span
+              className={`px-2 py-4 font-serif text-base ${
+                category === 3
+                  ? "bg-gradient-to-r from from-[#994D80] to-[#E55CB8] text-transparent bg-clip-text "
+                  : "text-[#1A1A1A]"
+              } cursor-pointer`}
+              onClick={() => setCategoryNum(3)}
+            >
+              RECOMMENDED
+            </span>
+          ) : null
+        }
         <span
           className={`px-2 py-4 font-serif text-base ${
-            category === 3
+            category === 4
               ? "bg-gradient-to-r from from-[#994D80] to-[#E55CB8] text-transparent bg-clip-text "
               : "text-[#1A1A1A]"
           } cursor-pointer`}
-          onClick={() => setCategoryNum(3)}
+          onClick={() => setCategoryNum(4)}
         >
           OFFERS
         </span>

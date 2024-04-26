@@ -114,7 +114,7 @@ async def update_product(
 ):
     print("in the update product route~~~")
     
-    print("product price: ", price) 
+    print("product price: ", price) #None
     print("product name: ", name) 
     print("product description: ", description) 
     print("product skin_type: ", skin_type) 

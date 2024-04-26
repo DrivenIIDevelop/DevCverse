@@ -5,6 +5,7 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  purge: ["./src/**/*.{js,jsx,ts,tsx}", "./index.html"],
   
   theme: {
     extend: {
@@ -14,7 +15,7 @@ export default {
       },
       boxShadow: {
         'even': '10px 10px rgba(235, 235, 235, 0.8)', // Custom shadow definition
-      }
+      },
     },
   },
   plugins: [],
