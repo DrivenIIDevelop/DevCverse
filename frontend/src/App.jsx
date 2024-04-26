@@ -9,6 +9,8 @@ import CreateProduct from './components/Products/CreateProduct';
 import Cart from './pages/Cart';
 import SignUp from './components/SignUp';
 import Login from './components/LogIn';
+import UpdateProduct from './components/Products/UpdateProduct';
+import DeleteProduct from './components/Products/DeleteProduct';
 
 function App() {
 
@@ -19,6 +21,8 @@ function App() {
       <Routes>
         <Route exact={true} path='/' element={<Home />} />
         <Route exact={true} path='/products/create' element={<CreateProduct />} />
+        <Route exact={true} path='products/delete/:id' element={<DeleteProduct />}></Route>
+        <Route exact={true} path='/products/update/:id' element={<UpdateProduct />}></Route>
         <Route exact={true} path='/products/:id' element={<SingleProduct />} />
         <Route exact={true} path='/cart' element={<Cart />} />
         <Route exact={true} path='/signup' element={<SignUp />} />

@@ -34,6 +34,8 @@ export default function CreateProduct() {
     formData.append("brand", productBrand);
     formData.append("file", productImage);
 
+    console.log("formData in creatproduct component: ", formData);
+
     await createProduct(formData);
 
     setProductName("");

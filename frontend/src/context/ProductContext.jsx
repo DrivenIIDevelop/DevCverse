@@ -74,16 +74,18 @@ export const ProductContextProvider = ({ children }) => {
     }
   };
 
-  const updateProduct = async (product) => { 
+  const updateProduct = async (id, formData) => { 
+    // const id = Number(formData.get('product_id'));
+    // console.log("id in updateProduct route: ", id);
+    console.log("in the update product route")
     try {
-      const response = await fetch(`http://localhost:8000/products/update/${product.id}`, {
+      const response = await fetch(`http://localhost:8000/products/update/${id}`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(product),
+        body: formData,
       });
-      console.log("response in updateProduct: ", response);
+      
+      const data = await response.json();
+      console.log("data in updateProduct: ", data);
       getAllProducts();
     } catch (error) {
       setError(error);

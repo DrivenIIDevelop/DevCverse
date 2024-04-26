@@ -112,6 +112,8 @@ async def update_product(
     # file: Optional[UploadFile] = File(...), 
     db: Session = Depends(get_db),
 ):
+    
+    print("product price: ", price)
     db_product = db.query(Products).filter(Products.id == product_id).first()
 
     if not db_product:
@@ -135,8 +137,10 @@ async def update_product(
 
     return db_product
 
-@router.delete("/delete/{product.id}")
+@router.delete("/delete/{product_id}")
 async def delete_product(product_id: int, db: Session = Depends(get_db)):
+    print("product_id in the backend: ", product_id)
+    print("in the delete product route~~~")
     db_product = db.query(Products).filter(Products.id == product_id).first()
     if not db_product:
         raise HTTPException(status_code=404, detail="Product not found")
