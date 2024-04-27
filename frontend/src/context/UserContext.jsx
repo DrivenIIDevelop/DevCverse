@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 import axios from "axios";
 axios.defaults.baseURL = "http://localhost:8000";
 
@@ -16,7 +16,7 @@ export const UserContextProvider = ({ children }) => {
   // console.log("user in UserContextProvider: ", user);
   const [error, setError] = useState(null);
 
-  const login = async (username, password, ) => {
+  const login = async ( username, password ) => {
     const response = await fetch("http://localhost:8000/auth/token", {
       method: "POST",
       headers: {
@@ -27,10 +27,13 @@ export const UserContextProvider = ({ children }) => {
       )}&password=${encodeURIComponent(password)}`,
     });
 
-    // console.log('Raw response in login function context: ', response);
-
     const { access_token } = await response.json();
-    // console.log("access_token: ", access_token);
+    localStorage.setItem('access_token', access_token);
+    getUser();
+  };
+  
+  const getUser = async () => {
+    const access_token = localStorage.getItem('access_token');
     const userResponse = await fetch("http://localhost:8000/user", {
       method: "GET",
       headers: {
@@ -43,9 +46,11 @@ export const UserContextProvider = ({ children }) => {
       throw new Error(`Failed to get user! status: ${userResponse.status}`);
     }
     const userData = await userResponse.json();
-    console.log("userData in login component: ", userData);
+    // console.log("userData in login component: ", userData);
     setUser(userData);
+
   };
+
 
   const userSignUp = async (userData) => {
     try {
@@ -65,13 +70,18 @@ export const UserContextProvider = ({ children }) => {
       setError(error.message);
     }
 
-    login(userData.username, userData.password); // Auto-login after signup
+    login(userData.username, userData.password); 
   };
   // console.log("user in UserContextProvider: ", user);
   // console.log("Providing context", { user, error, login, userSignUp, updateUser });
 
+  // useEffect (() => {
+  //   getUser();
+  // }, [])
+
+
   return (
-    <UserContext.Provider value={{ user, error, login, userSignUp }}>
+    <UserContext.Provider value={{ user, error, login, userSignUp, getUser }}>
       {children}
     </UserContext.Provider>
   );

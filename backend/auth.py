@@ -123,7 +123,7 @@ async def get_current_user(token: Annotated[str, Depends(oauth2_bearer)], db: db
             'skin_type': user.skin_type,
             'role': user.role,
             'is_survey_complete': user.is_survey_complete,
-            'cart': user.cart
+            'cart': user.cart,
             }
     
     except JWTError:

@@ -1,21 +1,24 @@
 import { useState } from "react";
 import { img1, img2, img3, img4, img5, img6, img7 } from "./singleProductImage";
 
-const product = {
-  name: "Glass Skin Water-Gel Moisturizer",
-  price: 100,
-  description: "Product Description",
-  skin_type: "Normal",
-  brand: "Peach & Lily",
-  imageUrl: [img1, img2, img3, img4, img5, img6, img7],
-};
+// const product = {
+//   name: "Glass Skin Water-Gel Moisturizer",
+//   price: 100,
+//   description: "Product Description",
+//   skin_type: "Normal",
+//   brand: "Peach & Lily",
+//   imageUrl: [img1, img2, img3, img4, img5, img6, img7],
+// };
 
-export default function SingleProductImg() {
-  const [currentImage, setCurrentImage] = useState(product.imageUrl[0]);
+export default function SingleProductImg({ product }) {
+  console.log("product in SingleProductImg: ", product)
+  const [currentImage, setCurrentImage] = useState(product.image_url);
+
 
   function handleImageChange(image) {
-    setCurrentImage(product.imageUrl[image]);
+    setCurrentImage(product.image_url[image]);
   }
+
   return (
     <>
 
