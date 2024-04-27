@@ -1,5 +1,5 @@
 import { useUserContext } from "../../context/UserContext";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import logo from "../../assets/logo/logo.svg";
 import brand_r from "../../assets/logo/brand-r.svg";
@@ -13,17 +13,15 @@ import InferiorNav from "./InferiorNav";
 import Login from "../LogIn";
 
 import { FaRegUser } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 
 export default function NavBar() {
   const [showPopUp, setShowPopUp] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  // const [showSignUp, setShowSignUp] = useState(false);
 
   const { user } = useUserContext();
-  console.log("user in NavBar: ", user);
-  const { getUser } = useUserContext();
-  
-
 
   function handlePopUp() {
     setShowPopUp(!showPopUp);
@@ -35,6 +33,10 @@ export default function NavBar() {
 
   function handleLogin() {
     setShowLogin(!showLogin);
+  }
+
+  function handleSignUp() {
+    setShowLogin(false);
   }
 
 
@@ -52,16 +54,16 @@ export default function NavBar() {
           <option value="chinese">Chinese</option>
         </select>
 
-        <div className="flex gap-3">
+        <Link to='/'><div className="flex gap-3">
           <img src={logo} alt="logo" className="" />
-          <div className="flex">
+          <div className="flex items-center">
             <img src={brand_r} alt="brand" className="" />
             <img src={brand_e} alt="brand" className="" />
             <img src={brand_n} alt="brand" className="" />
             <img src={brand_a} alt="brand" className="" />
             <img src={brand_i} alt="brand" className="" />
           </div>
-        </div>
+        </div></Link> 
         <div className="flex items-center">
           <img src={searchIcon} alt="search" className="px-2 py-2" />
           <img src={cartIcon} alt="cart" className="px-2 py-2" />
@@ -80,7 +82,7 @@ export default function NavBar() {
         {showPopUp && 
         <div className="font-sans text-base px-6 py-6 rounded-lg absolute top-[60px] right-0 z-20 bg-[#F2DBEB]  text-[#732E5C] shadow-even flex flex-col gap-3" onMouseLeave={() => handlePopUp()}>
           <p className="hover:underline hover:font-medium transition duration-300 ease-in-out" onClick={handleLogin}>Sing In</p>
-          <p className="hover:underline hover:font-medium transition duration-300 ease-in-out">Create Account</p>
+         <Link to="/signup"><p className="hover:underline hover:font-medium transition duration-300 ease-in-out" onClick={handleSignUp}>Create Account</p></Link>
         </div>}
       </div>
       <InferiorNav />

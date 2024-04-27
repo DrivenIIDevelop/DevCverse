@@ -2,29 +2,27 @@ import { useState } from "react";
 import { img1, img2, img3, img4, img5, img6, img7 } from "./singleProductImage";
 import { FaStar } from "react-icons/fa";
 import badges from "../../assets/Badges.png";
-import purchaseOption from "../../assets/purchaseOption.png";
 import cartIcon from "../../assets/cart.svg";
 import like from "../../assets/like.svg";
 import { FaMinus } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
 import checked from "../../assets/RadioCheck.svg";
 import notChecked from "../../assets/RadioNotChecked.svg";
-import rectangle from "../../assets/Rectangle.svg";
 import horizontal_badge from "../../assets/Horizontal Badge.svg";
 
-const product = {
-  name: "Glass Skin Water-Gel Moisturizer",
-  price: 43.0,
-  description: "Product Description",
-  skin_type: "Normal",
-  brand: "Peach & Lily",
-  imageUrl: [img1, img2, img3, img4, img5, img6, img7],
-};
+// const product = {
+//   name: "Glass Skin Water-Gel Moisturizer",
+//   price: 43.0,
+//   description: "Product Description",
+//   skin_type: "Normal",
+//   brand: "Peach & Lily",
+//   imageUrl: [img1, img2, img3, img4, img5, img6, img7],
+// };
 
 
 const productDescription = `Instantly hydrates, balances and strengthens your skin with the power of vegan pre- and probiotics and hyaluronic acid. The perfect end to your skincare routine, our Glass Skin Water-Gel Moisturizer provides instant and long-lasting hydration for a Glass Skin glow. This breakthrough formula delivers a proprietary vegan prebiotic and probiotic complex that strengthens your skin’s unique microbiome – the environment in which your skin functions – to strengthen skin and curb breakouts. The moisturizer is also expertly blended with natural antioxidants and vitamins found in peach and kiwi extracts, combined with calming chamomile, and licorice that helps skin appear more even-toned and brighter. Meanwhile, 3 different weights of hyaluronic acid hydrates deeply while beta glucans help bind moisture to skin for long-lasting hydration. The finishing touch is powered by our signature VoluSmooth™ that leaves skin looking and feeling smooth.`;
 
-export default function SingleProductCard() {
+export default function SingleProductCard({ product }) {
   const [productQuantity, setProductQuantity] = useState(1);
   const [category, setCategory] = useState("Details");
   const [productPrice, setProductPrice] = useState(product.price.toFixed(2));
@@ -55,10 +53,7 @@ export default function SingleProductCard() {
     return (
       <div className="font-sans text-sm text-[#333]">
         {paragraphs.map((para, index) => (
-          <>
-          <p key={index}>{para}</p>
-          {/* <br></br> */}
-          </>
+          <span key={index}>{para}</span>
         ))}
       </div>
     );
@@ -179,9 +174,7 @@ export default function SingleProductCard() {
           Share
         </p>
       </div>
-      <p className="font-sans text-base text-[#333]">
-        {autoParagraphs(productDescription)}
-      </p>
+        {autoParagraphs(product.description)}
     </div>
   );
 }

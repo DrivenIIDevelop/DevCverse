@@ -27,31 +27,13 @@ export const UserContextProvider = ({ children }) => {
       )}&password=${encodeURIComponent(password)}`,
     });
 
-    // console.log('Raw response in login function context: ', response);
-
     const { access_token } = await response.json();
     localStorage.setItem('access_token', access_token);
-    // console.log("access_token: ", access_token);
-    // const userResponse = await fetch("http://localhost:8000/user", {
-    //   method: "GET",
-    //   headers: {
-    //     Authorization: `Bearer ${access_token}`,
-    //     "Content-Type": "application/json",
-    //   },
-    // });
-
-    // if (!userResponse.ok) {
-    //   throw new Error(`Failed to get user! status: ${userResponse.status}`);
-    // }
-    // const userData = await userResponse.json();
-    // console.log("userData in login component: ", userData);
-    // setUser(userData);
     getUser();
   };
   
   const getUser = async () => {
     const access_token = localStorage.getItem('access_token');
-    console.log("access_token in getUser: ", access_token);
     const userResponse = await fetch("http://localhost:8000/user", {
       method: "GET",
       headers: {
@@ -64,7 +46,7 @@ export const UserContextProvider = ({ children }) => {
       throw new Error(`Failed to get user! status: ${userResponse.status}`);
     }
     const userData = await userResponse.json();
-    console.log("userData in login component: ", userData);
+    // console.log("userData in login component: ", userData);
     setUser(userData);
 
   };
@@ -88,7 +70,7 @@ export const UserContextProvider = ({ children }) => {
       setError(error.message);
     }
 
-    login(userData.username, userData.password); // Auto-login after signup
+    login(userData.username, userData.password); 
   };
   // console.log("user in UserContextProvider: ", user);
   // console.log("Providing context", { user, error, login, userSignUp, updateUser });

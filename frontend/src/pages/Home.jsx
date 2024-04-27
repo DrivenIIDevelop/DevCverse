@@ -6,7 +6,6 @@ import Labels from "../components/Home/Labels";
 import Recommendations from "../components/Home/Recommendations";
 import Reviews from "../components/Home/Reviews";
 import Footer from "../components/Footer";
-import Login from "../components/LogIn";
 
 
 export default function Home() {

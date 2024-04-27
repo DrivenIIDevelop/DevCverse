@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useUserContext } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [username, setUserName] = useState("");
@@ -10,6 +11,8 @@ const SignUp = () => {
   const [skin_type, setSkinType] = useState("");
   const [error, setError] = useState(null);
   const { userSignUp } = useUserContext();
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,16 +28,9 @@ const SignUp = () => {
     };
 
     await userSignUp(userData);
-    // if (signUpSuccess) {
-    //   setUserName("");
-    //   setPassword("");
-    //   setFirstName("");
-    //   setLastName("");
-    //   setAge("");  // Reset age
-    //   setSkinType("");  // Reset skin type
-    // } else {
-    //   setError("Failed to create account. Please check your details.");
-    // }
+
+    navigate("/");
+   
   };
 
   return (

@@ -45,7 +45,7 @@ export const ProductContextProvider = ({ children }) => {
         },
       });
       const data = await response.json();
-      console.log("data in getSingleProduct: ", data);
+      console.log("data in getSingleProduct function: ", data);
       setSingleProduct(data);
     } catch (error) {
       setError(error);
