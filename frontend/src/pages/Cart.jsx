@@ -4,6 +4,8 @@ import { FaPlus } from "react-icons/fa6";
 import Footer from "../components/Footer";
 import progessBar from "../assets/cart/Progress.svg";
 import line from "../assets/cart/Line.svg";
+import line1 from "../assets/cart/Line1.png";
+import product from "../assets/cart/Product.png";
 
 export default function Cart() {
   const [productQuantity, setProductQuantity] = useState(1);
@@ -18,12 +20,12 @@ export default function Cart() {
     }
   }
   return (
-    <div>
-      <div className="flex flex-row px-20 ">
-        <div className="w-[672px] px-15">
+    <div className="">
+      <div className="flex flex-row w-[1312px] h-[1313px] py-[60px] ml-[12%]">
+        <div className="w-[672px] h-[1193px]">
           <br />
           <div className="Status pt-10">
-            <div className="flex flex-column text-center font-serif text-base">
+            <div className="flex flex-column text-center font-serif text-base ml-[4%]">
               <div className="flex flex-col items-center">
                 <img src={progessBar} alt="" className="w-[24px] h-[24px]" />
                 <span>Shipping</span>
@@ -150,7 +152,7 @@ export default function Cart() {
             <div className="mt-[48px] mb-[24px]">
               <span className="text-2xl font-serif">Shipping Method</span>
             </div>
-            <form className="flex flex-col font-sans">
+            <div className="flex flex-col font-sans">
               <div className="">
                 <label className="text-base ">Standard </label>
                 <span className="text-sm text-gray-500 ml-[7px]">
@@ -172,33 +174,51 @@ export default function Cart() {
                 </span>
                 <span className="text-sm">$25.00</span>
               </div>
-            </form>
+            </div>
           </div>
           <button className="rounded-md h-[48px] px-9 text-sm font-sans bg-[#BF4C9A] text-white ml-[70%] my-[60px]">
             Continue To Payment
           </button>
         </div>
-        <div className="Order w-3/6 ">
-          <img src="" alt="" />
-        </div>
-        <div className="pt-10">
-          <div>
-            <input type="text" name="" id="" placeholder="Enter promo code" />
+
+        <div className="Order flex flex-col w-[560px] h-[1313px] ml-[10%] ">
+          <div className="flex flex-col">
+            <span className="font-serif text-2xl">Order Summery</span>
+            <span className="flex justify-end">Edit Cart</span>
+          </div>
+          <img src={product} alt="" className="w-[96px] h-[96px]" />
+          <span className="ProductName flex flex-col">
+            {" "}
+            <span className="ProductPrice">$</span>
+            <span className="Description"></span>
             <span className="flex gap-5 border border-black rounded-lg py-2 justify-center items-center text-center w-[20%]">
               <FaMinus onClick={decreaseQuantity} />{" "}
               <div className="flex justify-end w-[10px]">{productQuantity}</div>
               <FaPlus onClick={increaseQuantity} />
             </span>
+            <input type="text" name="" id="" placeholder="Enter promo code" />
             <button>Apply</button>
+          </span>
+
+          <div className="font-sans text-xl flex flex-col">
+            <div className="flex justify-between">
+              <span className="">Subtotal</span>
+              <span className="Subtotal">$</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Estimated Shipping </span>
+              <span className="Shipping">$</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Estimated Tax</span>
+              <span className="Tax ">$</span>
+            </div>
+            <img src={line1} alt="" />
+            <div className="flex justify-between">
+              <span className="">Estimated Total</span>
+              <span className="Total">$</span>
+            </div>
           </div>
-          <ul>
-            <li>Subtotal</li>
-            <li></li>
-            <li>Estimated Shipping</li>
-            <li></li>
-            <li>Estimated Tax</li>
-            <li></li>
-          </ul>
         </div>
       </div>
       <Footer />
