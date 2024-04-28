@@ -3,7 +3,7 @@ import { useProductContext } from "../../context/ProductContext";
 
 export default function CreateProduct({ closeFunction }) {
   const [productName, setProductName] = useState("");
-  const [productPrice, setProductPrice] = useState(0);
+  const [productPrice, setProductPrice] = useState(0.00);
   const [productDescription, setProductDescription] = useState("");
   const [productSkinType, setProductSkinType] = useState("");
   const [productBrand, setProductBrand] = useState("");
@@ -58,6 +58,7 @@ export default function CreateProduct({ closeFunction }) {
             onChange={(e) => setProductPrice(e.target.value)}
             required
             className="px-3 py-2 rounded-lg outline-[#9CA3AF]"
+            step="0.01"
           />
         </div>
       </div>
