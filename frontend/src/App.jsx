@@ -11,6 +11,8 @@ import SignUp from './components/SignUp';
 import Login from './components/LogIn';
 import UpdateProduct from './components/Products/UpdateProduct';
 import DeleteProduct from './components/Products/DeleteProduct';
+import About from './pages/About';
+import Quiz from './pages/Quiz';
 
 function App() {
 
@@ -27,6 +29,9 @@ function App() {
         <Route exact={true} path='/cart' element={<Cart />} />
         <Route exact={true} path='/signup' element={<SignUp />} />
         <Route exact={true} path='/login' element={<Login />} />
+        <Route exact={true} path='/about' element={<About />} />
+        <Route exact={true} path='/about/quiz' element={<Quiz />} />
+        <Route exact={true} path='/about/quiz/result' element={<Quiz />} />
       </Routes>
     </>
   )
