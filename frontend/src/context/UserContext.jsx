@@ -48,6 +48,7 @@ export const UserContextProvider = ({ children }) => {
     const userData = await userResponse.json();
     // console.log("userData in login component: ", userData);
     setUser(userData);
+    localStorage.setItem('access_token', access_token);
     localStorage.setItem('user', JSON.stringify(userData));
     return userData;
   };

@@ -1,5 +1,5 @@
 import { useUserContext } from "../../context/UserContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import logo from "../../assets/logo/logo.svg";
 import brand_r from "../../assets/logo/brand-r.svg";
@@ -15,13 +15,15 @@ import Login from "../LogIn";
 import { FaRegUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-
 export default function NavBar() {
   const [showPopUp, setShowPopUp] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  const [showUser, setShowUser] = useState(false);
   // const [showSignUp, setShowSignUp] = useState(false);
 
   const { user } = useUserContext();
+  // console.log("user in NavBar component: ", user);
+  const { getUser } = useUserContext();
 
   function handlePopUp() {
     setShowPopUp(!showPopUp);
@@ -39,6 +41,17 @@ export default function NavBar() {
     setShowLogin(false);
   }
 
+  function handleShowUser() {
+    setShowUser(!showUser);
+  }
+
+  // useEffect(() => {
+  //   getUser();
+  // }, []);
+
+  // if (!user) {
+  //   return <h1>Loading...</h1>;
+  // }
 
   return (
     <nav className="max-w-[1440px] mx-auto mt-6 px-16 relative">
@@ -54,22 +67,24 @@ export default function NavBar() {
           <option value="chinese">Chinese</option>
         </select>
 
-        <Link to='/'><div className="flex gap-3">
-          <img src={logo} alt="logo" className="" />
-          <div className="flex items-center">
-            <img src={brand_r} alt="brand" className="" />
-            <img src={brand_e} alt="brand" className="" />
-            <img src={brand_n} alt="brand" className="" />
-            <img src={brand_a} alt="brand" className="" />
-            <img src={brand_i} alt="brand" className="" />
+        <Link to="/">
+          <div className="flex gap-3">
+            <img src={logo} alt="logo" className="" />
+            <div className="flex items-center">
+              <img src={brand_r} alt="brand" className="" />
+              <img src={brand_e} alt="brand" className="" />
+              <img src={brand_n} alt="brand" className="" />
+              <img src={brand_a} alt="brand" className="" />
+              <img src={brand_i} alt="brand" className="" />
+            </div>
           </div>
-        </div></Link> 
+        </Link>
         <div className="flex items-center">
           <img src={searchIcon} alt="search" className="px-2 py-2" />
           <img src={cartIcon} alt="cart" className="px-2 py-2" />
           {user ? (
             // <img src={user.avatar} alt="user" className="px-2 py-2" />
-            <FaRegUser className="text-2xl mx-1.5" />
+            <FaRegUser className="text-2xl mx-1.5" onClick={handleShowUser} />
           ) : (
             <button
               className="px-4 py-2 text-white rounded-[8px] items-center bg-[#BF4C9A]"
@@ -79,11 +94,34 @@ export default function NavBar() {
             </button>
           )}
         </div>
-        {showPopUp && 
-        <div className="font-sans text-base px-6 py-6 rounded-lg absolute top-[60px] right-0 z-20 bg-[#F2DBEB]  text-[#732E5C] shadow-even flex flex-col gap-3" onMouseLeave={() => handlePopUp()}>
-          <p className="hover:underline hover:font-medium transition duration-300 ease-in-out" onClick={handleLogin}>Sing In</p>
-         <Link to="/signup"><p className="hover:underline hover:font-medium transition duration-300 ease-in-out" onClick={handleSignUp}>Create Account</p></Link>
-        </div>}
+        {user && user.User.role === "admin" && showUser && (
+          <div className="font-sans text-base px-6 py-6 rounded-lg absolute top-[60px] right-0 z-20 bg-[#F2DBEB]  text-[#732E5C] shadow-even flex flex-col gap-3" onMouseLeave={() => handleShowUser()}>
+            <Link to='/admin' className="hover:underline hover:font-medium transition duration-300 ease-in-out">
+              Manage Products
+            </Link>
+          </div>
+        )}
+        {showPopUp && (
+          <div
+            className="font-sans text-base px-6 py-6 rounded-lg absolute top-[60px] right-0 z-20 bg-[#F2DBEB]  text-[#732E5C] shadow-even flex flex-col gap-3"
+            onMouseLeave={() => handlePopUp()}
+          >
+            <p
+              className="hover:underline hover:font-medium transition duration-300 ease-in-out"
+              onClick={handleLogin}
+            >
+              Sing In
+            </p>
+            <Link to="/signup">
+              <p
+                className="hover:underline hover:font-medium transition duration-300 ease-in-out"
+                onClick={handleSignUp}
+              >
+                Create Account
+              </p>
+            </Link>
+          </div>
+        )}
       </div>
       <InferiorNav />
       {!user && showLogin ? <Login /> : null}

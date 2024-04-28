@@ -14,6 +14,7 @@ import DeleteProduct from './components/Products/DeleteProduct';
 import About from './pages/About';
 import Quiz from './pages/Quiz';
 import Results from './pages/Results';
+import Admin from './pages/Admin';
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
         <Route exact={true} path='/about' element={<About />} />
         <Route exact={true} path='/about/quiz' element={<Quiz />} />
         <Route exact={true} path='/about/results' element={<Results />} />
+        <Route exact={true} path='/admin' element={<Admin />} />
       </Routes>
     </>
   )
