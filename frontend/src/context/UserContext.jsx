@@ -29,7 +29,7 @@ export const UserContextProvider = ({ children }) => {
 
     const { access_token } = await response.json();
     localStorage.setItem('access_token', access_token);
-    getUser();
+    await getUser();
   };
   
   const getUser = async () => {
@@ -48,7 +48,8 @@ export const UserContextProvider = ({ children }) => {
     const userData = await userResponse.json();
     // console.log("userData in login component: ", userData);
     setUser(userData);
-
+    localStorage.setItem('user', JSON.stringify(userData));
+    return userData;
   };
 
 
@@ -74,10 +75,9 @@ export const UserContextProvider = ({ children }) => {
   };
   // console.log("user in UserContextProvider: ", user);
   // console.log("Providing context", { user, error, login, userSignUp, updateUser });
-
-  // useEffect (() => {
-  //   getUser();
-  // }, [])
+  useEffect(() => { 
+    getUser();
+  }, []);
 
 
   return (

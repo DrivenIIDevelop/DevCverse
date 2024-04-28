@@ -13,6 +13,7 @@ import UpdateProduct from './components/Products/UpdateProduct';
 import DeleteProduct from './components/Products/DeleteProduct';
 import About from './pages/About';
 import Quiz from './pages/Quiz';
+import Results from './pages/Results';
 
 function App() {
 
@@ -31,7 +32,7 @@ function App() {
         <Route exact={true} path='/login' element={<Login />} />
         <Route exact={true} path='/about' element={<About />} />
         <Route exact={true} path='/about/quiz' element={<Quiz />} />
-        <Route exact={true} path='/about/quiz/result' element={<Quiz />} />
+        <Route exact={true} path='/about/results' element={<Results />} />
       </Routes>
     </>
   )
