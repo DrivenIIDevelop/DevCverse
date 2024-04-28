@@ -28,7 +28,7 @@ export const ProductContextProvider = ({ children }) => {
         },
       });
       const data = await response.json();
-      console.log("data in getAllProducts: ", data);
+      // console.log("data in getAllProducts: ", data);
       setAllProducts(data);
     } catch (error) {
       setError(error);
@@ -59,7 +59,7 @@ export const ProductContextProvider = ({ children }) => {
         method: 'POST',
         body: formData, 
       });
-      console.log("response in createProduct: ", response);
+      // console.log("response in createProduct: ", response);
       if (response.ok) {
         const productResponse = await response.json();
         console.log("Product created successfully: ", productResponse);

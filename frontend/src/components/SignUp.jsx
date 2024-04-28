@@ -193,7 +193,7 @@ const SignUp = () => {
             </div>
 
             <p className="font-serif text-base text-[#000] text-center">
-              Already a user? <Link to="/">SIGN-IN</Link>
+              Already a user? <Link to="/" className="underline">SIGN-IN</Link>
             </p>
           </div>
 

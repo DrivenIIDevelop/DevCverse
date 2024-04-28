@@ -20,12 +20,14 @@ import horizontal_badge from "../../assets/Horizontal Badge.svg";
 // };
 
 
-const productDescription = `Instantly hydrates, balances and strengthens your skin with the power of vegan pre- and probiotics and hyaluronic acid. The perfect end to your skincare routine, our Glass Skin Water-Gel Moisturizer provides instant and long-lasting hydration for a Glass Skin glow. This breakthrough formula delivers a proprietary vegan prebiotic and probiotic complex that strengthens your skin’s unique microbiome – the environment in which your skin functions – to strengthen skin and curb breakouts. The moisturizer is also expertly blended with natural antioxidants and vitamins found in peach and kiwi extracts, combined with calming chamomile, and licorice that helps skin appear more even-toned and brighter. Meanwhile, 3 different weights of hyaluronic acid hydrates deeply while beta glucans help bind moisture to skin for long-lasting hydration. The finishing touch is powered by our signature VoluSmooth™ that leaves skin looking and feeling smooth.`;
+// const productDescription = `Instantly hydrates, balances and strengthens your skin with the power of vegan pre- and probiotics and hyaluronic acid. The perfect end to your skincare routine, our Glass Skin Water-Gel Moisturizer provides instant and long-lasting hydration for a Glass Skin glow. This breakthrough formula delivers a proprietary vegan prebiotic and probiotic complex that strengthens your skin’s unique microbiome – the environment in which your skin functions – to strengthen skin and curb breakouts. The moisturizer is also expertly blended with natural antioxidants and vitamins found in peach and kiwi extracts, combined with calming chamomile, and licorice that helps skin appear more even-toned and brighter. Meanwhile, 3 different weights of hyaluronic acid hydrates deeply while beta glucans help bind moisture to skin for long-lasting hydration. The finishing touch is powered by our signature VoluSmooth™ that leaves skin looking and feeling smooth.`;
 
 export default function SingleProductCard({ product }) {
+  console.log("product in SingleProductCard component: ", product);
   const [productQuantity, setProductQuantity] = useState(1);
   const [category, setCategory] = useState("Details");
-  const [productPrice, setProductPrice] = useState(product.price.toFixed(2));
+  // const [productPrice, setProductPrice] = useState(product.price.toFixed(2));
+  const [productPrice, setProductPrice] = useState(product.price);
 
   // console.log("productPrice", productPrice);
 
@@ -47,8 +49,8 @@ export default function SingleProductCard({ product }) {
     setProductPrice(price.toFixed(2));
   }
 
-  function autoParagraphs( text ) {
-    const paragraphs = text.split(/(?<=\.)\s+/); 
+  function autoParagraphs( ) {
+    const paragraphs = product.description.split(/(?<=\.)\s+/); 
   
     return (
       <div className="font-sans text-sm text-[#333]">
@@ -72,7 +74,8 @@ export default function SingleProductCard({ product }) {
         {product.brand}
       </p>
       <p className="font-sans text-2xl text-[#260F1F] mb-2">
-        ${product.price.toFixed(2)}
+        {/* ${product.price.toFixed(2)} */}
+        ${product.price}
       </p>
       <p className="font-sans text-xl text-[#260F1F] mb-2">
         Size: 1.69 oz/ 50ml
@@ -82,7 +85,8 @@ export default function SingleProductCard({ product }) {
       <div className="mb-2">
         <div
           className={` flex gap-2 items-center justify-between text-sm mb-2 mt-2 ${
-            productPrice === product.price.toFixed(2)
+            // productPrice === product.price.toFixed(2)
+            productPrice === product.price
               ? "text-[#CC70AE]"
               : "text-[#333]"
           }`}
@@ -90,18 +94,21 @@ export default function SingleProductCard({ product }) {
           <div className="flex gap-2 items-center">
             <img
               src={
-                productPrice === product.price.toFixed(2) ? checked : notChecked
+                // productPrice === product.price.toFixed(2) ? checked : notChecked
+                productPrice === product.price ? checked : notChecked
               }
               alt="one time purchase"
               onClick={() => handlePriceChange(product.price)}
             />
             <p >One-time purchase</p>
           </div>
-          <p>${product.price.toFixed(2)}</p>
+          {/* <p>${product.price.toFixed(2)}</p> */}
+          <p>${product.price}</p>
         </div>
         <div
           className={` flex gap-2 items-center justify-between text-sm mb-2 ${
-            productPrice === (product.price * 0.9).toFixed(2)
+            // productPrice === (product.price * 0.9).toFixed(2)
+            productPrice === (product.price * 0.9)
               ? "text-[#CC70AE]"
               : "text-[#333]"
           }`}
@@ -109,7 +116,8 @@ export default function SingleProductCard({ product }) {
           <div className="flex items-center gap-2 relative">
             <img
               src={
-                productPrice === (product.price * 0.9).toFixed(2)
+                // productPrice === (product.price * 0.9).toFixed(2)
+                productPrice === (product.price * 0.9)
                   ? checked
                   : notChecked
               }
@@ -120,7 +128,8 @@ export default function SingleProductCard({ product }) {
             <p className="text-sm">Subscribe & Save 10%</p>
             <img src={horizontal_badge} alt="" className="relative bottom-[8px]"/>
           </div>
-          <p>${(product.price * 0.9).toFixed(2)}</p>
+          {/* <p>${(product.price * 0.9).toFixed(2)}</p> */}
+          <p>${(product.price * 0.9)}</p>
         </div>
       </div>
       <div className="flex justify-between gap-3 mb-3">
