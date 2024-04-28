@@ -45,9 +45,9 @@ export default function NavBar() {
     setShowUser(!showUser);
   }
 
-  // useEffect(() => {
-  //   getUser();
-  // }, []);
+  useEffect(() => {
+    getUser();
+  }, []);
 
   // if (!user) {
   //   return <h1>Loading...</h1>;
@@ -103,7 +103,7 @@ export default function NavBar() {
         )}
         {showPopUp && (
           <div
-            className="font-sans text-base px-6 py-6 rounded-lg absolute top-[60px] right-0 z-20 bg-[#F2DBEB]  text-[#732E5C] shadow-even flex flex-col gap-3"
+            className="font-sans text-base px-6 py-6 rounded-lg absolute top-[60px] right-0 z-40 bg-[#F2DBEB]  text-[#732E5C] shadow-even flex flex-col gap-3"
             onMouseLeave={() => handlePopUp()}
           >
             <p
@@ -123,7 +123,7 @@ export default function NavBar() {
           </div>
         )}
       </div>
-      <InferiorNav />
+      <InferiorNav  user={user} />
       {!user && showLogin ? <Login /> : null}
     </nav>
   );

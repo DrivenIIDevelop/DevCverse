@@ -1,6 +1,8 @@
 import { useState } from "react";
 
-export default function InferiorNav() {
+export default function InferiorNav( { user }) {
+
+
   const [category, setCategory] = useState(1);
 
   function handleClick(n) {

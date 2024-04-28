@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useProductContext } from "../../context/ProductContext";
 
-export default function CreateProduct() {
+export default function CreateProduct({ closeFunction }) {
   const [productName, setProductName] = useState("");
   const [productPrice, setProductPrice] = useState(0);
   const [productDescription, setProductDescription] = useState("");
@@ -9,18 +9,9 @@ export default function CreateProduct() {
   const [productBrand, setProductBrand] = useState("");
   const [productImage, setProductImage] = useState("");
 
-  // console.log("productName: ", productName);
-  // console.log("productPrice: ", productPrice);
-  // console.log("productDescription: ", productDescription);
-  // console.log("productSkinType: ", productSkinType);
-  // console.log("productBrand: ", productBrand);
-  // console.log("productImage: ", productImage);
-
   const { createProduct } = useProductContext();
-  // const { allProducts } = useProductContext();
-  // const { getSingleProduct } = useProductContext();
 
-  const formattedPrice = parseFloat(productPrice); // Convert to float (decimal number)
+  const formattedPrice = parseFloat(productPrice);
   const inputPrice = formattedPrice.toFixed(2);
 
   const handleSubmit = async (e) => {
@@ -33,20 +24,18 @@ export default function CreateProduct() {
     formData.append("brand", productBrand);
     formData.append("file", productImage);
 
-    console.log("formData in creatproduct component: ", formData);
+    // console.log("formData in create product component: ", formData);
 
     await createProduct(formData);
-
-    setProductName("");
-    setProductPrice(0);
-    setProductDescription("");
-    setProductSkinType("");
-    setProductBrand("");
-    setProductImage("");
+    // navigate("/admin");
+    closeFunction();
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col items-center gap-3 font-sans text-base">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col items-center gap-3 font-sans text-base"
+    >
       <div className="flex gap-6">
         <div className="flex flex-col gap-0.5">
           <label htmlFor="product name">Product name</label>
@@ -110,11 +99,15 @@ export default function CreateProduct() {
         />
       </div>
 
-      <input
-        type="file"
-        onChange={(e) => setProductImage(e.target.files[0])}
-        required
-      />
+      <div className="w-full flex gap-2 items-center mb-8">
+        <label htmlFor="product image">Product Image</label>
+        <input
+          type="file"
+          onChange={(e) => setProductImage(e.target.files[0])}
+          required
+          className="px-3 py-2 rounded-lg outline-[#9CA3AF]"
+        />
+      </div>
       <button
         type="submit"
         className="px-8 py-2 w-[300px] rounded-lg font-sans text-base text-[#FFF] bg-[#BF4C9A] flex justify-center items-center"
