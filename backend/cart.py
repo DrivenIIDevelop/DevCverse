@@ -25,8 +25,8 @@ def get_db():
 
 
 @router.get("/")
-def get_all_items(db:Session = Depends(get_db)):
-    cart = db.query(Cart).filter(Cart.user_id == 1).first()
+def get_all_items(user_id: int, db:Session = Depends(get_db)):
+    cart = db.query(Cart).filter(Cart.user_id == user_id).first()
 
     if not cart:
       raise HTTPException(status_code=404, detail="Cart not found")
@@ -35,9 +35,9 @@ def get_all_items(db:Session = Depends(get_db)):
 
 
 @router.post("/add-item/{product_id}")
-def add_cart_item(product_id: int, db: Session = Depends(get_db)):
-    # Retrieve the user (you need to implement authentication)
-    user = db.query(Users).filter_by(id=1).first()
+def add_cart_item(user_id: int, product_id: int, db: Session = Depends(get_db)):
+
+    user = db.query(Users).filter_by(id=user_id).first()
 
     # Check if the user exists
     if user is None:
