@@ -32,7 +32,8 @@ class Users(Base):
     age = Column(Enum(AgeRange), nullable=False)
     skin_type = Column(Enum(SkinType), nullable=False)
     is_survey_complete = Column(Boolean, default=False)
-    cart = []
+
+    cart = relationship("Cart", back_populates="user", uselist=False)
 
 
 class Products(Base):
@@ -45,6 +46,8 @@ class Products(Base):
     skin_type = Column(String, nullable=False)
     brand=Column(String, nullable=False)
     image_url = Column(String, nullable=False)
+
+    cart_items = relationship("CartItem", back_populates="product")
 
 class CartItem(Base):
     __tablename__ = "cart_items"
