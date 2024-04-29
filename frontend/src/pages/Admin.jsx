@@ -68,7 +68,7 @@ export default function Admin() {
 
   return (
     <>
-      <div className="flex flex-col">
+      <div className="flex flex-col max-w-[1440px] mx-auto">
         <h1 className="font-serif text-[40px] text-center mb-12 mt-8">
           Welcome, Admin!
         </h1>

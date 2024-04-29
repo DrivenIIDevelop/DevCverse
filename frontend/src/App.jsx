@@ -13,6 +13,7 @@ import Quiz from "./pages/Quiz";
 import Results from "./pages/Results";
 import Admin from "./pages/Admin";
 
+
 function App() {
   return (
     <>
