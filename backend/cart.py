@@ -2,11 +2,16 @@ from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
 from models import Cart, CartItem
 from database import SessionLocal
+from pydantic import BaseModel
 
 router = APIRouter(
     prefix="/cart",
     tags=["cart"]
 )
+
+class CartItem(BaseModel):
+    product_id: int
+
 
 def get_db():
     db = SessionLocal()
@@ -15,32 +20,34 @@ def get_db():
     finally:
         db.close()
 
-@router.post("/{user_id}")
-async def create_cart(user_id: int, db: Session = Depends(get_db)):
-    db_cart = Cart(user_id=user_id)
-    db.add(db_cart)
-    db.commit()
-    return db_cart
 
-@router.get("/{user_id}")
-async def get_cart(user_id: int, db: Session = Depends(get_db)):
-    db_cart = db.query(Cart).filter(Cart.user_id == user_id).first()
-    if not db_cart:
+@router.get("/")
+def get_cart_items(user_id: int, db: Session = Depends(get_db)):
+    cart = db.query(Cart).filter(Cart.user_id == user_id).first()
+    if not cart:
         raise HTTPException(status_code=404, detail="Cart not found")
-    return db_cart
+    return {"cart_items": [item.product_id for item in cart.cart_items]}
 
-@router.post("/{cart_id}/add/{product_id}")
-async def add_product_to_cart(cart_id: int, product_id: int, db: Session = Depends(get_db)):
-    db_cart_item = CartItem(cart_id=cart_id, product_id=product_id)
-    db.add(db_cart_item)
+@router.post("/add-item")
+def add_product_to_cart(cart_item: CartItem, user_id: int, db: Session = Depends(get_db)):
+    cart = db.query(Cart).filter(Cart.user_id == user_id).first()
+    if not cart:
+        cart = Cart(user_id=user_id)
+        db.add(cart)
+        db.commit()
+    new_cart_item = CartItem(cart_id=cart.id, product_id=cart_item.product_id)
+    db.add(new_cart_item)
     db.commit()
-    return db_cart_item
+    return {"message": "Product added to cart"}
 
-@router.delete("/{cart_id}/remove/{product_id}")
-async def remove_product_from_cart(cart_id: int, product_id: int, db: Session = Depends(get_db)):
-    db_cart_item = db.query(CartItem).filter(CartItem.cart_id == cart_id, CartItem.product_id == product_id).first()
-    if not db_cart_item:
-        raise HTTPException(status_code=404, detail="Product not found in cart")
-    db.delete(db_cart_item)
+@router.delete("/{cartItem_id}")
+def delete_product_from_cart(cart_item: CartItem, cartItem_id: int, db: Session = Depends(get_db)):
+    cart = db.query(Cart).filter(CartItem.id == cartItem_id).first()
+    if not cart:
+        raise HTTPException(status_code=404, detail="Cart not found")
+    cart_item = db.query(CartItem).filter(CartItem.id == cart_item.cartitem_id, CartItem.cart_id == cart.id).first()
+    if not cart_item:
+        raise HTTPException(status_code=404, detail="Cart item not found")
+    db.delete(cart_item)
     db.commit()
-    return {"message": "Product successfully removed from cart"}
+    return {"message": "Product removed from cart"}

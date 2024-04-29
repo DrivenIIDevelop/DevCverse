@@ -32,7 +32,7 @@ class Users(Base):
     age = Column(Enum(AgeRange), nullable=False)
     skin_type = Column(Enum(SkinType), nullable=False)
     is_survey_complete = Column(Boolean, default=False)
-    cart = relationship("Cart", uselist=False, back_populates="user")
+    cart = []
 
 
 class Products(Base):
@@ -46,15 +46,6 @@ class Products(Base):
     brand=Column(String, nullable=False)
     image_url = Column(String, nullable=False)
 
-class Cart(Base):
-    __tablename__ = "carts"
-
-    id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey('users.id'))
-
-    user = relationship("Users", back_populates="cart")
-    items = relationship("CartItem", back_populates="cart")
-
 class CartItem(Base):
     __tablename__ = "cart_items"
 
@@ -62,6 +53,15 @@ class CartItem(Base):
     cart_id = Column(Integer, ForeignKey('carts.id'))
     product_id = Column(Integer, ForeignKey('products.id'))
 
-    cart = relationship("Cart", back_populates="items")
-    product = relationship("Products")
+    cart = relationship("Cart", back_populates="cart_items")
+    product = relationship("Products", back_populates="cart_items")
 
+class Cart(Base):
+    __tablename__ = "carts"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey('users.id'))
+
+    user = relationship("Users", back_populates="cart")
+    cart_items = relationship("CartItem", back_populates="cart")
+    
