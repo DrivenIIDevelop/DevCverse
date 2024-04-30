@@ -110,7 +110,7 @@ export default function NavBar() {
               className="hover:underline hover:font-medium transition duration-300 ease-in-out"
               onClick={handleLogin}
             >
-              Sing In
+              Sign In
             </p>
             <Link to="/signup">
               <p
