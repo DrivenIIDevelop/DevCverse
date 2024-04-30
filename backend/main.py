@@ -6,6 +6,7 @@ from typing import Annotated, Optional
 from sqlalchemy.orm import Session
 import auth, product, cart
 from auth import get_current_user
+from seed import seed_data
 
 app = FastAPI()
 
@@ -25,6 +26,7 @@ app.include_router(product.router)
 app.include_router(cart.router)
 
 models.Base.metadata.create_all(bind=engine)
+seed_data()
 
 def get_db():
     db = SessionLocal()

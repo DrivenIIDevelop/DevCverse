@@ -10,8 +10,33 @@ class SkinType(enum.Enum):
     COMBINATION = "combination"
     SENSITIVE = "sensitive"
     UNCERTAIN = "uncertain"
-    MATURE = "mature"
     ACNE = "acne"
+
+class TargetRange(enum.Enum):
+    REDUCE_IRREGULARITIES = "reduces_irregularities"
+    OILY_SKIN = "oily_skin"
+    PH_BALANCE = "ph_balance"
+    DRY_SKIN="dry_skin"
+    MICROBIOME_BALANCE="microbiome_balances"
+    SKIN_IRRITATION="skin_irritation"
+    ACNE="acne"
+    TEXTURE_IRREGULARITIES="texture_irregularities"
+    DULLNESS="dullness"
+    VISIBLE_SHINE="visible_shine"
+    CONGESTION="congestion"
+    SKIN_TEXTURE="skin_texture"
+    AGING="aging"
+    HYDRATION="hydration"
+    MOISTURE_BALANCE="moisture_balance"
+    SKIN_BARRIER="skin_barrier"
+    DARK_SPOTS="dark_spots"
+    BLEMISH_SKIN="blemish_skin"
+    BRIGHTENS="brightens"
+    SUPPORTS="supports"
+    EXFOLIATING="exfoliating"
+    DARK_SPOT_CORRECTING="dark_spot_correcting"
+    HYPERPIGMENTATION="hyperpigmentation"
+    SKIN_TONE="skin_tone"
 
 class AgeRange(enum.Enum):
     BELOW_18 = "Below 18"
@@ -19,6 +44,8 @@ class AgeRange(enum.Enum):
     BETWEEN_26_AND_35 = "26-35"
     BETWEEN_36_AND_50 = "36-50"
     ABOVE_50 = "Above 50"
+
+
 
 class Users(Base):
     __tablename__ = "users"
@@ -44,8 +71,10 @@ class Products(Base):
     price = Column(Float, nullable=False)
     description = Column(String, nullable=False)
     skin_type = Column(String, nullable=False)
+    target= Column(String, nullable=False)
     brand=Column(String, nullable=False)
     image_url = Column(String, nullable=False)
+    size = Column(String, nullable=False)
 
     cart_items = relationship("CartItem", back_populates="product")
 
