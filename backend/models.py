@@ -70,7 +70,7 @@ class Products(Base):
     price = Column(Float, nullable=False)
     description = Column(String, nullable=False)
     skin_type = Column(String, nullable=False)
-    target= Column(String, nullable=False)
+    # target= Column(String, nullable=False)
     brand=Column(String, nullable=False)
     image_url = Column(String, nullable=False)
     size = Column(String, nullable=False)

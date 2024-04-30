@@ -1,3 +1,6 @@
+from database import SessionLocal, Base
+from models import Products
+
 # SEED_DATA = [
 
 #     Products(name="Sebium Foaming Gel", price=21.99, size="16.9", description="Gentle, purifying cleanser that visibly reduces excess shine.", skin_type="combination", brand="Bioderma", image_url="https://renai-dev.s3.us-east-2.amazonaws.com/SeedDataPhotos/Bioderma+-+Sebium+Foaming+Gel1.png"),
@@ -112,3 +115,31 @@ INITIAL_DATA = {
 
 
 
+def seed_data():
+    db = SessionLocal()
+
+    if db.query(Products).count() == 0:
+            # Sample data
+        products_data = INITIAL_DATA["products"]
+        
+        # Insert seed data into the database
+        for product_data in products_data:
+            product = Products(
+                name=product_data["name"],
+                price=product_data["price"],
+                size=product_data["size"],
+                description=product_data["description"],
+                skin_type=product_data["skin_type"],
+                brand=product_data["brand"],
+                image_url=product_data["image_url"]
+            )
+            db.add(product)
+
+        db.commit()
+        db.close()
+
+# Run the seeder
+# seed_data()
+# only run if products table is empty
+if __name__ == "__main__":
+    seed_data()
