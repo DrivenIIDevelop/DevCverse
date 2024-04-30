@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import star from "../../assets/star.svg";
 import cartIcon from "../../assets/cart.svg";
 import likeIcon from "../../assets/like.svg";
@@ -11,11 +13,15 @@ export default function ProductCard({ product }) {
   return (
     <li className="p-2">
       <div className="">
-        <img
+        <Link to={`/products/${product.id}`}>
+
+           <img
           src={product.image}
           alt={product.name}
           className="w-full h-[330px] object-cover rounded-lg"
         />
+        </Link>
+       
       </div>
 
       <div className="p-2">

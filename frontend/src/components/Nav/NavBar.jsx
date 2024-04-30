@@ -124,7 +124,7 @@ export default function NavBar() {
         )}
       </div>
       <InferiorNav  user={user} />
-      {!user && showLogin ? <Login /> : null}
+      {!user && showLogin ? <Login handleLogin={handleLogin}/> : null}
     </nav>
   );
 }

@@ -3,7 +3,7 @@ import { useProductContext } from "../../context/ProductContext";
 
 export default function CreateProduct({ closeFunction }) {
   const [productName, setProductName] = useState("");
-  const [productPrice, setProductPrice] = useState(0.00);
+  const [productPrice, setProductPrice] = useState(0.0);
   const [productDescription, setProductDescription] = useState("");
   const [productSkinType, setProductSkinType] = useState("");
   const [productBrand, setProductBrand] = useState("");
@@ -50,6 +50,20 @@ export default function CreateProduct({ closeFunction }) {
         </div>
 
         <div className="flex flex-col gap-0.5">
+          <label htmlFor="Product Brand">Product Brand</label>
+          <input
+            type="text"
+            value={productBrand}
+            placeholder="Product Brand"
+            onChange={(e) => setProductBrand(e.target.value)}
+            required
+            className="px-3 py-2 rounded-lg outline-[#9CA3AF]"
+          />
+        </div>
+      </div>
+
+      <div className="w-full flex gap-6">
+        <div className="flex flex-col gap-0.5">
           <label htmlFor="product price">Product Price</label>
           <input
             type="number"
@@ -61,30 +75,24 @@ export default function CreateProduct({ closeFunction }) {
             step="0.01"
           />
         </div>
-      </div>
-      <div className="flex gap-6">
-        <div className="flex flex-col gap-0.5">
-          <label htmlFor="product skin type">Product Skin Type</label>
-          <input
-            type="text"
+        <div className="w-full flex flex-col gap-0.5">
+          <label htmlFor="skin type">Product Skin Type</label>
+          <select
             value={productSkinType}
-            placeholder="Product Skin Type"
             onChange={(e) => setProductSkinType(e.target.value)}
             required
-            className="px-3 py-2 rounded-lg outline-[#9CA3AF]"
-          />
-        </div>
-
-        <div className="flex flex-col gap-0.5">
-          <label htmlFor="Product Brand">Product Brand</label>
-          <input
-            type="text"
-            value={productBrand}
-            placeholder="Product Brand"
-            onChange={(e) => setProductBrand(e.target.value)}
-            required
-            className="px-3 py-2 rounded-lg outline-[#9CA3AF]"
-          />
+            className="px-3 py-3 rounded-lg text-[#9CA3AF] "
+          >
+            <option value="">Select Skin Type</option>
+            <option value="oily">Oily</option>
+            <option value="dry">Dry</option>
+            <option value="normal">Normal</option>
+            <option value="combination">Combination</option>
+            <option value="sensitive">Sensitive</option>
+            <option value="uncertain">Uncertain</option>
+            <option value="mature">Mature</option>
+            <option value="acne">Acne</option>
+          </select>
         </div>
       </div>
 

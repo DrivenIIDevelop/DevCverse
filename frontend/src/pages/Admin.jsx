@@ -25,9 +25,17 @@ const productList = [
 
 const productArr = [];
 
-for (let i = 0; i < 8; i++) {
-  productArr.push(productList[0]);
+for (let i = 0; i < 12; i++) {
+  productArr.push({ ...productList[0] });
 }
+
+// console.log("productArr in Admin component: ", productArr);
+
+for (let i = 0; i < 12; i++) {
+  productArr[i].id = i + 1;
+}
+
+// console.log("productArr in Admin component after modify id: ", productArr);
 
 export default function Admin() {
   // const { allProducts } = useProductContext();
@@ -37,6 +45,8 @@ export default function Admin() {
   const [showCreateProduct, setShowCreateProduct] = useState(false);
   const [showDeleteProduct, setShowDeleteProduct] = useState(false);
   const [showUpdateProduct, setShowUpdateProduct] = useState(false);
+  const [productToDelete, setProductToDelete] = useState(null);
+  const [productToUpdate, setProductToUpdate] = useState(null);
 
   function openCreateProduct() {
     setShowCreateProduct(true);
@@ -46,19 +56,25 @@ export default function Admin() {
     setShowCreateProduct(false);
   }
 
-  function openDeleteProduct() {
+  function openDeleteProduct(product) {
+    console.log("product in openDeleteProduct: ", product);
+    setProductToDelete(product);
     setShowDeleteProduct(true);
   }
 
   function closeDeleteProduct() {
+    setProductToDelete(null);
     setShowDeleteProduct(false);
   }
 
-  function openUpdateProduct() {
+  function openUpdateProduct(product) {
+    console.log("product in openUpdateProduct: ", product);
+    setProductToUpdate(product);
     setShowUpdateProduct(true);
   }
 
   function closeUpdateProduct() {
+    setProductToUpdate(null);
     setShowUpdateProduct(false);
   }
 
@@ -68,7 +84,7 @@ export default function Admin() {
 
   return (
     <>
-      <div className="flex flex-col max-w-[1440px] mx-auto">
+      <div className="flex flex-col max-w-[1440px] mx-auto ">
         <h1 className="font-serif text-[40px] text-center mb-12 mt-8">
           Welcome, Admin!
         </h1>
@@ -78,8 +94,40 @@ export default function Admin() {
         >
           Create New Product
         </button>
+
+        {productToUpdate && (
+          <div className="fixed top-[20%] w-full bg-[rgba(255,255,255,0.05)] flex justify-center items-center z-50">
+            <div className="flex justify-evenly p-16 w-[60%] h-[700px] bg-gradient-to-br from-white via-[#EFEFEF] to-gray-200 rounded-lg">
+              <RxCross2
+                onClick={closeUpdateProduct}
+                className="bg-[#FFF] w-[40px] h-[40px] rounded-[50%] p-0.5 cursor-pointer hover:bg-[#BF4C9A] hover:text-[#FFF]"
+                text="Update Product"
+              />
+              <UpdateProduct
+                product={productToUpdate}
+                closeFunction={closeUpdateProduct}
+              />
+            </div>
+          </div>
+        )}
+
+        {productToDelete && (
+          <div className="fixed top-[25%] w-full bg-[rgba(255,255,255,0.05)] flex justify-center items-center z-50">
+            <div className="flex justify-evenly p-16 w-[50%] h-[400px] bg-gradient-to-br from-white via-[#EFEFEF] to-gray-200 rounded-lg">
+              <RxCross2
+                onClick={closeDeleteProduct}
+                className="bg-[#FFF] w-[40px] h-[40px] rounded-[50%] p-0.5 cursor-pointer hover:bg-[#BF4C9A] hover:text-[#FFF]"
+              />
+              <DeleteProduct
+                product={productToDelete}
+                closeFunction={closeDeleteProduct}
+              />
+            </div>
+          </div>
+        )}
+
         <div className="flex  ">
-          <ul className="sm:grid sm:grid-cols-2 md:grid md:grid-cols-3 lg:grid lg:grid-cols-4 mx-16 gap-8 font-sans text-base relative">
+          <ul className="sm:grid sm:grid-cols-2 md:grid md:grid-cols-3 lg:grid lg:grid-cols-4 mx-16 gap-8 font-sans text-base">
             {productArr.map((product) => {
               return (
                 <>
@@ -98,68 +146,37 @@ export default function Admin() {
                       </p>
                       {/* <p>{product.price}</p> */}
                       {/* <p>{product.description}</p> */}
-                      <div className="flex justify-between items-center px-2">
+                      <div className="flex justify-between items-center px-2 relative">
                         <button
                           className="w-[40%] flex justify-center items-center font-sans lg:text-sm border border-[#262626] gap-2 px-8 py-2 rounded-lg mt-2.5 hover:text-[#FFF] hover:bg-[#BF4C9A] hover:border-none hover:transition ease-in-out"
-                          onClick={openUpdateProduct}
+                          onClick={() => openUpdateProduct(product)}
                         >
                           Update
                         </button>
                         <button
                           className="w-[40%] flex justify-center items-center font-sans lg:text-sm border border-[#262626] gap-2 px-8 py-2 rounded-lg mt-2.5 hover:text-[#FFF] hover:bg-[#BF4C9A] hover:border-none hover:transition ease-in-out"
-                          onClick={openDeleteProduct}
+                          onClick={() => openDeleteProduct(product)}
                         >
                           Delete
                         </button>
                       </div>
                     </div>
                   </li>
-
-                  {showCreateProduct ? (
-                    <div className="absolute -top-[20px] w-full bg-[rgba(255,255,255,0.05)] flex justify-center items-center z-50">
-                      <div className="flex justify-evenly p-16 w-[60%] h-[600px] bg-gradient-to-br from-white via-[#EFEFEF] to-gray-200 rounded-lg">
-                        <RxCross2
-                          onClick={closeCreateProduct}
-                          className="bg-[#FFF] w-[40px] h-[40px] rounded-[50%] p-0.5 cursor-pointer hover:bg-[#BF4C9A] hover:text-[#FFF]"
-                        />
-                        <CreateProduct closeFunction={closeCreateProduct} />
-                      </div>
-                    </div>
-                  ) : null}
-
-                  {showDeleteProduct ? (
-                    <div className="absolute -top-[20px] w-full bg-[rgba(255,255,255,0.05)] flex justify-center items-center z-50">
-                      <div className="flex justify-evenly p-16 w-[60%] h-[600px] bg-gradient-to-br from-white via-[#EFEFEF] to-gray-200 rounded-lg">
-                        <RxCross2
-                          onClick={closeDeleteProduct}
-                          className="bg-[#FFF] w-[40px] h-[40px] rounded-[50%] p-0.5 cursor-pointer hover:bg-[#BF4C9A] hover:text-[#FFF]"
-                        />
-                        <DeleteProduct
-                          product={product}
-                          closeFunction={closeDeleteProduct}
-                        />
-                      </div>
-                    </div>
-                  ) : null}
-
-                  {showUpdateProduct ? (
-                    <div className="absolute -top-[20px] w-full bg-[rgba(255,255,255,0.05)] flex justify-center items-center z-50">
-                      <div className="flex justify-evenly p-16 w-[60%] h-[600px] bg-gradient-to-br from-white via-[#EFEFEF] to-gray-200 rounded-lg">
-                        <RxCross2
-                          onClick={closeUpdateProduct}
-                          className="bg-[#FFF] w-[40px] h-[40px] rounded-[50%] p-0.5 cursor-pointer hover:bg-[#BF4C9A] hover:text-[#FFF]"
-                        />
-                        <UpdateProduct
-                          product={product}
-                          closeFunction={closeUpdateProduct}
-                        />
-                      </div>
-                    </div>
-                  ) : null}
                 </>
               );
             })}
           </ul>
+          {showCreateProduct ? (
+            <div className="absolute top-[30%] w-full bg-[rgba(255,255,255,0.05)] flex justify-center items-center z-50">
+              <div className="flex justify-evenly p-16 w-[60%] h-[600px] bg-gradient-to-br from-white via-[#EFEFEF] to-gray-200 rounded-lg">
+                <RxCross2
+                  onClick={closeCreateProduct}
+                  className="bg-[#FFF] w-[40px] h-[40px] rounded-[50%] p-0.5 cursor-pointer hover:bg-[#BF4C9A] hover:text-[#FFF]"
+                />
+                <CreateProduct closeFunction={closeCreateProduct} />
+              </div>
+            </div>
+          ) : null}
         </div>
       </div>
     </>

@@ -10,7 +10,7 @@ import { useProductContext } from "../../context/ProductContext";
 // };
 
 export default function UpdateProduct({ product, closeFunction }) {
-  console.log("product in updateProduct component: ", product);
+  // console.log("product in updateProduct component: ", product);
   const id = product.id;
   const { updateProduct } = useProductContext();
 
@@ -47,6 +47,7 @@ export default function UpdateProduct({ product, closeFunction }) {
       encType="multipart/form-data"
       className="flex flex-col items-center gap-6 font-sans text-base"
     >
+      <h1 className="font-serif mb-3 text-xl">Update Product</h1>
       <div className="flex gap-6">
         <div className="flex flex-col gap-0.5">
           <label htmlFor="product brand">Product Brand</label>
