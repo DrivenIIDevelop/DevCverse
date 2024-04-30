@@ -29,9 +29,9 @@ export default function ProductCard({ product }) {
         <div className="flex justify-between">
           <p className="font-sans text-xl text-[#262626]">{product.brand} </p>
           <div className="flex gap-x-0.5 ">
-            <img src={star} alt="star" className="w-4 h-4" />
-            <p className="font-sans text-xs">{product.review}</p>
-            <p className="font-sans text-xs">({product.reviewCount})</p>
+            {/* <img src={star} alt="star" className="w-4 h-4" /> */}
+            {/* <p className="font-sans text-xs">{product.review}</p> */}
+            {/* <p className="font-sans text-xs">({product.reviewCount})</p> */}
           </div>
         </div>
         <p className="font-sans text-sm truncate">{product.name}</p>
