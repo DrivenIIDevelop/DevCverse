@@ -15,7 +15,7 @@ class SkinType(enum.Enum):
 class TargetRange(enum.Enum):
     REDUCE_IRREGULARITIES = "reduces_irregularities"
     OILY_SKIN = "oily_skin"
-    PH_BALANCES = "ph_balances"
+    PH_BALANCE = "ph_balance"
     DRY_SKIN="dry_skin"
     MICROBIOME_BALANCE="microbiome_balances"
     SKIN_IRRITATION="skin_irritation"
@@ -70,7 +70,7 @@ class Products(Base):
     price = Column(Float, nullable=False)
     description = Column(String, nullable=False)
     skin_type = Column(String, nullable=False)
-    # target= Column(String, nullable=False)
+    target= Column(String, nullable=False)
     brand=Column(String, nullable=False)
     image_url = Column(String, nullable=False)
     size = Column(String, nullable=False)
