@@ -43,7 +43,8 @@ def get_all_items(user_id: int, db:Session = Depends(get_db)):
             "product_description": product.description,
             "product_skin_type": product.skin_type,
             "product_brand": product.brand,
-            "product_image": product.image_url
+            "product_image": product.image_url,
+            "product_quantity": item.quantity
         })
 
     return cart_items
@@ -69,6 +70,29 @@ def add_cart_item(user_id: int, product_id: int, db: Session = Depends(get_db)):
     db.commit()
 
     return {"message": "Product added to cart successfully"}
+
+@router.put("/update/{cart_item_id}")
+def update_cart_item(cart_item_id: int, quantity: int, db: Session = Depends(get_db)):
+    cart_item = db.query(CartItem).filter_by(id=cart_item_id).first()
+    if cart_item is None:
+        raise HTTPException(status_code=404, detail="Cart item not found")
+    
+    product = db.query(Products).filter(Products.id == cart_item.product_id).first()
+
+    update_data = {
+        "id": cart_item_id,
+        "product_id": cart_item.product_id,
+        "product_name": product.name,
+        "product_price": product.price,
+        "product_description": product.description,
+        "product_skin_type": product.skin_type,
+        "product_brand": product.brand,
+        "product_image": product.image_url,
+        "product_quantity": quantity,
+    }
+
+    db.query(CartItem).filter(CartItem.id == cart_item_id).update(update_data)
+    return {"message": "Product updated successfully"}
 
 @router.delete("/remove/{cart_item_id}")
 def remove_cart_item(cart_item_id: int, db: Session = Depends(get_db)):
