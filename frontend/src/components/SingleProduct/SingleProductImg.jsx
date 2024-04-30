@@ -1,23 +1,15 @@
-import { useState } from "react";
-import { img1, img2, img3, img4, img5, img6, img7 } from "./singleProductImage";
+// import { useState } from "react";
+// import { img1, img2, img3, img4, img5, img6, img7 } from "./singleProductImage";
 
-// const product = {
-//   name: "Glass Skin Water-Gel Moisturizer",
-//   price: 100,
-//   description: "Product Description",
-//   skin_type: "Normal",
-//   brand: "Peach & Lily",
-//   imageUrl: [img1, img2, img3, img4, img5, img6, img7],
-// };
 
 export default function SingleProductImg({ product }) {
-  console.log("product in SingleProductImg: ", product)
-  const [currentImage, setCurrentImage] = useState(product.image_url);
+  // console.log("product in SingleProductImg: ", product);
+  // const [currentImage, setCurrentImage] = useState(product.image_url);
 
 
-  function handleImageChange(image) {
-    setCurrentImage(product.image_url[image]);
-  }
+  // function handleImageChange(image) {
+  //   setCurrentImage(product.image_url[image]);
+  // }
 
   return (
     <>
@@ -29,19 +21,20 @@ export default function SingleProductImg({ product }) {
         >
           <div className="w-full h-full">
             <img
-              src={currentImage}
+              // src={currentImage}
+              src={product.image_url}
               alt={product.name}
               className="w-full h-full object-cover rounded-lg"
             />
           </div>
           <div className="w-full grid grid-cols-7 gap-5 ">
             <img
-              src={img1}
+              src={product.image_url}
               alt="image 1"
               className="w-[60px] aspect-square rounded-lg"
-              onClick={() => handleImageChange(0)}
+              // onClick={() => handleImageChange(0)}
             />
-            <img
+            {/* <img
               src={img2}
               alt="image 2"
               className="w-[60px] aspect-square rounded-lg"
@@ -76,7 +69,7 @@ export default function SingleProductImg({ product }) {
               alt="image 7"
               className="w-[60px] aspect-square rounded-lg"
               onClick={() => handleImageChange(6)}
-            />
+            /> */}
           </div>
         </div>
 

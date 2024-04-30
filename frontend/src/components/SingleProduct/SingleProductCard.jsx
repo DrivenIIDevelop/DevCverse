@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { img1, img2, img3, img4, img5, img6, img7 } from "./singleProductImage";
+// import { img1, img2, img3, img4, img5, img6, img7 } from "./singleProductImage";
 import { FaStar } from "react-icons/fa";
 import badges from "../../assets/Badges.png";
 import cartIcon from "../../assets/cart.svg";
@@ -9,7 +9,6 @@ import { FaPlus } from "react-icons/fa6";
 import checked from "../../assets/RadioCheck.svg";
 import notChecked from "../../assets/RadioNotChecked.svg";
 import horizontal_badge from "../../assets/Horizontal Badge.svg";
-
 
 export default function SingleProductCard({ product }) {
   // console.log("product in SingleProductCard component: ", product);
@@ -38,9 +37,9 @@ export default function SingleProductCard({ product }) {
     setProductPrice(price.toFixed(2));
   }
 
-  function autoParagraphs( ) {
-    const paragraphs = product.description.split(/(?<=\.)\s+/); 
-  
+  function autoParagraphs() {
+    const paragraphs = product.description.split(/(?<=\.)\s+/);
+
     return (
       <div className="font-sans text-sm text-[#333]">
         {paragraphs.map((para, index) => (
@@ -49,7 +48,7 @@ export default function SingleProductCard({ product }) {
       </div>
     );
   }
-  
+
   return (
     <div className="flex flex-col pr-14">
       <span className="font-sans text-sm text-[#BF4C9A] flex gap-1 mb-2 items-center">
@@ -67,7 +66,10 @@ export default function SingleProductCard({ product }) {
         {/* ${product.price} */}
       </p>
       <p className="font-sans text-xl text-[#260F1F] mb-2">
-        Size: 1.69 oz/ 50ml
+        Size: {product.size}ml{" "}
+        <span className="font-sans text-[#9F9BA6] text-sm ml-1">
+         ({(product.size * 0.0338).toFixed(2)} oz)
+        </span>
       </p>
       <img src={badges} alt="product badges" className="mb-2" />
       {/* <img src={purchaseOption} alt="" className="mb-2" /> */}
@@ -75,8 +77,8 @@ export default function SingleProductCard({ product }) {
         <div
           className={` flex gap-2 items-center justify-between text-sm mb-2 mt-2 ${
             productPrice === product.price.toFixed(2)
-            // productPrice === product.price
-              ? "text-[#CC70AE]"
+              ? // productPrice === product.price
+                "text-[#CC70AE]"
               : "text-[#333]"
           }`}
         >
@@ -89,7 +91,7 @@ export default function SingleProductCard({ product }) {
               alt="one time purchase"
               onClick={() => handlePriceChange(product.price)}
             />
-            <p >One-time purchase</p>
+            <p>One-time purchase</p>
           </div>
           <p>${product.price.toFixed(2)}</p>
           {/* <p>${product.price}</p> */}
@@ -97,8 +99,8 @@ export default function SingleProductCard({ product }) {
         <div
           className={` flex gap-2 items-center justify-between text-sm mb-2 ${
             productPrice === (product.price * 0.9).toFixed(2)
-            // productPrice === (product.price * 0.9)
-              ? "text-[#CC70AE]"
+              ? // productPrice === (product.price * 0.9)
+                "text-[#CC70AE]"
               : "text-[#333]"
           }`}
         >
@@ -106,8 +108,8 @@ export default function SingleProductCard({ product }) {
             <img
               src={
                 productPrice === (product.price * 0.9).toFixed(2)
-                // productPrice === (product.price * 0.9)
-                  ? checked
+                  ? // productPrice === (product.price * 0.9)
+                    checked
                   : notChecked
               }
               alt="Subscribe & save 10%"
@@ -115,10 +117,14 @@ export default function SingleProductCard({ product }) {
               className="w-[24px] h-[24px]"
             />
             <p className="text-sm">Subscribe & Save 10%</p>
-            <img src={horizontal_badge} alt="" className="relative bottom-[8px]"/>
+            <img
+              src={horizontal_badge}
+              alt=""
+              className="relative bottom-[8px]"
+            />
           </div>
           {/* <p>${(product.price * 0.9).toFixed(2)}</p> */}
-          <p>${(product.price * 0.9)}</p>
+          <p>${product.price * 0.9}</p>
         </div>
       </div>
       <div className="flex justify-between gap-3 mb-3">
@@ -172,7 +178,7 @@ export default function SingleProductCard({ product }) {
           Share
         </p>
       </div>
-        {autoParagraphs(product.description)}
+      {autoParagraphs(product.description)}
     </div>
   );
 }

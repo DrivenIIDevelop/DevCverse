@@ -6,39 +6,8 @@ import { useProductContext } from "../context/ProductContext";
 
 import { RxCross2 } from "react-icons/rx";
 
-const productList = [
-  {
-    id: 4,
-    brand: "Anua",
-    name: "Heartleaf Qurecetinol - Pore Deep Cleansing Foam",
-    price: 16.23,
-    review: 4.9,
-    reviewCount: 127,
-    image:
-      "https://s3-alpha-sig.figma.com/img/52cb/1354/58f73ac859d25fb75cd61dd434902379?Expires=1714953600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=HKMlVbWOtf4q753LAmyWSnH127FaygDCygxfiLB~O8FFHr23OwcdDYlKh5fSiYrNSsP85R1WkzyJnDrPXx2wJGVoBQBWSKhs2OR~bOghy6vIkc5IddRFkPARVYbcXD3MzNVfsgVI1EFFVoyIkqO5MYpawqGUiG3khZOFpk7hJTtj5vgsrlXaBdc4Ve3irKZYsK0Ba9Svtmhl2rfKSvwgyIhi5ChIBDqJouivOPrbnlfOrruBrxLLwMQ6d~F4dNU5AqSsy5u~RUq7dTherxbYeVpYfKFuEHqsJV8ln9l4nywdAe18W1dwzTgXCgG4cL9VpFiOIfCMgVHY124eXj~Jng__",
-    badge: ["Clean", "Cruelty-Free"],
-    like: false,
-    description: "Product Description",
-    skin_type: "Normal",
-  },
-];
-
-const productArr = [];
-
-for (let i = 0; i < 12; i++) {
-  productArr.push({ ...productList[0] });
-}
-
-// console.log("productArr in Admin component: ", productArr);
-
-for (let i = 0; i < 12; i++) {
-  productArr[i].id = i + 1;
-}
-
-// console.log("productArr in Admin component after modify id: ", productArr);
-
 export default function Admin() {
-  // const { allProducts } = useProductContext();
+  const { allProducts } = useProductContext();
   // console.log("products in Admin component: ", allProducts);
   const { getAllProducts } = useProductContext();
 
@@ -57,7 +26,7 @@ export default function Admin() {
   }
 
   function openDeleteProduct(product) {
-    console.log("product in openDeleteProduct: ", product);
+    // console.log("product in openDeleteProduct: ", product);
     setProductToDelete(product);
     setShowDeleteProduct(true);
   }
@@ -68,7 +37,7 @@ export default function Admin() {
   }
 
   function openUpdateProduct(product) {
-    console.log("product in openUpdateProduct: ", product);
+    // console.log("product in openUpdateProduct: ", product);
     setProductToUpdate(product);
     setShowUpdateProduct(true);
   }
@@ -96,8 +65,8 @@ export default function Admin() {
         </button>
 
         {productToUpdate && (
-          <div className="fixed top-[20%] w-full bg-[rgba(255,255,255,0.05)] flex justify-center items-center z-50">
-            <div className="flex justify-evenly p-16 w-[60%] h-[700px] bg-gradient-to-br from-white via-[#EFEFEF] to-gray-200 rounded-lg">
+          <div className="max-w-[1440px] mx-auto fixed top-[20%] w-full bg-[rgba(255,255,255,0.05)] flex justify-center items-between z-50">
+            <div className="flex gap-36 px-20 py-16 w-[60%] h-[740px] bg-gradient-to-br from-white via-[#EFEFEF] to-gray-200 rounded-lg">
               <RxCross2
                 onClick={closeUpdateProduct}
                 className="bg-[#FFF] w-[40px] h-[40px] rounded-[50%] p-0.5 cursor-pointer hover:bg-[#BF4C9A] hover:text-[#FFF]"
@@ -112,7 +81,7 @@ export default function Admin() {
         )}
 
         {productToDelete && (
-          <div className="fixed top-[25%] w-full bg-[rgba(255,255,255,0.05)] flex justify-center items-center z-50">
+          <div className="max-w-[1440px] mx-auto fixed top-[25%] w-full bg-[rgba(255,255,255,0.05)] flex justify-center items-center z-50">
             <div className="flex justify-evenly p-16 w-[50%] h-[400px] bg-gradient-to-br from-white via-[#EFEFEF] to-gray-200 rounded-lg">
               <RxCross2
                 onClick={closeDeleteProduct}
@@ -127,21 +96,21 @@ export default function Admin() {
         )}
 
         <div className="flex  ">
-          <ul className="sm:grid sm:grid-cols-2 md:grid md:grid-cols-3 lg:grid lg:grid-cols-4 mx-16 gap-8 font-sans text-base">
-            {productArr.map((product) => {
+          <ul className="sm:grid sm:grid-cols-2 md:grid md:grid-cols-3 lg:grid lg:grid-cols-4 mx-16 gap-8 font-sans text-base mb-20">
+            {allProducts.map((product) => {
               return (
                 <>
-                  <li key={product.id} className="relative">
+                  <li key={product.id} className="relative px-3 py-3 border border-[#ccc] rounded-lg">
                     <img
-                      src={product.image}
+                      src={product.image_url}
                       alt={product.name}
                       className="rounded-lg"
                     />
                     <div className="flex flex-col p-2">
-                      <h2 className="font-sans text-xl text-[#262626]">
+                      <h2 className="font-sans text-xl px-2 text-[#262626]">
                         {product.brand}
                       </h2>
-                      <p className="font-sans text-sm truncate">
+                      <p className="font-sans text-sm px-2 truncate">
                         {product.name}
                       </p>
                       {/* <p>{product.price}</p> */}
@@ -167,7 +136,7 @@ export default function Admin() {
             })}
           </ul>
           {showCreateProduct ? (
-            <div className="absolute top-[30%] w-full bg-[rgba(255,255,255,0.05)] flex justify-center items-center z-50">
+            <div className="max-w-[1440px] mx-auto absolute top-[30%] w-full bg-[rgba(255,255,255,0.05)] flex justify-center items-center z-50">
               <div className="flex justify-evenly p-16 w-[60%] h-[600px] bg-gradient-to-br from-white via-[#EFEFEF] to-gray-200 rounded-lg">
                 <RxCross2
                   onClick={closeCreateProduct}

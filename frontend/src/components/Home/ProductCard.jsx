@@ -5,6 +5,7 @@ import cartIcon from "../../assets/cart.svg";
 import likeIcon from "../../assets/like.svg";
 
 export default function ProductCard({ product }) {
+  // console.log("product in ProductCard component: ", product);
 
   function handleClick() {
     window.alert("Feature coming soon!🚀");
@@ -16,7 +17,7 @@ export default function ProductCard({ product }) {
         <Link to={`/products/${product.id}`}>
 
            <img
-          src={product.image}
+          src={product.image_url}
           alt={product.name}
           className="w-full h-[330px] object-cover rounded-lg"
         />

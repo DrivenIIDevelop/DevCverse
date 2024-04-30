@@ -1,14 +1,6 @@
 import { useState } from "react";
 import { useProductContext } from "../../context/ProductContext";
 
-// const product = {
-//   name: "test",
-//   price: 12.36,
-//   description: "test",
-//   skin_type: "test",
-//   brand: "test",
-// };
-
 export default function UpdateProduct({ product, closeFunction }) {
   // console.log("product in updateProduct component: ", product);
   const id = product.id;
@@ -47,7 +39,8 @@ export default function UpdateProduct({ product, closeFunction }) {
       encType="multipart/form-data"
       className="flex flex-col items-center gap-6 font-sans text-base"
     >
-      <h1 className="font-serif mb-3 text-xl">Update Product</h1>
+      <h1 className="font-serif text-xl">Update Product :</h1>
+      <h1 className="font-serif mb-1 text-xl">{product.brand} {product.name}</h1>
       <div className="flex gap-6">
         <div className="flex flex-col gap-0.5">
           <label htmlFor="product brand">Product Brand</label>
@@ -92,15 +85,24 @@ export default function UpdateProduct({ product, closeFunction }) {
         />
       </div>
 
-      <div className="flex gap-6 items-center justify-center w-full">
+      <div className="w-full flex flex-col gap-0.5">
         <label htmlFor="skin type">Product Skin Type</label>
-        <input
-          type="text"
+        <select
           value={productSkinType}
-          placeholder={productSkinType}
           onChange={(e) => setProductSkinType(e.target.value)}
-          className="px-3 py-2 rounded-lg outline-[#9CA3AF]"
-        />
+          required
+          className="px-3 py-3 rounded-lg text-[#9CA3AF] "
+        >
+          <option value="">Select Skin Type</option>
+          <option value="oily">Oily</option>
+          <option value="dry">Dry</option>
+          <option value="normal">Normal</option>
+          <option value="combination">Combination</option>
+          <option value="sensitive">Sensitive</option>
+          <option value="uncertain">Uncertain</option>
+          <option value="mature">Mature</option>
+          <option value="acne">Acne</option>
+        </select>
       </div>
       <button
         type="submit"

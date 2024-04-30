@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 import axios from "axios";
 axios.defaults.baseURL = "http://localhost:8000";
 
@@ -28,7 +28,7 @@ export const ProductContextProvider = ({ children }) => {
         },
       });
       const data = await response.json();
-      // console.log("data in getAllProducts: ", data);
+      // console.log("data in getAllProducts context: ", data);
       setAllProducts(data);
     } catch (error) {
       setError(error);
@@ -37,6 +37,7 @@ export const ProductContextProvider = ({ children }) => {
   };
 
   const getSingleProduct = async (id) => {
+    setSingleProduct(null); 
     try {
       const response = await fetch(`http://localhost:8000/products/${id}`, {
         method: "GET",
@@ -45,7 +46,7 @@ export const ProductContextProvider = ({ children }) => {
         },
       });
       const data = await response.json();
-      console.log("data in getSingleProduct function: ", data);
+      // console.log("data in getSingleProduct function: ", data);
       setSingleProduct(data);
     } catch (error) {
       setError(error);
@@ -118,6 +119,14 @@ export const ProductContextProvider = ({ children }) => {
       console.log("error in deleteProduct: ", error);
     }
   };
+
+  // console.log("allProducts in ProductContext: ", allProducts);
+  // console.log("singleProduct in ProductContext: ", singleProduct);
+
+  useEffect(() => {
+    getAllProducts();
+    // getSingleProduct();
+  },[])
 
   // console.log("providing context: ", allProducts, singleProduct, error, getAllProducts, getSingleProduct, createProduct, updateProduct, deleteProduct)
 

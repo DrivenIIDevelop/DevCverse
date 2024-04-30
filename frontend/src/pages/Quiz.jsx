@@ -37,7 +37,7 @@ const quiz9Img =
 const quiz10Img =
   "https://s3-alpha-sig.figma.com/img/e013/e9fc/989346602fd130cbe2117af27f04d778?Expires=1715558400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=j0JfjDWRvq73KCoYgQoI-f2Vnnk5R-ID8T42HjeXicqnKkJw5HrCmNGbaooHXxReQoD2Mlw2YSOszqcyOCdCFaRSSb1gV1dLJLo1hSSJx4TULz~yb-BtVjzrb0GOBVmyXPbbMW2zSK1U5FEb1HCcn~RXRs0WprbJxR0ryKuSgFUDmo95ZGBjP96kCsFdQS-CCmsbrF2WYO5CVN9K-vBoIm611CvZeyBOGv2pTAquMaJ3lOQ93hVw7DJB1GbS6h4H9ueBA56bFm7nqG-fma6d4USm-7-2veKVd1iecJZBK~y2FPG7Tcpc9iMR~6X-A0T0pXZvNG-BeQqpvn3FgUOBog__";
 export default function Quiz() {
-  const [quizNumber, setQuizNumber] = useState(8);
+  const [quizNumber, setQuizNumber] = useState(1);
 
   function increaseQuizNumber() {
     setQuizNumber(quizNumber + 1);
@@ -197,20 +197,27 @@ export default function Quiz() {
                 `}
               ></span>
             </div>
+
+            {quizNumber === 10 ?   <Link
+            to="/about/results"
+            className="w-[10%] font-sans text-sm underline text-[#BF4C9A]"
+          >
+            See Your Results
+          </Link>:
             <Link to="/" className="w-[10%]">
               Take Quiz Later
-            </Link>
+            </Link>}
           </div>
           <p className="w-full text-center">{quizNumber} of 10</p>
         </div>
-        {quizNumber === 10 ? (
-          <Link
+       
+          {/* <Link
             to="/about/results"
             className="mx-16 mt-16 px-8 py-2 w-[300px] rounded-lg font-sans text-base text-[#FFF] bg-[#BF4C9A] flex justify-center items-center mb-16"
           >
             See Your Results
-          </Link>
-        ) : null}
+          </Link> */}
+      
       </div>
       <Footer />
     </div>

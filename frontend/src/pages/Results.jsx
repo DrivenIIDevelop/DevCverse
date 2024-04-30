@@ -34,13 +34,12 @@ export default function Results() {
           <p>Skin type: </p>
           <p>Concerns: </p>
           <p>Products: </p>
-          <p>Serums: </p>
           <p>Remember: </p>
           <p>Quick Tips: </p>
           <p>additional notes</p>
           <Link
             to="/"
-            className="border border-[#262626] font-sans text-base text-[#262626] py-2 px-16 rounded-lg "
+            className="border border-[#262626] font-sans text-base text-[#262626] py-2 px-16 rounded-lg text-center hover:bg-[#BF4C9A] hover:text-white hover:border-[#BF4C9A]"
           >
             Let&apos;s get started for your journey!
           </Link>

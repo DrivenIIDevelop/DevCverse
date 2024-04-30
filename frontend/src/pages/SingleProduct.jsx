@@ -8,17 +8,24 @@ import { useEffect } from "react";
 
 export default function SingleProduct() {
   const { id } = useParams();
-  console.log("id in singleProduct page: ", id);
-  const { singleProduct } = useProductContext();
+  // console.log("id in singleProduct page: ", id);
+const  { singleProduct }  = useProductContext();
+  // console.log("singleProduct in singleProduct page: ", singleProduct);
   const { getSingleProduct } = useProductContext();
+  // const singleProduct = getSingleProduct(Number(id));
 
   useEffect(() => {
     getSingleProduct(Number(id));
   }, [id]);
 
+  // useEffect(() => {
+  //   console.log("singleProduct in singleProduct page: ", singleProduct);
+  // }, [singleProduct]);
+
   if (!singleProduct) {
     return <h1>Loading...</h1>;
   }
+
 
   return (
     <div className="max-w-[1440px] mx-auto flex justify-center">
