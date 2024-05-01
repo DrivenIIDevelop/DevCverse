@@ -7,6 +7,8 @@ export default function Quiz1() {
   function handleAnswerChange(text, number) {
     setSelected(number);
     setAnswer(text);
+
+    console.log(answer);
   }
 
 

@@ -74,7 +74,7 @@ export const UserContextProvider = ({ children }) => {
 
     login(userData.username, userData.password); 
   };
-  // console.log("user in UserContextProvider: ", user);
+  console.log("user in UserContextProvider: ", user);
   // console.log("Providing context", { user, error, login, userSignUp, updateUser });
   useEffect(() => { 
     getUser();

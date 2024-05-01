@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaMinus } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
 import Footer from "../components/Footer";
@@ -6,8 +6,18 @@ import progessBar from "../assets/cart/Progress.svg";
 import line from "../assets/cart/Line.svg";
 import line1 from "../assets/cart/Line1.png";
 import product from "../assets/cart/Product.png";
+import { useCartContext } from "../context/CartContext";
+import { useUserContext } from "../context/UserContext";
 
 export default function Cart() {
+  const { user } = useUserContext();
+  console.log("user in Cart component: ", user);
+
+  const { allItems } = useCartContext();
+  console.log("allItems in Cart component: ", allItems);
+
+  const { getAllCartItems } = useCartContext();
+
   const [productQuantity, setProductQuantity] = useState(1);
 
   function increaseQuantity() {
@@ -19,6 +29,19 @@ export default function Cart() {
       setProductQuantity(productQuantity - 1);
     }
   }
+
+  useEffect(() => {
+    console.log("user in useEffect: ", user)
+    console.log("in the cart component useEffect : ");
+    if (user && user.User.id) {
+      getAllCartItems(user.User.id);
+    }
+    console.log("after useEffect in cart component : ");
+  },[user]);
+
+  if (!user || !allItems)
+    return <div className="text-3xl text-center my-8">Loading...</div>;
+
   return (
     <div className="">
       <div className="flex flex-row w-[1312px] h-[1313px] py-[60px] ml-[12%]">
