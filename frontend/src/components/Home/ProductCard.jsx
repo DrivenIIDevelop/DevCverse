@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import star from "../../assets/star.svg";
+// import star from "../../assets/star.svg";
 import cartIcon from "../../assets/cart.svg";
 import likeIcon from "../../assets/like.svg";
 

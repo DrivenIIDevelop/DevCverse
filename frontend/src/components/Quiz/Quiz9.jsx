@@ -7,6 +7,7 @@ export default function Quiz9() {
   function handleAnswerChange(text, number) {
     setSelected(number);
     setAnswer(text);
+    console.log(answer);
   }
 
   return (
