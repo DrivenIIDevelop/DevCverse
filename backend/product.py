@@ -46,7 +46,9 @@ class ProductResponse(BaseModel):
     description: str
     skin_type: str
     brand: str
+    target: str
     image_url: str
+    size: float
 
     class Config:
         from_attributes = True
@@ -77,8 +79,10 @@ async def create_product(
     description: Annotated[str, Form()],
     skin_type: Annotated[str, Form()],
     brand: Annotated[str, Form()],
+    target: Annotated[str, Form()],
+    size: Annotated[float, Form()],
+    file: UploadFile = File(...),
     db: Session = Depends(get_db),
-    file: UploadFile = File(...)
 ):
     if file:
         s3.upload_fileobj(file.file, S3_BUCKET, file.filename)
@@ -89,7 +93,9 @@ async def create_product(
             "description": description,
             "skin_type": skin_type,
             "brand": brand,
-            "image_url": image_url
+            "image_url": image_url,
+            "target": target,
+            "size": size
         }
         db_product = Products(**product_data)
         db.add(db_product)
