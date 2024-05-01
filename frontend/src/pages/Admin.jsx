@@ -138,8 +138,8 @@ export default function Admin() {
           })}
         </ul>
         {showCreateProduct ? (
-          <div className="max-w-[1440px] mx-auto absolute top-[30%] w-full bg-[rgba(255,255,255,0.05)] flex justify-center items-center z-50">
-            <div className="flex justify-evenly p-16 w-[60%] h-[600px] bg-gradient-to-br from-white via-[#EFEFEF] to-gray-200 rounded-lg">
+          <div className="max-w-[1440px] mx-auto absolute top-[25%] w-full bg-[rgba(255,255,255,0.05)] flex justify-center items-center z-50">
+            <div className="flex justify-evenly p-16 w-[60%] h-[700px] bg-gradient-to-br from-white via-[#EFEFEF] to-gray-200 rounded-lg">
               <RxCross2
                 onClick={closeCreateProduct}
                 className="bg-[#FFF] w-[40px] h-[40px] rounded-[50%] p-0.5 cursor-pointer hover:bg-[#BF4C9A] hover:text-[#FFF]"

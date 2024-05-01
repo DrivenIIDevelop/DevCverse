@@ -8,6 +8,8 @@ export default function CreateProduct({ closeFunction }) {
   const [productSkinType, setProductSkinType] = useState("");
   const [productBrand, setProductBrand] = useState("");
   const [productImage, setProductImage] = useState("");
+  const [targetRange, setTargetRange] = useState("");
+  const [productSize, setProductSize] = useState(0);
 
   const { createProduct } = useProductContext();
 
@@ -23,6 +25,8 @@ export default function CreateProduct({ closeFunction }) {
     formData.append("skin_type", productSkinType);
     formData.append("brand", productBrand);
     formData.append("file", productImage);
+    formData.append("target", targetRange);
+    formData.append("size", productSize); 
 
     // console.log("formData in create product component: ", formData);
 
@@ -38,24 +42,23 @@ export default function CreateProduct({ closeFunction }) {
     >
       <div className="flex gap-6">
         <div className="flex flex-col gap-0.5">
-          <label htmlFor="product name">Product name</label>
-          <input
-            type="text"
-            value={productName}
-            placeholder="Product Name"
-            onChange={(e) => setProductName(e.target.value)}
-            required
-            className="px-3 py-2 rounded-lg outline-[#9CA3AF]"
-          />
-        </div>
-
-        <div className="flex flex-col gap-0.5">
           <label htmlFor="Product Brand">Product Brand</label>
           <input
             type="text"
             value={productBrand}
             placeholder="Product Brand"
             onChange={(e) => setProductBrand(e.target.value)}
+            required
+            className="px-3 py-2 rounded-lg outline-[#9CA3AF]"
+          />
+        </div>
+        <div className="flex flex-col gap-0.5">
+          <label htmlFor="product name">Product name</label>
+          <input
+            type="text"
+            value={productName}
+            placeholder="Product Name"
+            onChange={(e) => setProductName(e.target.value)}
             required
             className="px-3 py-2 rounded-lg outline-[#9CA3AF]"
           />
@@ -93,6 +96,60 @@ export default function CreateProduct({ closeFunction }) {
             <option value="mature">Mature</option>
             <option value="acne">Acne</option>
           </select>
+        </div>
+      </div>
+
+      <div className="flex gap-6">
+        <div className="w-full flex flex-col gap-0.5">
+          <label htmlFor="target range">Target Range</label>
+          <select
+            value={targetRange}
+            onChange={(e) => setTargetRange(e.target.value)}
+            required
+            className="px-3 py-3 rounded-lg text-[#9CA3AF] w-full"
+          >
+            <option value="">Select Target Range</option>
+            <option value="reduces_irregularities">
+              Reduce Irregularities
+            </option>
+            <option value="oily_skin">Oily Skin</option>
+            <option value="ph_balance">PH Balance</option>
+            <option value="dry_skin">Dry Skin</option>
+            <option value="microbiome_balances">Microbiome Balance</option>
+            <option value="skin_irritation">Skin Irritation</option>
+            <option value="acne">Acne</option>
+            <option value="texture_irregularities">
+              Texture Irregularities
+            </option>
+            <option value="dullness">Dullness</option>
+            <option value="visible_shine">Visible Shine</option>
+            <option value="congestion">Congestion</option>
+            <option value="skin_texture">Skin Texture</option>
+            <option value="aging">Aging</option>
+            <option value="hydration">Hydration</option>
+            <option value="moisture_balance">Moisture Balance</option>
+            <option value="skin_barrier">Skin Barrier</option>
+            <option value="dark_spots">Dark Spots</option>
+            <option value="blemish_skin">Blemish Skin</option>
+            <option value="brightens">Brightens</option>
+            <option value="supports">Supports</option>
+            <option value="exfoliating">Exfoliating</option>
+            <option value="dark_spot_correcting">Dark Spot Correcting</option>
+            <option value="hyperpigmentation">Hyperpigmentation</option>
+            <option value="skin_tone">Skin Tone</option>
+          </select>
+        </div>
+
+        <div className="w-[40%] flex flex-col gap-0.5">
+          <label htmlFor="product size">Product Size (ml)</label>
+          <input
+            type="number"
+            value={productSize}
+            placeholder="Product Size"
+            onChange={(e) => setProductSize(e.target.value)}
+            required
+            className="px-3 py-2 rounded-lg outline-[#9CA3AF]"
+          />
         </div>
       </div>
 

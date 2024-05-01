@@ -28,6 +28,24 @@ export const CartContextProvider = ({ children }) => {
     }
   };
 
+  const addCartItem = async (user_id, product_id, quantity) => {
+    try {
+      const response = await fetch(`http://localhost:8000/cart/add-item/${user_id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ product_id, quantity }),
+      });
+      const data = await response.json();
+      console.log("data in addCartItem function: ", data);
+      getAllCartItems(user_id);
+    } catch (error) {
+      setError(error);
+      console.log("error in addCartItem: ", error);
+    }
+  }
+
   useEffect(() => {
     // console.log("in the useEffect in CartContextProvider: ");
     getAllCartItems();
