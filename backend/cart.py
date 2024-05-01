@@ -51,47 +51,41 @@ def get_all_items(user_id: int, db:Session = Depends(get_db)):
 
 
 @router.post("/add-item/{product_id}")
-def add_cart_item(user_id: int, product_id: int, db: Session = Depends(get_db)):
-
-    user = db.query(Users).filter_by(id=user_id).first()
+def add_cart_item(user_id: int, product_id: int, quantity: int = 1, db: Session = Depends(get_db)):
 
     # Check if the user exists
+    user = db.query(Users).filter_by(id=user_id).first()
     if user is None:
         raise HTTPException(status_code=404, detail="User not found")
-    
-    product = db.query(Products).filter_by(id=product_id).first()
 
     # Check if the product exists
+    product = db.query(Products).filter_by(id=product_id).first()
     if product is None:
         raise HTTPException(status_code=404, detail="Product not found")
 
-    cart_item = CartItem(cart_id=user.cart.id, product_id=product_id)    
+    # Create a new cart for the user if they don't have one
+    if user.cart is None:
+        user.cart = Cart(user_id=user_id)
+        db.add(user.cart)
+        db.commit()
+        db.refresh(user.cart)
+
+    # Add the product to the user's cart
+    cart_item = CartItem(cart_id=user.cart.id, product_id=product_id, quantity=quantity)
     db.add(cart_item)
     db.commit()
 
     return {"message": "Product added to cart successfully"}
 
-@router.put("/update/{cart_item_id}")
-def update_cart_item(cart_item_id: int, quantity: int, db: Session = Depends(get_db)):
+@router.put("/update/{product_id}")
+def update_cart_item(cart_item_id, product_id: int, quantity: int, db: Session = Depends(get_db)):
     cart_item = db.query(CartItem).filter_by(id=cart_item_id).first()
     if cart_item is None:
         raise HTTPException(status_code=404, detail="Cart item not found")
     
-    product = db.query(Products).filter(Products.id == cart_item.product_id).first()
+    cart_item.quantity = quantity
+    db.commit()
 
-    update_data = {
-        "id": cart_item_id,
-        "product_id": cart_item.product_id,
-        "product_name": product.name,
-        "product_price": product.price,
-        "product_description": product.description,
-        "product_skin_type": product.skin_type,
-        "product_brand": product.brand,
-        "product_image": product.image_url,
-        "product_quantity": quantity,
-    }
-
-    db.query(CartItem).filter(CartItem.id == cart_item_id).update(update_data)
     return {"message": "Product updated successfully"}
 
 @router.delete("/remove/{cart_item_id}")
