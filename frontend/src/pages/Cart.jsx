@@ -6,6 +6,7 @@ import progessBar from "../assets/cart/Progress.svg";
 import line from "../assets/cart/Line.svg";
 import line1 from "../assets/cart/Line1.png";
 import product from "../assets/cart/Product.png";
+import radio from "../assets/cart/Radio.svg";
 
 export default function Cart() {
   const [productQuantity, setProductQuantity] = useState(1);
@@ -149,78 +150,150 @@ export default function Cart() {
                 </div>
               </div>
             </form>
-            <div className="mt-[48px] mb-[24px]">
-              <span className="text-2xl font-serif">Shipping Method</span>
+            <div class="w-[672px] h-[222px] flex-col justify-start items-start gap-6 inline-flex">
+              <div class="text-neutral-800 text-2xl font-normal font-serif leading-loose">
+                Shipping Method
+              </div>
+              <div class="w-[672px] h-[166px] relative">
+                <div class="w-[672px] h-6 left-0 top-0 absolute justify-between items-center inline-flex">
+                  <div class="justify-center items-end gap-2 flex">
+                    <div class="w-6 h-6 relative"></div>
+                    <div class="justify-center items-center gap-[7px] flex">
+                      <img src={radio} alt="" />
+                      <div class="text-zinc-800 text-base font-normal  leading-tight">
+                        Standard
+                      </div>
+                      <div class="text-zinc-500 text-sm font-normal leading-tight">
+                        Arrives in 3-5 business days
+                      </div>
+                    </div>
+                  </div>
+                  <div class="text-right text-zinc-800 text-sm font-normal  leading-tight">
+                    $7.00
+                  </div>
+                </div>
+                <div class="w-[672px] h-6 left-0 top-[64px] absolute justify-between items-center inline-flex">
+                  <div class="justify-center items-end gap-2 flex">
+                    <div class="w-6 h-6 relative"></div>
+                    <div class="justify-center items-center gap-[7px] flex">
+                      <img src={radio} alt="" />
+                      <div class="text-zinc-800 text-base font-normal font-['Epilogue'] leading-tight">
+                        2-Day Express
+                      </div>
+                      <div class="text-zinc-500 text-sm font-normal font-['Epilogue'] leading-tight">
+                        Arrives in 2 business days.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="text-right text-zinc-800 text-sm font-normal font-['Epilogue'] leading-tight">
+                    $15.00
+                  </div>
+                </div>
+                <div class="w-[672px] h-6 left-0 top-[128px] absolute justify-between items-center inline-flex">
+                  <div class="justify-center items-end gap-2 flex">
+                    <div class="w-6 h-6 relative"></div>
+                    <div class="justify-center items-center gap-[7px] flex">
+                      <img src={radio} alt="" />
+                      <div class="text-zinc-800 text-base font-normal font-['Epilogue'] leading-tight">
+                        Overnight
+                      </div>
+                      <div class="text-zinc-500 text-sm font-normal font-['Epilogue'] leading-tight">
+                        Arrives the next business day.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="text-right text-zinc-800 text-sm font-normal font-['Epilogue'] leading-tight">
+                    $25.00
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="flex flex-col font-sans">
-              <div className="">
-                <label className="text-base ">Standard </label>
-                <span className="text-sm text-gray-500 ml-[7px]">
-                  Arrives in 3-5 business days.
-                </span>
-                <span className="text-sm">$7.00</span>
-              </div>
-              <div className="">
-                <label className="text-base">2-Day Express </label>
-                <span className="text-sm text-gray-500 ml-[7px]">
-                  Arrives in 2 business days.
-                </span>
-                <span className="text-sm">$15.00</span>
-              </div>
-              <div className="">
-                <label className="text-base">Overnight </label>
-                <span className="text-sm text-gray-500 ml-[7px]">
-                  Arrives the next business day.
-                </span>
-                <span className="text-sm">$25.00</span>
-              </div>
-            </div>
+            <button className="rounded-md w-[229px] h-[48px] text-sm font-sans bg-[#BF4C9A] text-white ml-[70%] my-[60px]">
+              Continue To Payment
+            </button>
           </div>
-          <button className="rounded-md h-[48px] px-9 text-sm font-sans bg-[#BF4C9A] text-white ml-[70%] my-[60px]">
-            Continue To Payment
-          </button>
         </div>
+        <div>
+          <div className="Order flex flex-col w-[560px] h-[1313px] ml-[10%] pt-[125px]">
+            <div className="flex flex-col">
+              <span className="font-serif text-2xl">Order Summery</span>
+              <span className="flex justify-end">Edit Cart</span>
+            </div>
 
-        <div className="Order flex flex-col w-[560px] h-[1313px] ml-[10%] ">
-          <div className="flex flex-col">
-            <span className="font-serif text-2xl">Order Summery</span>
-            <span className="flex justify-end">Edit Cart</span>
-          </div>
-          <img src={product} alt="" className="w-[96px] h-[96px]" />
-          <span className="ProductName flex flex-col">
-            {" "}
-            <span className="ProductPrice">$</span>
-            <span className="Description"></span>
-            <span className="flex gap-5 border border-black rounded-lg py-2 justify-center items-center text-center w-[20%]">
-              <FaMinus onClick={decreaseQuantity} />{" "}
-              <div className="flex justify-end w-[10px]">{productQuantity}</div>
-              <FaPlus onClick={increaseQuantity} />
-            </span>
-            <input type="text" name="" id="" placeholder="Enter promo code" />
-            <button>Apply</button>
-          </span>
-
-          <div className="font-sans text-xl flex flex-col">
-            <div className="flex justify-between">
-              <span className="">Subtotal</span>
-              <span className="Subtotal">$</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Estimated Shipping </span>
-              <span className="Shipping">$</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Estimated Tax</span>
-              <span className="Tax ">$</span>
-            </div>
-            <img src={line1} alt="" />
-            <div className="flex justify-between">
-              <span className="">Estimated Total</span>
-              <span className="Total">$</span>
+            <div class="w-[477px] h-[465.42px] flex-col justify-start items-start gap-8 inline-flex">
+              <div class="self-stretch justify-start items-start gap-[29px]">
+                <div class="grow shrink basis-0 self-stretch justify-start items-start gap-6 flex">
+                  <div class="grow shrink basis-0 self-stretch rounded-lg justify-center items-center flex">
+                    <img class="w-24 h-24" src={product} />
+                  </div>
+                  <div class="w-[357px]">
+                    <div class="w-[196px] h-[19.74px] text-zinc-800 text-base font-normal font-sans leading-tight">
+                      Hanskin
+                      <br />
+                      Hyaluron Skin Essence
+                    </div>
+                    <div className="w-[111.44px] p-1 bg-white rounded-md border border-[##E6E6E6] justify-between items-start inline-flex ">
+                      <FaMinus onClick={decreaseQuantity} />{" "}
+                      <div className="flex justify-end w-[10px]">
+                        {productQuantity}
+                      </div>
+                      <FaPlus onClick={increaseQuantity} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="w-[477px] justify-start items-end gap-6 inline-flex">
+                <div class="w-[357px] h-10 px-3 py-2 bg-white rounded-md border border-neutral-200 justify-start items-center gap-1 flex">
+                  <div class="grow shrink basis-0 h-5 text-zinc-500 text-sm font-normal leading-tight">
+                    Enter promo code
+                  </div>
+                </div>
+                <div class="w-24 h-10 px-8 bg[##BF4C9A] rounded-lg justify-center items-center gap-2 flex">
+                  <div class="text-center text-white text-base font-normal font-sans">
+                    Apply
+                  </div>
+                </div>
+              </div>
+              <div class="self-stretch grow shrink basis-0 flex-col justify-start items-center gap-4 flex">
+                <div class="w-[477px] justify-between items-start inline-flex">
+                  <div class="text-zinc-800 text-xl font-normal font-sans leading-normal">
+                    Subtotal
+                  </div>
+                  <div class="text-center text-zinc-800 text-xl font-normal font-sans leading-normal">
+                    $25.00
+                  </div>
+                </div>
+                <div class="w-[477px] justify-between items-end inline-flex">
+                  <div class="text-zinc-800 text-xl font-normal font-sans leading-normal">
+                    Estimated Shipping
+                  </div>
+                  <div class="text-zinc-800 text-xl font-normal font-sans leading-normal">
+                    $7.00
+                  </div>
+                </div>
+                <div class="w-[477px] justify-between items-end inline-flex">
+                  <div class="text-zinc-800 text-xl font-normal font-sans leading-normal">
+                    Estimated Tax
+                  </div>
+                  <div class="text-zinc-800 text-xl font-normal font-sans leading-normal">
+                    $3.24
+                  </div>
+                </div>
+                <div class="w-[477px] h-[0px] border border-zinc-800"></div>
+                <div class="w-[477px] justify-between items-start inline-flex">
+                  <div class="text-zinc-800 text-xl font-normal font-sans leading-normal">
+                    Estimated Total
+                  </div>
+                  <div class="text-right text-zinc-800 text-xl font-normal font-sans leading-normal">
+                    $35.24
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
       <Footer />
     </div>
   );
