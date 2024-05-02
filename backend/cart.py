@@ -19,6 +19,11 @@ class Item(BaseModel):
     user_id: int
     quantity: int
     
+class UpdateItem(BaseModel):
+    cart_item_id: int
+    quantity: int
+    
+    
 def get_db():
     db = SessionLocal()
     try:
@@ -95,10 +100,16 @@ def add_cart_item(item: Item, product_id: int, db: Session = Depends(get_db)):
     return {"message": "Product added to cart successfully"}
 
 @router.put("/update/{product_id}")
-def update_cart_item(cart_item_id, product_id: int, quantity: int, db: Session = Depends(get_db)):
+# def update_cart_item(cart_item_id, product_id: int, quantity: int, db: Session = Depends(get_db)):
+def update_cart_item(item: UpdateItem, product_id: int, db: Session = Depends(get_db)):
+    print('in the update cart api route~~~')
+    cart_item_id = item.cart_item_id
+    quantity = item.quantity
+    
     cart_item = db.query(CartItem).filter_by(id=cart_item_id).first()
     if cart_item is None:
         raise HTTPException(status_code=404, detail="Cart item not found")
+    print("cart_item in the update cart api ")
     
     cart_item.quantity = quantity
     db.commit()

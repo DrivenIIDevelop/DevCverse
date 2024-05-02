@@ -9,7 +9,7 @@ import product from "../assets/cart/Product.png";
 import { useCartContext } from "../context/CartContext";
 import { useUserContext } from "../context/UserContext";
 import radio from "../assets/cart/Radio.svg";
-import { Link } from "react-router-dom";
+import CartSummary from "../components/Cart/CartSummary";
 
 export default function Cart() {
   const { user } = useUserContext();
@@ -108,9 +108,9 @@ export default function Cart() {
 
               <span className=" flex justify-end">
                 Already have an account?{" "}
-                <Link to="/" className="underline">
+                <a href="#" className="underline">
                   Login
-                </Link>
+                </a>
               </span>
 
               <label className="py-3">Full Name</label>
@@ -240,17 +240,18 @@ export default function Cart() {
         <div>
           <div className="Order flex flex-col w-[560px] h-[1313px] ml-[10%] pt-[125px]">
             <div className="flex flex-col">
-              <span className="font-serif text-2xl">Order Summery</span>
-              <span className="flex justify-end">Edit Cart</span>
+              {/* <span className="font-serif text-2xl">Order Summery</span>
+              <span className="flex justify-end">Edit Cart</span> */}
+              <CartSummary user={user}/>
             </div>
 
-            <div className="w-[477px] h-[465.42px] flex-col justify-start items-start gap-8 inline-flex">
+            {/* <div className="w-[477px] h-[465.42px] flex-col justify-start items-start gap-8 inline-flex">
               <div className="self-stretch justify-start items-start gap-[29px]">
                 <div className="grow shrink basis-0 self-stretch justify-start items-start gap-6 flex">
                   <div className="grow shrink basis-0 self-stretch rounded-lg justify-center items-center flex">
                     <img className="w-24 h-24" src={product} />
                   </div>
-                  <div className="w-[357px] flex flex-col gap-10">
+                  <div className="w-[357px]">
                     <div className="w-[196px] h-[19.74px] text-zinc-800 text-base font-normal font-sans leading-tight">
                       Hanskin
                       <br />
@@ -313,7 +314,7 @@ export default function Cart() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

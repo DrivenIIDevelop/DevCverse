@@ -6,6 +6,7 @@ export const CartContext = createContext({
     allItems: null,
     getAllCartItems: () => {},
     addCartItem: () => {},
+    updateCartItem: () => {},
 
 });
 
@@ -47,20 +48,20 @@ export const CartContextProvider = ({ children }) => {
     }
   }
 
-  // const addCartItem = async (userId, productId, quantity) => {
-  //   try {
-  //     const response = await axios.post(`http://localhost:8000/cart/add-item/${productId}`, {
-  //       user_id: userId,
-  //       quantity: quantity
-  //     });
+  const updateCartItem = async (cartItemId, productId, quantity) => {
+    try {
+      const response = await axios.put(`http://localhost:8000/cart/update/${productId}`, {
+        cart_item_id: cartItemId,
+        quantity: quantity
+      });
   
-  //     if (response.data.message === 'Product added to cart successfully') {
-  //       // Update your state here
-  //     }
-  //   } catch (error) {
-  //     console.error('Error adding item to cart', error);
-  //   }
-  // };
+      if (response.data.message === 'Product updated successfully') {
+        // Update your state here
+      }
+    } catch (error) {
+      console.error('Error updating cart item', error);
+    }
+  };
   
 
   useEffect(() => {
@@ -71,7 +72,7 @@ export const CartContextProvider = ({ children }) => {
 //   console.log("allItems in CartContextProvider: ", allItems);
 //   console.log("getAllCartItems in CartContextProvider: ", getAllCartItems);
   return (
-    <CartContext.Provider value={{  allItems, getAllCartItems, addCartItem,}}>
+    <CartContext.Provider value={{  allItems, getAllCartItems, addCartItem, updateCartItem}}>
       {children}
     </CartContext.Provider>
   );
