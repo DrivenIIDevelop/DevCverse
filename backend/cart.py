@@ -24,8 +24,9 @@ def get_db():
         db.close()
 
 
-@router.get("/")
+@router.get("/user/{user_id}")
 def get_all_items(user_id: int, db:Session = Depends(get_db)):
+    
     user = db.query(Users).filter_by(id=user_id).first()
     
     if user is None:
