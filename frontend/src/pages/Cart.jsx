@@ -9,15 +9,16 @@ import product from "../assets/cart/Product.png";
 import { useCartContext } from "../context/CartContext";
 import { useUserContext } from "../context/UserContext";
 import radio from "../assets/cart/Radio.svg";
+import { Link } from "react-router-dom";
 
 export default function Cart() {
   const { user } = useUserContext();
   console.log("user in Cart component: ", user);
 
-  const { allItems } = useCartContext();
+  /*const { allItems } = useCartContext();
   console.log("allItems in Cart component: ", allItems);
 
-  const { getAllCartItems } = useCartContext();
+  const { getAllCartItems } = useCartContext();*/
 
   const [productQuantity, setProductQuantity] = useState(1);
 
@@ -31,7 +32,7 @@ export default function Cart() {
     }
   }
 
-  useEffect(() => {
+  /*useEffect(() => {
     console.log("user in useEffect: ", user)
     console.log("in the cart component useEffect : ");
     if (user && user.User.id) {
@@ -41,7 +42,7 @@ export default function Cart() {
   },[user]);
 
   if (!user || !allItems)
-    return <div className="text-3xl text-center my-8">Loading...</div>;
+    return <div className="text-3xl text-center my-8">Loading...</div>;*/
 
   return (
     <div className="">
@@ -107,9 +108,9 @@ export default function Cart() {
 
               <span className=" flex justify-end">
                 Already have an account?{" "}
-                <a href="#" className="underline">
+                <Link to="/" className="underline">
                   Login
-                </a>
+                </Link>
               </span>
 
               <label className="py-3">Full Name</label>
@@ -249,7 +250,7 @@ export default function Cart() {
                   <div class="grow shrink basis-0 self-stretch rounded-lg justify-center items-center flex">
                     <img class="w-24 h-24" src={product} />
                   </div>
-                  <div class="w-[357px]">
+                  <div class="w-[357px] flex flex-col gap-10">
                     <div class="w-[196px] h-[19.74px] text-zinc-800 text-base font-normal font-sans leading-tight">
                       Hanskin
                       <br />
