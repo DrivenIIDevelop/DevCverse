@@ -15,7 +15,10 @@ class CartItemBase(BaseModel):
     product_id: int
     cart_id: int
 
-
+class Item(BaseModel):
+    user_id: int
+    quantity: int
+    
 def get_db():
     db = SessionLocal()
     try:
@@ -63,8 +66,10 @@ def get_all_items(user_id: int, db:Session = Depends(get_db)):
 
 
 @router.post("/add-item/{product_id}")
-def add_cart_item(user_id: int, product_id: int, quantity: int = 1, db: Session = Depends(get_db)):
-
+# def add_cart_item(user_id: int, product_id: int, quantity: int = 1, db: Session = Depends(get_db)):
+def add_cart_item(item: Item, product_id: int, db: Session = Depends(get_db)):
+    user_id = item.user_id
+    quantity = item.quantity
     # Check if the user exists
     user = db.query(Users).filter_by(id=user_id).first()
     if user is None:

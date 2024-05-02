@@ -5,6 +5,7 @@ axios.defaults.baseURL = "http://localhost:8000";
 export const CartContext = createContext({
     allItems: null,
     getAllCartItems: () => {},
+    addCartItem: () => {},
 
 });
 
@@ -17,7 +18,7 @@ export const CartContextProvider = ({ children }) => {
     console.log("user_id in getAllCartItems function: ", user_id);
     console.log("in the getAllCartItems function~~~~")
     try {
-      const response = await fetch(`http://localhost:8000/cart/${user_id}`);
+      const response = await fetch(`http://localhost:8000/cart/user/${user_id}`);
       console.log("response in getAllCartItems function: ", response);
       const data = await response.json();
       console.log("data in getAllCartItems function: ", data);
@@ -30,12 +31,12 @@ export const CartContextProvider = ({ children }) => {
 
   const addCartItem = async (user_id, product_id, quantity) => {
     try {
-      const response = await fetch(`http://localhost:8000/cart/add-item/${user_id}`, {
+      const response = await fetch(`http://localhost:8000/cart/add-item/${product_id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ product_id, quantity }),
+        body: JSON.stringify({ user_id, quantity }),
       });
       const data = await response.json();
       console.log("data in addCartItem function: ", data);
@@ -46,6 +47,22 @@ export const CartContextProvider = ({ children }) => {
     }
   }
 
+  // const addCartItem = async (userId, productId, quantity) => {
+  //   try {
+  //     const response = await axios.post(`http://localhost:8000/cart/add-item/${productId}`, {
+  //       user_id: userId,
+  //       quantity: quantity
+  //     });
+  
+  //     if (response.data.message === 'Product added to cart successfully') {
+  //       // Update your state here
+  //     }
+  //   } catch (error) {
+  //     console.error('Error adding item to cart', error);
+  //   }
+  // };
+  
+
   useEffect(() => {
     // console.log("in the useEffect in CartContextProvider: ");
     getAllCartItems();
@@ -54,7 +71,7 @@ export const CartContextProvider = ({ children }) => {
 //   console.log("allItems in CartContextProvider: ", allItems);
 //   console.log("getAllCartItems in CartContextProvider: ", getAllCartItems);
   return (
-    <CartContext.Provider value={{  allItems, getAllCartItems, }}>
+    <CartContext.Provider value={{  allItems, getAllCartItems, addCartItem,}}>
       {children}
     </CartContext.Provider>
   );

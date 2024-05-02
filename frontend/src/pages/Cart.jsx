@@ -15,10 +15,10 @@ export default function Cart() {
   const { user } = useUserContext();
   console.log("user in Cart component: ", user);
 
-  /*const { allItems } = useCartContext();
+  const { allItems } = useCartContext();
   console.log("allItems in Cart component: ", allItems);
 
-  const { getAllCartItems } = useCartContext();*/
+  const { getAllCartItems } = useCartContext();
 
   const [productQuantity, setProductQuantity] = useState(1);
 
@@ -32,7 +32,7 @@ export default function Cart() {
     }
   }
 
-  /*useEffect(() => {
+  useEffect(() => {
     console.log("user in useEffect: ", user)
     console.log("in the cart component useEffect : ");
     if (user && user.User.id) {
@@ -42,7 +42,7 @@ export default function Cart() {
   },[user]);
 
   if (!user || !allItems)
-    return <div className="text-3xl text-center my-8">Loading...</div>;*/
+    return <div className="text-3xl text-center my-8">Loading...</div>;
 
   return (
     <div className="">
@@ -174,59 +174,59 @@ export default function Cart() {
                 </div>
               </div>
             </form>
-            <div class="w-[672px] h-[222px] flex-col justify-start items-start gap-6 inline-flex">
-              <div class="text-neutral-800 text-2xl font-normal font-serif leading-loose">
+            <div className="w-[672px] h-[222px] flex-col justify-start items-start gap-6 inline-flex">
+              <div className="text-neutral-800 text-2xl font-normal font-serif leading-loose">
                 Shipping Method
               </div>
-              <div class="w-[672px] h-[166px] relative">
-                <div class="w-[672px] h-6 left-0 top-0 absolute justify-between items-center inline-flex">
-                  <div class="justify-center items-end gap-2 flex">
-                    <div class="w-6 h-6 relative"></div>
-                    <div class="justify-center items-center gap-[7px] flex">
+              <div className="w-[672px] h-[166px] relative">
+                <div className="w-[672px] h-6 left-0 top-0 absolute justify-between items-center inline-flex">
+                  <div className="justify-center items-end gap-2 flex">
+                    <div className="w-6 h-6 relative"></div>
+                    <div className="justify-center items-center gap-[7px] flex">
                       <img src={radio} alt="" />
-                      <div class="text-zinc-800 text-base font-normal  leading-tight">
+                      <div className="text-zinc-800 text-base font-normal  leading-tight">
                         Standard
                       </div>
-                      <div class="text-zinc-500 text-sm font-normal leading-tight">
+                      <div className="text-zinc-500 text-sm font-normal leading-tight">
                         Arrives in 3-5 business days
                       </div>
                     </div>
                   </div>
-                  <div class="text-right text-zinc-800 text-sm font-normal  leading-tight">
+                  <div className="text-right text-zinc-800 text-sm font-normal  leading-tight">
                     $7.00
                   </div>
                 </div>
-                <div class="w-[672px] h-6 left-0 top-[64px] absolute justify-between items-center inline-flex">
-                  <div class="justify-center items-end gap-2 flex">
-                    <div class="w-6 h-6 relative"></div>
-                    <div class="justify-center items-center gap-[7px] flex">
+                <div className="w-[672px] h-6 left-0 top-[64px] absolute justify-between items-center inline-flex">
+                  <div className="justify-center items-end gap-2 flex">
+                    <div className="w-6 h-6 relative"></div>
+                    <div className="justify-center items-center gap-[7px] flex">
                       <img src={radio} alt="" />
-                      <div class="text-zinc-800 text-base font-normal font-['Epilogue'] leading-tight">
+                      <div className="text-zinc-800 text-base font-normal font-['Epilogue'] leading-tight">
                         2-Day Express
                       </div>
-                      <div class="text-zinc-500 text-sm font-normal font-['Epilogue'] leading-tight">
+                      <div className="text-zinc-500 text-sm font-normal font-['Epilogue'] leading-tight">
                         Arrives in 2 business days.
                       </div>
                     </div>
                   </div>
-                  <div class="text-right text-zinc-800 text-sm font-normal font-['Epilogue'] leading-tight">
+                  <div className="text-right text-zinc-800 text-sm font-normal font-['Epilogue'] leading-tight">
                     $15.00
                   </div>
                 </div>
-                <div class="w-[672px] h-6 left-0 top-[128px] absolute justify-between items-center inline-flex">
-                  <div class="justify-center items-end gap-2 flex">
-                    <div class="w-6 h-6 relative"></div>
-                    <div class="justify-center items-center gap-[7px] flex">
+                <div className="w-[672px] h-6 left-0 top-[128px] absolute justify-between items-center inline-flex">
+                  <div className="justify-center items-end gap-2 flex">
+                    <div className="w-6 h-6 relative"></div>
+                    <div className="justify-center items-center gap-[7px] flex">
                       <img src={radio} alt="" />
-                      <div class="text-zinc-800 text-base font-normal font-['Epilogue'] leading-tight">
+                      <div className="text-zinc-800 text-base font-normal font-['Epilogue'] leading-tight">
                         Overnight
                       </div>
-                      <div class="text-zinc-500 text-sm font-normal font-['Epilogue'] leading-tight">
+                      <div className="text-zinc-500 text-sm font-normal font-['Epilogue'] leading-tight">
                         Arrives the next business day.
                       </div>
                     </div>
                   </div>
-                  <div class="text-right text-zinc-800 text-sm font-normal font-['Epilogue'] leading-tight">
+                  <div className="text-right text-zinc-800 text-sm font-normal font-['Epilogue'] leading-tight">
                     $25.00
                   </div>
                 </div>
@@ -244,14 +244,14 @@ export default function Cart() {
               <span className="flex justify-end">Edit Cart</span>
             </div>
 
-            <div class="w-[477px] h-[465.42px] flex-col justify-start items-start gap-8 inline-flex">
-              <div class="self-stretch justify-start items-start gap-[29px]">
-                <div class="grow shrink basis-0 self-stretch justify-start items-start gap-6 flex">
-                  <div class="grow shrink basis-0 self-stretch rounded-lg justify-center items-center flex">
-                    <img class="w-24 h-24" src={product} />
+            <div className="w-[477px] h-[465.42px] flex-col justify-start items-start gap-8 inline-flex">
+              <div className="self-stretch justify-start items-start gap-[29px]">
+                <div className="grow shrink basis-0 self-stretch justify-start items-start gap-6 flex">
+                  <div className="grow shrink basis-0 self-stretch rounded-lg justify-center items-center flex">
+                    <img className="w-24 h-24" src={product} />
                   </div>
-                  <div class="w-[357px] flex flex-col gap-10">
-                    <div class="w-[196px] h-[19.74px] text-zinc-800 text-base font-normal font-sans leading-tight">
+                  <div className="w-[357px] flex flex-col gap-10">
+                    <div className="w-[196px] h-[19.74px] text-zinc-800 text-base font-normal font-sans leading-tight">
                       Hanskin
                       <br />
                       Hyaluron Skin Essence
@@ -266,49 +266,49 @@ export default function Cart() {
                   </div>
                 </div>
               </div>
-              <div class="w-[477px] justify-start items-end gap-6 inline-flex">
-                <div class="w-[357px] h-10 px-3 py-2 bg-white rounded-md border border-neutral-200 justify-start items-center gap-1 flex">
-                  <div class="grow shrink basis-0 h-5 text-zinc-500 text-sm font-normal leading-tight">
+              <div className="w-[477px] justify-start items-end gap-6 inline-flex">
+                <div className="w-[357px] h-10 px-3 py-2 bg-white rounded-md border border-neutral-200 justify-start items-center gap-1 flex">
+                  <div className="grow shrink basis-0 h-5 text-zinc-500 text-sm font-normal leading-tight">
                     Enter promo code
                   </div>
                 </div>
-                <div class="w-24 h-10 px-8 bg[##BF4C9A] rounded-lg justify-center items-center gap-2 flex">
-                  <div class="text-center text-white text-base font-normal font-sans">
+                <div className="w-24 h-10 px-8 bg[##BF4C9A] rounded-lg justify-center items-center gap-2 flex">
+                  <div className="text-center text-white text-base font-normal font-sans">
                     Apply
                   </div>
                 </div>
               </div>
-              <div class="self-stretch grow shrink basis-0 flex-col justify-start items-center gap-4 flex">
-                <div class="w-[477px] justify-between items-start inline-flex">
-                  <div class="text-zinc-800 text-xl font-normal font-sans leading-normal">
+              <div className="self-stretch grow shrink basis-0 flex-col justify-start items-center gap-4 flex">
+                <div className="w-[477px] justify-between items-start inline-flex">
+                  <div className="text-zinc-800 text-xl font-normal font-sans leading-normal">
                     Subtotal
                   </div>
-                  <div class="text-center text-zinc-800 text-xl font-normal font-sans leading-normal">
+                  <div className="text-center text-zinc-800 text-xl font-normal font-sans leading-normal">
                     $25.00
                   </div>
                 </div>
-                <div class="w-[477px] justify-between items-end inline-flex">
-                  <div class="text-zinc-800 text-xl font-normal font-sans leading-normal">
+                <div className="w-[477px] justify-between items-end inline-flex">
+                  <div className="text-zinc-800 text-xl font-normal font-sans leading-normal">
                     Estimated Shipping
                   </div>
-                  <div class="text-zinc-800 text-xl font-normal font-sans leading-normal">
+                  <div className="text-zinc-800 text-xl font-normal font-sans leading-normal">
                     $7.00
                   </div>
                 </div>
-                <div class="w-[477px] justify-between items-end inline-flex">
-                  <div class="text-zinc-800 text-xl font-normal font-sans leading-normal">
+                <div className="w-[477px] justify-between items-end inline-flex">
+                  <div className="text-zinc-800 text-xl font-normal font-sans leading-normal">
                     Estimated Tax
                   </div>
-                  <div class="text-zinc-800 text-xl font-normal font-sans leading-normal">
+                  <div className="text-zinc-800 text-xl font-normal font-sans leading-normal">
                     $3.24
                   </div>
                 </div>
-                <div class="w-[477px] h-[0px] border border-zinc-800"></div>
-                <div class="w-[477px] justify-between items-start inline-flex">
-                  <div class="text-zinc-800 text-xl font-normal font-sans leading-normal">
+                <div className="w-[477px] h-[0px] border border-zinc-800"></div>
+                <div className="w-[477px] justify-between items-start inline-flex">
+                  <div className="text-zinc-800 text-xl font-normal font-sans leading-normal">
                     Estimated Total
                   </div>
-                  <div class="text-right text-zinc-800 text-xl font-normal font-sans leading-normal">
+                  <div className="text-right text-zinc-800 text-xl font-normal font-sans leading-normal">
                     $35.24
                   </div>
                 </div>

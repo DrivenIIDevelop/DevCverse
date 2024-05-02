@@ -9,6 +9,8 @@ import { FaPlus } from "react-icons/fa6";
 import checked from "../../assets/RadioCheck.svg";
 import notChecked from "../../assets/RadioNotChecked.svg";
 import horizontal_badge from "../../assets/Horizontal Badge.svg";
+import { useCartContext } from "../../context/CartContext";
+import { useUserContext } from "../../context/UserContext";
 
 export default function SingleProductCard({ product }) {
   // console.log("product in SingleProductCard component: ", product);
@@ -16,6 +18,12 @@ export default function SingleProductCard({ product }) {
   const [category, setCategory] = useState("Details");
   // const [productPrice, setProductPrice] = useState(product.price.toFixed(2));
   const [productPrice, setProductPrice] = useState(product.price);
+
+
+  const { user } = useUserContext();
+  console.log("user in singleproductcard: ", user);
+
+  const { addCartItem } = useCartContext();
 
   // console.log("productPrice in singleproductcard: ", productPrice);
 
@@ -47,6 +55,12 @@ export default function SingleProductCard({ product }) {
         ))}
       </div>
     );
+  }
+
+
+  function handleAddCartItem() {
+    addCartItem(user.User.id , product.id, productQuantity);
+    
   }
 
   return (
@@ -133,7 +147,7 @@ export default function SingleProductCard({ product }) {
           <div className="flex justify-end w-[10px]">{productQuantity}</div>
           <FaPlus onClick={increaseQuantity} />
         </span>
-        <button className="flex justify-center items-center gap-2 border border-black rounded-lg py-2 px-14 w-[70%]">
+        <button className="flex justify-center items-center gap-2 border border-black rounded-lg py-2 px-14 w-[70%]" onClick={handleAddCartItem}>
           <img src={cartIcon} alt="" /> Add to cart
         </button>
         <button className="flex justify-center items-center border border-black py-2 px-4 rounded-lg w-[10%]">
