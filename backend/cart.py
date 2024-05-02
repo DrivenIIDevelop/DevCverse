@@ -26,6 +26,17 @@ def get_db():
 
 @router.get("/")
 def get_all_items(user_id: int, db:Session = Depends(get_db)):
+    user = db.query(Users).filter_by(id=user_id).first()
+    
+    if user is None:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    if user.cart is None:
+        user.cart = Cart(user_id=user_id)
+        db.add(user.cart)
+        db.commit()
+        db.refresh(user.cart)
+    
     cart = db.query(Cart).filter(Cart.user_id == user_id).first()
 
     if not cart:
