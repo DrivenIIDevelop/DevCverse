@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 
 export default function About() {
   return (
-    <div className="px-16">
+    <div className="max-w-[1440px] mx-auto">
       <img src={aboutImg} alt="about image" className="mb-16" />
 
       <div className="flex mb-16 justify-center gap-8">
