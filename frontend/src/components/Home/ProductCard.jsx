@@ -1,15 +1,34 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useUserContext } from "../../context/UserContext";
+import { useCartContext } from "../../context/CartContext";
 
 // import star from "../../assets/star.svg";
 import cartIcon from "../../assets/cart.svg";
 import likeIcon from "../../assets/like.svg";
 
 export default function ProductCard({ product }) {
-  // console.log("product in ProductCard component: ", product);
+  const [successAdded, setSuccessAdded] = useState(false);
+ 
+  const productQuantity = 1;
+  const { user } = useUserContext();
+  const { addCartItem, getAllCartItems } = useCartContext();
+  
+
 
   function handleClick() {
     window.alert("Feature coming soon!🚀");
   } 
+
+  async function handleAddCartItem() {
+    addCartItem(user.User.id , product.id, productQuantity);
+    getAllCartItems(user.User.id);
+    setSuccessAdded(true);
+
+    setTimeout(() => {
+      setSuccessAdded(false);
+    }, 5000); 
+  }
 
   return (
     <li className="p-2">
@@ -54,8 +73,11 @@ export default function ProductCard({ product }) {
               : null}
           </div>
         </div>
-        <div className="flex justify-between">
-          <button className="w-[70%] flex justify-center items-center font-sans lg:text-sm border border-[#262626] gap-2 px-8 py-3 rounded-lg mt-2.5 " onClick={handleClick}>
+        <div className="flex justify-between relative">
+          {successAdded ? (
+            <p className="absolute left-[15%] bg-[#B26B94] p-4 font-sans text-sm text-[#FFF] rounded-lg z-50 transition-opacity duration-1000 ease-out opacity-100">Added to cart!</p>
+          ) : null}
+          <button className="w-[70%] flex justify-center items-center font-sans lg:text-sm border border-[#262626] gap-2 px-8 py-3 rounded-lg mt-2.5 " onClick={handleAddCartItem}>
             <img src={cartIcon} alt="cart" className="w-6 h-6" />
             <span className="hidden xl:inline">Add to cart</span>
           </button>
