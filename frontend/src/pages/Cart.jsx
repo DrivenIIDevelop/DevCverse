@@ -10,6 +10,7 @@ import { useCartContext } from "../context/CartContext";
 import { useUserContext } from "../context/UserContext";
 import radio from "../assets/cart/Radio.svg";
 import CartSummary from "../components/Cart/CartSummary";
+import { Link } from "react-router-dom";
 
 export default function Cart() {
   const { user } = useUserContext();
@@ -20,17 +21,13 @@ export default function Cart() {
 
   const { getAllCartItems } = useCartContext();
 
-  const [productQuantity, setProductQuantity] = useState(1);
+  const [shippingCost, setShippingCost] = useState(7.00);
 
-  function increaseQuantity() {
-    setProductQuantity(productQuantity + 1);
+  function handleShippingCost(cost) {
+    setShippingCost(cost);
   }
 
-  function decreaseQuantity() {
-    if (productQuantity > 1) {
-      setProductQuantity(productQuantity - 1);
-    }
-  }
+
 
   useEffect(() => {
     // console.log("user in useEffect: ", user);
@@ -39,14 +36,14 @@ export default function Cart() {
       getAllCartItems(user.User.id);
     }
     // console.log("after useEffect in cart component : ");
-  },[user]);
+  }, [user]);
 
   if (!user || !allItems)
     return <div className="text-3xl text-center my-8">Loading...</div>;
 
   return (
-    <div className="">
-      <div className="flex flex-row w-[1312px] h-[1313px] py-[60px] ml-[12%]">
+    <div className="max-w-[1440px] mx-auto">
+      <div className="flex flex-row w-full  py-[60px] px-16">
         <div className="w-[672px] h-[1193px]">
           <br />
           <div className="Status pt-10">
@@ -106,7 +103,7 @@ export default function Cart() {
                 Contact Information
               </span>
 
-              <span className=" flex justify-end">
+              <span className=" flex gap-3 justify-end">
                 Already have an account?{" "}
                 <a href="#" className="underline">
                   Login
@@ -116,7 +113,7 @@ export default function Cart() {
               <label className="py-3">Full Name</label>
               <input
                 type="text"
-                className="px-3"
+                className="px-3 border py-2 rounded-lg border-[#E6E6E6]"
                 id=""
                 placeholder="Enter your full name"
               />
@@ -124,7 +121,7 @@ export default function Cart() {
               <label className="py-3">Email</label>
               <input
                 type="text"
-                className="px-3"
+                className="px-3 border py-2 rounded-lg border-[#E6E6E6] mb-12"
                 id=""
                 placeholder="Enter your email"
               />
@@ -134,11 +131,11 @@ export default function Cart() {
                 <span className="text-2xl font-serif">
                   Shipping Information
                 </span>
-                <div className="font-sans">
+                <div className="font-sans w-full">
                   <label className="flex flex-col pt-8">Address</label>
                   <input
                     type="text"
-                    className=""
+                    className="w-full px-3 border py-2 rounded-lg border-[#E6E6E6]"
                     id=""
                     placeholder="Enter your street address and apt/suite"
                   />
@@ -148,7 +145,7 @@ export default function Cart() {
                     <label className="py-1">City</label>
                     <input
                       type="text"
-                      className="w-[202px] h-[40px] px-[8px] py-[12px] gap-[4px] items-center"
+                      className="w-[202px] h-[40px] px-[8px] py-[12px] gap-[4px] items-center border border-[#E6E6E6] rounded-lg"
                       id=""
                       placeholder="Enter your city"
                     />
@@ -157,7 +154,7 @@ export default function Cart() {
                     <label className="py-1">State/Province</label>
                     <input
                       type="text"
-                      className="h-[40px] px-[8px] py-[12px] gap-[4px] items-center"
+                      className="h-[40px] px-[8px] py-[12px] gap-[4px] items-center border border-[#E6E6E6] rounded-lg"
                       id=""
                       placeholder="Enter your state/province"
                     />
@@ -166,7 +163,7 @@ export default function Cart() {
                     <label className="py-1">Zip Code</label>
                     <input
                       type="text"
-                      className="w-[202px] h-[40px] px-[8px] py-[12px] gap-[4px] items-center"
+                      className="w-[202px] h-[40px] px-[8px] py-[12px] gap-[4px] items-center border border-[#E6E6E6] rounded-lg"
                       id=""
                       placeholder="Enter your zip code"
                     />
@@ -174,7 +171,7 @@ export default function Cart() {
                 </div>
               </div>
             </form>
-            <div className="w-[672px] h-[222px] flex-col justify-start items-start gap-6 inline-flex">
+            {/* <div className="w-[672px] h-[222px] flex-col justify-start items-start gap-6 inline-flex">
               <div className="text-neutral-800 text-2xl font-normal font-serif leading-loose">
                 Shipping Method
               </div>
@@ -231,18 +228,56 @@ export default function Cart() {
                   </div>
                 </div>
               </div>
+            </div> */}
+            <div className="flex flex-col mt-16 gap-6 mb-16">
+              <h1 className="font-serif text-2xl text-[#262626]">
+                Shipping Method
+              </h1>
+
+              <div className="flex justify-between items-center">
+                <div className="flex gap-4 items-center">
+                  <input type="radio" id="standard" name="shipping" defaultChecked onClick={() => handleShippingCost(7.00)}/>
+                  <label htmlFor="standard">
+                    <span>Standard</span>Arrives in 3-5 business days
+                  </label>
+                </div>
+                <p>$7.00</p>
+              </div>
+
+              <div className="flex justify-between items-center">
+                <div className="flex gap-4 items-center">
+                   <input type="radio" id="2-day express" name="shipping" onClick={() => handleShippingCost(15.00)}/>
+                <label htmlFor="2-day express">
+                  <span>2-Day Express</span>Arrives in 2 business days.
+                </label>
+                </div>
+               
+                <p>$15.00</p>
+              </div>
+
+              <div className="flex justify-between items-center">
+                <div className="flex gap-4 items-center">
+                   <input type="radio" id="overnight" name="shipping" onClick={() => handleShippingCost(25.00)}/>
+                <label htmlFor="overnight">
+                  <span>Overnight</span>Arrives the next business day.
+                </label>
+                </div>
+               
+                <p>$25.00</p>
+              </div>
             </div>
-            <button className="rounded-md w-[229px] h-[48px] text-sm font-sans bg-[#BF4C9A] text-white ml-[70%] my-[60px]">
-              Continue To Payment
-            </button>
           </div>
+            <Link to='/cart/checkout' className="absolute left-[595px] rounded-md p-4 w-[229px] h-[48px] text-sm font-sans bg-[#BF4C9A] text-white flex justify-center">
+              Click to checkout
+            </Link>
+
         </div>
         <div>
           <div className="Order flex flex-col w-[560px] h-[1313px] ml-[10%] ">
             <div className="flex flex-col h-full">
               {/* <span className="font-serif text-2xl">Order Summery</span>
               <span className="flex justify-end">Edit Cart</span> */}
-              <CartSummary user={user}/>
+              <CartSummary user={user} shippingCost={shippingCost}/>
             </div>
 
             {/* <div className="w-[477px] h-[465.42px] flex-col justify-start items-start gap-8 inline-flex">

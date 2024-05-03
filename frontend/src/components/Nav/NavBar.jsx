@@ -24,6 +24,7 @@ export default function NavBar() {
   const { user } = useUserContext();
   // console.log("user in NavBar component: ", user);
   const { getUser } = useUserContext();
+  const { userLogout } = useUserContext();
 
   function handlePopUp() {
     setShowPopUp(!showPopUp);
@@ -95,18 +96,43 @@ export default function NavBar() {
           )}
         </div>
         {user && user.User.role === "admin" && showUser && (
-          <div className="font-sans text-base px-6 py-6 rounded-lg absolute top-[60px] right-0 z-20 bg-[#F2DBEB]  text-[#732E5C] shadow-even flex flex-col gap-3" onMouseLeave={() => handleShowUser()}>
-            <Link to='/admin' className="hover:underline hover:font-medium transition duration-300 ease-in-out">
+          <div
+            className="font-sans text-base px-6 py-6 rounded-lg absolute top-[60px] right-0 z-20 bg-[#F2DBEB]  text-[#732E5C] shadow-even flex flex-col gap-3"
+            onMouseLeave={() => handleShowUser()}
+          >
+            <Link
+              to="/admin"
+              className="hover:underline hover:font-medium transition duration-300 ease-in-out"
+            >
               Manage Products
             </Link>
-            <Link to='/cart' className="hover:underline hover:font-medium transition duration-300 ease-in-out">Cart</Link>
-           
+            <Link
+              to="/cart"
+              className="hover:underline hover:font-medium transition duration-300 ease-in-out"
+            >
+              Cart
+            </Link>
+
+            <p
+              className="hover:underline hover:font-medium transition duration-300 ease-in-out"
+              onClick={userLogout}
+            >
+              Sign Out
+            </p>
           </div>
         )}
 
         {user && user.User.role === "user" && showUser && (
-          <div className="font-sans text-base px-6 py-6 rounded-lg absolute top-[60px] right-0 z-20 bg-[#F2DBEB]  text-[#732E5C] shadow-even flex flex-col gap-3" onMouseLeave={() => handleShowUser()}>
-            <Link to='/cart' className="hover:underline hover:font-medium transition duration-300 ease-in-out">Cart</Link>
+          <div
+            className="font-sans text-base px-6 py-6 rounded-lg absolute top-[60px] right-0 z-20 bg-[#F2DBEB]  text-[#732E5C] shadow-even flex flex-col gap-3"
+            onMouseLeave={() => handleShowUser()}
+          >
+            <Link
+              to="/cart"
+              className="hover:underline hover:font-medium transition duration-300 ease-in-out"
+            >
+              Cart
+            </Link>
           </div>
         )}
 
@@ -132,8 +158,8 @@ export default function NavBar() {
           </div>
         )}
       </div>
-      <InferiorNav  user={user} />
-      {!user && showLogin ? <Login handleLogin={handleLogin}/> : null}
+      <InferiorNav user={user} />
+      {!user && showLogin ? <Login handleLogin={handleLogin} /> : null}
     </nav>
   );
 }

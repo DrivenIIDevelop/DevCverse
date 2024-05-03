@@ -6,7 +6,8 @@ export const UserContext = createContext({
   user: null,
   login: () => {},
   userSignUp: () => {},
-  setUser: () => {},
+  userLogout: () => {},
+  getUser: () => {},
   error: null,
 });
 
@@ -74,6 +75,11 @@ export const UserContextProvider = ({ children }) => {
 
     login(userData.username, userData.password); 
   };
+
+  const userLogout = () => {
+    localStorage.removeItem('access_token');
+    setUser(null);
+  };
   // console.log("user in UserContextProvider: ", user);
   // console.log("Providing context", { user, error, login, userSignUp, updateUser });
   useEffect(() => { 
@@ -82,7 +88,7 @@ export const UserContextProvider = ({ children }) => {
 
 
   return (
-    <UserContext.Provider value={{ user, error, login, userSignUp, getUser }}>
+    <UserContext.Provider value={{ user, error, login, userSignUp, getUser, userLogout }}>
       {children}
     </UserContext.Provider>
   );
