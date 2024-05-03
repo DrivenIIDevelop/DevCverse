@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useCartContext } from "../../context/CartContext";
 import CartItemCard from "./CartItemCard";
 
-export default function CartSummary({ user }) {
+export default function CartSummary({ user, shippingCost }) {
   const { allItems, getAllCartItems } = useCartContext();
 
   // console.log("allItems in CartSummary: ", allItems);
@@ -45,7 +45,7 @@ export default function CartSummary({ user }) {
 
         <div className="flex  justify-between">
           <p>Estimated Shipping</p>
-          <p>$ {7.0}</p>
+          <p>$ {shippingCost.toFixed(2)}</p>
         </div>
 
         <div className="flex  justify-between">
@@ -57,7 +57,7 @@ export default function CartSummary({ user }) {
 
         <div className="flex  justify-between">
           <p>Estimated Total</p>
-          <p>${(totalPrice + 7 + totalPrice * 0.1).toFixed(2)}</p>
+          <p>${(totalPrice + shippingCost + totalPrice * 0.1).toFixed(2)}</p>
         </div>
       </div>
     </div>

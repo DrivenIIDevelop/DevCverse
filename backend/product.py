@@ -86,7 +86,8 @@ async def create_product(
 ):
     if file:
         s3.upload_fileobj(file.file, S3_BUCKET, file.filename)
-        image_url = f"https://s3.<region>.amazonaws.com/{S3_BUCKET}/{file.filename}"
+        # image_url = f"https://s3.<region>.amazonaws.com/{S3_BUCKET}/{file.filename}"
+        image_url = f"https://renai-dev.s3.us-east-2.amazonaws.com/{file.filename}"
         product_data = {
             "name": name,
             "price": price,
