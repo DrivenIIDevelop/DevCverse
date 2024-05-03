@@ -229,7 +229,7 @@ export default function Cart() {
                 </div>
               </div>
             </div> */}
-            <div className="flex flex-col mt-16 gap-6 mb-16">
+            <div className="flex flex-col mt-16 gap-6 mb-16 relative">
               <h1 className="font-serif text-2xl text-[#262626]">
                 Shipping Method
               </h1>
@@ -265,11 +265,15 @@ export default function Cart() {
                
                 <p>$25.00</p>
               </div>
-            </div>
-          </div>
-            <Link to='/cart/checkout' className="absolute left-[595px] rounded-md p-4 w-[229px] h-[48px] text-sm font-sans bg-[#BF4C9A] text-white flex justify-center">
+
+              <Link to='/cart/checkout' className="absolute -bottom-[100px] right-[0px] rounded-md p-4 w-[229px] h-[48px] text-sm font-sans bg-[#BF4C9A] text-white flex justify-center">
               Click to checkout
             </Link>
+            </div>
+
+
+            
+          </div>
 
         </div>
         <div>
