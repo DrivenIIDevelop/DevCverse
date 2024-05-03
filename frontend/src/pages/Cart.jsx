@@ -238,8 +238,8 @@ export default function Cart() {
           </div>
         </div>
         <div>
-          <div className="Order flex flex-col w-[560px] h-[1313px] ml-[10%] pt-[125px]">
-            <div className="flex flex-col">
+          <div className="Order flex flex-col w-[560px] h-[1313px] ml-[10%] ">
+            <div className="flex flex-col h-full">
               {/* <span className="font-serif text-2xl">Order Summery</span>
               <span className="flex justify-end">Edit Cart</span> */}
               <CartSummary user={user}/>

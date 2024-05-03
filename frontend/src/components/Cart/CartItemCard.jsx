@@ -6,24 +6,27 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { useCartContext } from "../../context/CartContext";
 
 export default function CartItemCard({ user, item }) {
-//   console.log("item in CartItemCard component: ", item);
+  //   console.log("item in CartItemCard component: ", item);
 
   const [productQuantity, setProductQuantity] = useState(item.product_quantity);
-
-  const { updateCartItem, getAllCartItems } = useCartContext()
+  const { updateCartItem, getAllCartItems, deleteCartItem } = useCartContext();
+  const [updateSuccess, setUpdateSuccess] = useState(false);
 
   async function handleDecreaseItem() {
     const newQuantity = productQuantity - 1;
-    // console.log("item id, product id and quantity in handleUpdateItem function: ", item.id, item.product_id, productQuantity)
     await updateCartItem(item.id, item.product_id, newQuantity);
     setProductQuantity(newQuantity);
     getAllCartItems(user.User.id);
   }
   async function handleIncreaseItem() {
     const newQuantity = productQuantity + 1;
-    // console.log("item id, product id and quantity in handleUpdateItem function: ", item.id, item.product_id, productQuantity)
     await updateCartItem(item.id, item.product_id, newQuantity);
     setProductQuantity(newQuantity);
+    getAllCartItems(user.User.id);
+  }
+
+  async function handleDeleteCartItem() {
+    await deleteCartItem(item.id);
     getAllCartItems(user.User.id);
   }
 
@@ -32,7 +35,7 @@ export default function CartItemCard({ user, item }) {
       <img
         src={item.product_image}
         alt="item image"
-        className="w-[96px] h-[96px]"
+        className="w-[96px] h-[96px] rounded-lg object-cover"
       />
       <div className="flex flex-col w-[60%] justify-between">
         <div className="flex flex-col">
@@ -41,16 +44,16 @@ export default function CartItemCard({ user, item }) {
         </div>
 
         <div>
-          <span className="flex gap-3 border border-[#E6E6E6] rounded-lg p-1 justify-center items-center text-center w-[20%]">
+          <span className="flex gap-3 border border-[#E6E6E6] rounded-lg p-1 justify-center items-center text-center w-[30%] bg-[#FFF]">
             <FaMinus onClick={handleDecreaseItem} />
             <div className="flex justify-end w-[10px]">{productQuantity}</div>
             <FaPlus onClick={handleIncreaseItem} />
           </span>
         </div>
       </div>
-      <div className="flex flex-col justify-between items-center">
+      <div className="flex flex-col justify-between items-center font-serif text-base text=[#333]">
         <p>$ {(item.product_price * productQuantity).toFixed(2)}</p>
-        <FaRegTrashAlt />
+        <FaRegTrashAlt onClick={handleDeleteCartItem} />
       </div>
     </li>
   );

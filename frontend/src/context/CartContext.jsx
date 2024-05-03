@@ -7,6 +7,7 @@ export const CartContext = createContext({
     getAllCartItems: () => {},
     addCartItem: () => {},
     updateCartItem: () => {},
+    deleteCartItem: () => {},
 
 });
 
@@ -62,6 +63,18 @@ export const CartContextProvider = ({ children }) => {
       console.error('Error updating cart item', error);
     }
   };
+
+  const deleteCartItem = async (cartItemId) => {
+    try {
+      const response = await axios.delete(`http://localhost:8000/cart/remove/${cartItemId}`);
+  
+      if (response.data.message === 'Product removed from cart successfully') {
+        // Update your state here
+      }
+    } catch (error) {
+      console.error('Error removing cart item', error);
+    }
+  };
   
 
   useEffect(() => {
@@ -72,7 +85,7 @@ export const CartContextProvider = ({ children }) => {
 //   console.log("allItems in CartContextProvider: ", allItems);
 //   console.log("getAllCartItems in CartContextProvider: ", getAllCartItems);
   return (
-    <CartContext.Provider value={{  allItems, getAllCartItems, addCartItem, updateCartItem}}>
+    <CartContext.Provider value={{  allItems, getAllCartItems, addCartItem, updateCartItem, deleteCartItem}}>
       {children}
     </CartContext.Provider>
   );
