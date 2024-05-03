@@ -10,7 +10,7 @@ In root of the backend directory, in the following order:
 - Set up your Python Interpreter
 
   1. Navigate to: View > Command Palette > Python Interpreter > Enter your own interpreter
-  2. Type in this exact line (Again, make sure you have the latest version of Python installed) : `./backend/venv/bin/python`
+  2. Type in this exact line (Again, make sure you have the latest version of Python installed) : `./backend/renaivenv/bin/python`
 
 - Add the following files in the backend root directory of the project:
 
