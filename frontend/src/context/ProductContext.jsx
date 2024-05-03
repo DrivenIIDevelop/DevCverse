@@ -60,10 +60,10 @@ export const ProductContextProvider = ({ children }) => {
         method: 'POST',
         body: formData, 
       });
-      console.log("response in createProduct: ", response);
+      // console.log("response in createProduct: ", response);
       if (response.ok) {
         const productResponse = await response.json();
-        console.log("Product created successfully: ", productResponse);
+        // console.log("Product created successfully: ", productResponse);
         getAllProducts();
         return productResponse;
       } else {
@@ -81,7 +81,7 @@ export const ProductContextProvider = ({ children }) => {
     // const id = Number(formData.get('product_id'));
     // console.log("id in updateProduct route: ", id);
 
-    console.log("in the update product route")
+    // console.log("in the update product route")
     try {
       // const response = await fetch(`http://localhost:8000/products/update/${id}`, {
       //   method: 'PUT',
@@ -96,7 +96,7 @@ export const ProductContextProvider = ({ children }) => {
       });
       // const data = await response.json();
       const data = response.data;
-      console.log("data in updateProduct: ", data);
+      // console.log("data in updateProduct: ", data);
       getAllProducts();
     } catch (error) {
       setError(error);
@@ -112,7 +112,7 @@ export const ProductContextProvider = ({ children }) => {
           'Content-Type': 'application/json',
         },
       });
-      console.log("response in deleteProduct: ", response);
+      // console.log("response in deleteProduct: ", response);
       getAllProducts();
     } catch (error) {
       setError(error);

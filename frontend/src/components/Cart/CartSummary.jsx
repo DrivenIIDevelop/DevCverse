@@ -5,7 +5,7 @@ import CartItemCard from "./CartItemCard";
 export default function CartSummary({ user }) {
   const { allItems, getAllCartItems } = useCartContext();
 
-  console.log("allItems in CartSummary: ", allItems);
+  // console.log("allItems in CartSummary: ", allItems);
 
   useEffect(() => {
     getAllCartItems(user.User.id);

@@ -13,10 +13,10 @@ import CartSummary from "../components/Cart/CartSummary";
 
 export default function Cart() {
   const { user } = useUserContext();
-  console.log("user in Cart component: ", user);
+  // console.log("user in Cart component: ", user);
 
   const { allItems } = useCartContext();
-  console.log("allItems in Cart component: ", allItems);
+  // console.log("allItems in Cart component: ", allItems);
 
   const { getAllCartItems } = useCartContext();
 
@@ -33,12 +33,12 @@ export default function Cart() {
   }
 
   useEffect(() => {
-    console.log("user in useEffect: ", user)
-    console.log("in the cart component useEffect : ");
+    // console.log("user in useEffect: ", user);
+    // console.log("in the cart component useEffect : ");
     if (user && user.User.id) {
       getAllCartItems(user.User.id);
     }
-    console.log("after useEffect in cart component : ");
+    // console.log("after useEffect in cart component : ");
   },[user]);
 
   if (!user || !allItems)

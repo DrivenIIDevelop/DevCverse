@@ -17,13 +17,13 @@ export const CartContextProvider = ({ children }) => {
   const [error, setError] = useState(null);
 
   const getAllCartItems = async (user_id) => {
-    console.log("user_id in getAllCartItems function: ", user_id);
-    console.log("in the getAllCartItems function~~~~")
+    // console.log("user_id in getAllCartItems function: ", user_id);
+    // console.log("in the getAllCartItems function~~~~")
     try {
       const response = await fetch(`http://localhost:8000/cart/user/${user_id}`);
-      console.log("response in getAllCartItems function: ", response);
+      // console.log("response in getAllCartItems function: ", response);
       const data = await response.json();
-      console.log("data in getAllCartItems function: ", data);
+      // console.log("data in getAllCartItems function: ", data);
       setAllItems(data);
     } catch (error) {
       setError(error);
@@ -41,7 +41,7 @@ export const CartContextProvider = ({ children }) => {
         body: JSON.stringify({ user_id, quantity }),
       });
       const data = await response.json();
-      console.log("data in addCartItem function: ", data);
+      // console.log("data in addCartItem function: ", data);
       getAllCartItems(user_id);
     } catch (error) {
       setError(error);

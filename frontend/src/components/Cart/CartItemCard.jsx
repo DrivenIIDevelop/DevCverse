@@ -13,8 +13,8 @@ export default function CartItemCard({ user, item }) {
 
   async function handleDecreaseItem() {
     let newQuantity = productQuantity - 1;
-    if(newQuantity <= 0){
-      newQuantity = 1;
+    if (newQuantity < 0) {
+      newQuantity = 0;
     }
     await updateCartItem(item.id, item.product_id, newQuantity);
     setProductQuantity(newQuantity);

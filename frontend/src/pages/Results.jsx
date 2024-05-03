@@ -11,7 +11,7 @@ export default function Results() {
   const { getUser } = useUserContext();
   // const { user } = getUser();
 
-  console.log("user in Results component: ", user);
+  // console.log("user in Results component: ", user);
 
   useEffect(() => {
     getUser();
