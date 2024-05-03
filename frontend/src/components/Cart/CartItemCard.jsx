@@ -10,10 +10,12 @@ export default function CartItemCard({ user, item }) {
 
   const [productQuantity, setProductQuantity] = useState(item.product_quantity);
   const { updateCartItem, getAllCartItems, deleteCartItem } = useCartContext();
-  const [updateSuccess, setUpdateSuccess] = useState(false);
 
   async function handleDecreaseItem() {
-    const newQuantity = productQuantity - 1;
+    let newQuantity = productQuantity - 1;
+    if(newQuantity <= 0){
+      newQuantity = 1;
+    }
     await updateCartItem(item.id, item.product_id, newQuantity);
     setProductQuantity(newQuantity);
     getAllCartItems(user.User.id);

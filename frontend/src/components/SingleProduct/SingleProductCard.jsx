@@ -18,14 +18,11 @@ export default function SingleProductCard({ product }) {
   const [category, setCategory] = useState("Details");
   // const [productPrice, setProductPrice] = useState(product.price.toFixed(2));
   const [productPrice, setProductPrice] = useState(product.price);
-
+  const [showNoUser, setShowNoUser] = useState(false);
+  const [successAdded, setSuccessAdded] = useState(false);
 
   const { user } = useUserContext();
-  console.log("user in singleproductcard: ", user);
-
   const { addCartItem } = useCartContext();
-
-  // console.log("productPrice in singleproductcard: ", productPrice);
 
   function increaseQuantity() {
     setProductQuantity(productQuantity + 1);
@@ -57,10 +54,22 @@ export default function SingleProductCard({ product }) {
     );
   }
 
-
   function handleAddCartItem() {
-    addCartItem(user.User.id , product.id, productQuantity);
-    
+    if (user === null) {
+      setShowNoUser(true);
+      setTimeout(() => {
+        setShowNoUser(false);
+      }, 3000);
+    } else {
+      addCartItem(user.User.id, product.id, productQuantity);
+
+      // getAllCartItems(user.User.id);
+      setSuccessAdded(true);
+
+      setTimeout(() => {
+        setSuccessAdded(false);
+      }, 4000);
+    }
   }
 
   return (
@@ -82,7 +91,7 @@ export default function SingleProductCard({ product }) {
       <p className="font-sans text-xl text-[#260F1F] mb-2">
         Size: {product.size}ml{" "}
         <span className="font-sans text-[#9F9BA6] text-sm ml-1">
-         ({(product.size * 0.0338).toFixed(2)} oz)
+          ({(product.size * 0.0338).toFixed(2)} oz)
         </span>
       </p>
       <img src={badges} alt="product badges" className="mb-2" />
@@ -138,16 +147,30 @@ export default function SingleProductCard({ product }) {
             />
           </div>
           {/* <p>${(product.price * 0.9).toFixed(2)}</p> */}
-          <p>${product.price * 0.9}</p>
+          <p>${(product.price * 0.9).toFixed(2)}</p>
         </div>
       </div>
-      <div className="flex justify-between gap-3 mb-3">
+      <div className="relative flex justify-between gap-3 mb-3">
+      {showNoUser ? (
+          <p className="absolute left-[65%] bg-[#B26B94] p-4 font-sans text-sm text-[#FFF] rounded-lg z-50">
+            Please login to add to cart
+          </p>
+        ) : null}
+        {user && successAdded ? (
+          <p className="absolute left-[65%] bottom-[2px] bg-[#B26B94] p-4 font-sans text-sm text-[#FFF] rounded-lg z-50">
+            Added to cart!
+          </p>
+        ) : null}
         <span className="flex gap-5 border border-black rounded-lg py-2 justify-center items-center text-center w-[20%]">
           <FaMinus onClick={decreaseQuantity} />{" "}
           <div className="flex justify-end w-[10px]">{productQuantity}</div>
           <FaPlus onClick={increaseQuantity} />
         </span>
-        <button className="flex justify-center items-center gap-2 border border-black rounded-lg py-2 px-14 w-[70%]" onClick={handleAddCartItem}>
+        <button
+          className=" flex justify-center items-center gap-2 border border-black rounded-lg py-2 px-14 w-[70%]"
+          onClick={handleAddCartItem}
+        >
+        
           <img src={cartIcon} alt="" /> Add to cart
         </button>
         <button className="flex justify-center items-center border border-black py-2 px-4 rounded-lg w-[10%]">

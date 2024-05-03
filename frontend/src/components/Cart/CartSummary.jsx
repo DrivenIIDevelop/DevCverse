@@ -40,7 +40,7 @@ export default function CartSummary({ user }) {
       <div className="flex flex-col font-sans text-xl gap-3">
         <div className="flex  justify-between">
           <p>Subtotal</p>
-          <p>${totalPrice}</p>
+          <p>${totalPrice.toFixed(2)}</p>
         </div>
 
         <div className="flex  justify-between">

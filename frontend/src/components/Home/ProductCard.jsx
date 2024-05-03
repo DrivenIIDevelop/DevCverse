@@ -9,39 +9,44 @@ import likeIcon from "../../assets/like.svg";
 
 export default function ProductCard({ product }) {
   const [successAdded, setSuccessAdded] = useState(false);
- 
+  const [showNoUser, setShowNoUser] = useState(false);
+
   const productQuantity = 1;
   const { user } = useUserContext();
+  // console.log("user in Productcard: ", user);
   const { addCartItem, getAllCartItems } = useCartContext();
-  
-
 
   function handleClick() {
     window.alert("Feature coming soon!🚀");
-  } 
+  }
 
   async function handleAddCartItem() {
-    addCartItem(user.User.id , product.id, productQuantity);
-    getAllCartItems(user.User.id);
-    setSuccessAdded(true);
+    if (user === null) {
+      setShowNoUser(true);
+      setTimeout(() => {
+        setShowNoUser(false);
+      }, 3000);
+    } else {
+      addCartItem(user.User.id, product.id, productQuantity);
+      getAllCartItems(user.User.id);
+      setSuccessAdded(true);
 
-    setTimeout(() => {
-      setSuccessAdded(false);
-    }, 5000); 
+      setTimeout(() => {
+        setSuccessAdded(false);
+      }, 4000);
+    }
   }
 
   return (
     <li className="p-2">
       <div className="">
         <Link to={`/products/${product.id}`}>
-
-           <img
-          src={product.image_url}
-          alt={product.name}
-          className="w-full h-[330px] object-cover rounded-lg"
-        />
+          <img
+            src={product.image_url}
+            alt={product.name}
+            className="w-full h-[330px] object-cover rounded-lg"
+          />
         </Link>
-       
       </div>
 
       <div className="p-2">
@@ -74,14 +79,27 @@ export default function ProductCard({ product }) {
           </div>
         </div>
         <div className="flex justify-between relative">
-          {successAdded ? (
-            <p className="absolute left-[15%] bg-[#B26B94] p-4 font-sans text-sm text-[#FFF] rounded-lg z-50 transition-opacity duration-1000 ease-out opacity-100">Added to cart!</p>
+          {showNoUser ? (
+            <p className="absolute bg-[#B26B94] p-4 font-sans text-sm text-[#FFF] rounded-lg z-50 transition-opacity duration-1000 ease-out opacity-100">
+              Please login to add to cart
+            </p>
           ) : null}
-          <button className="w-[70%] flex justify-center items-center font-sans lg:text-sm border border-[#262626] gap-2 px-8 py-3 rounded-lg mt-2.5 " onClick={handleAddCartItem}>
+          {user && successAdded ? (
+            <p className="absolute left-[15%] bg-[#B26B94] p-4 font-sans text-sm text-[#FFF] rounded-lg z-50 transition-opacity duration-1000 ease-out opacity-100">
+              Added to cart!
+            </p>
+          ) : null}
+          <button
+            className="w-[70%] flex justify-center items-center font-sans lg:text-sm border border-[#262626] gap-2 px-8 py-3 rounded-lg mt-2.5 "
+            onClick={handleAddCartItem}
+          >
             <img src={cartIcon} alt="cart" className="w-6 h-6" />
             <span className="hidden xl:inline">Add to cart</span>
           </button>
-          <button className="w-[20%] flex justify-center items-center border border-[#262626] rounded-lg mt-2.5" onClick={handleClick}>
+          <button
+            className="w-[20%] flex justify-center items-center border border-[#262626] rounded-lg mt-2.5"
+            onClick={handleClick}
+          >
             <img src={likeIcon} alt="like button" className="w-6 h-6" />
           </button>
         </div>
