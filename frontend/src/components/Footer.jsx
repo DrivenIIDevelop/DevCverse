@@ -69,7 +69,7 @@ export default function Footer() {
       </div>
       <div className="py-4 px-14">
         <div className="flex justify-between items-center font-sans text-sm text-[#333]">
-          <p>©ranai 2024. All rights reserved.</p>
+          <p>©renai 2024. All rights reserved.</p>
           <div className="flex items-center gap-8">
             <p>Privacy Policy</p>
             <p>Terms of Use</p>
