@@ -1,4 +1,4 @@
 __pycache__/
 venv/
-.env
-renai.db
+backend/.env
+backend/renai.db
