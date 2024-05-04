@@ -1,16 +1,11 @@
-
-import { useUserContext } from '../context/UserContext'
+import { useUserContext } from "../context/UserContext";
 
 export default function Logout() {
-    const { userLogout } = useUserContext();
+  const { userLogout } = useUserContext();
 
-    function handleLogout() {
-        userLogout();
-    }   
+  function handleLogout() {
+    userLogout();
+  }
 
-  return (
-    <div>
-      
-    </div>
-  )
+  return <div></div>;
 }
