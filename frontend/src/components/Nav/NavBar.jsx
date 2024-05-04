@@ -1,6 +1,7 @@
 import { useUserContext } from "../../context/UserContext";
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import logo from "../../assets/logo/logo.svg";
 import brand_r from "../../assets/logo/brand-r.svg";
@@ -27,7 +28,7 @@ export default function NavBar() {
   const { getUser } = useUserContext();
   const { userLogout } = useUserContext();
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   function handlePopUp() {
     setShowPopUp(!showPopUp);
@@ -50,8 +51,8 @@ export default function NavBar() {
   }
 
   function handleLogout() {
-    history.push("/");
     userLogout();
+    navigate("/");
   }
   useEffect(() => {
     getUser();
